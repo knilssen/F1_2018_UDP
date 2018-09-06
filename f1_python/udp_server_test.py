@@ -36,10 +36,8 @@ while True:
     if counter == 2:
         counter = 0
 
-        
+
     # Sleeps for 2 seconds to slow down and actually be able to read the output it is sending
     time.sleep(2)
     print 'Sending', dataGroupName[counter]
     sending_sock.sendto(dataGroup[counter], (UDP_IP, UDP_PORT))
-
-    
