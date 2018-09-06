@@ -65,6 +65,6 @@ def main(address, port):
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         # Kristians Usuage:     python python_udp_test.py  127.0.0.1 5003
-        print 'Correct Usage is:            python F1_UDP_Client.py     [ ip address ]      [ port ]'
+        print 'Correct Usage is:            python f1_udp_client.py     [ ip address ]      [ port ]'
     else:
         main(sys.argv[1],sys.argv[2])
