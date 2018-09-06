@@ -13,13 +13,13 @@ class PacketHeader(ctypes.LittleEndianStructure):
     """
     _pack_ = 1
     _fields_ = [
-        ('m_packetFormat',    ctypes.c_uint16),   # 2018
-        ('m_packetVersion',    ctypes.c_uint8),  # Version of this packet type, all start from 1
-        ('m_packetId',    ctypes.c_uint8),       # Identifier for the packet type, see below
-        ('m_sessionUID',    ctypes.c_uint64),     # Unique identifier for the session
-        ('m_sessionTime',    ctypes.c_float),   # Session timestamp
-        ('m_frameIdentifier',    ctypes.c_uint),# Identifier for the frame the data was retrieved on
-        ('m_playerCarIndex',    ctypes.c_uint8), # Index of player's car in the array
+        ('m_packetFormat',              ctypes.c_uint16),       # 2018
+        ('m_packetVersion',             ctypes.c_uint8),        # Version of this packet type, all start from 1
+        ('m_packetId',                  ctypes.c_uint8),        # Identifier for the packet type, see below
+        ('m_sessionUID',                ctypes.c_uint64),       # Unique identifier for the session
+        ('m_sessionTime',               ctypes.c_float),        # Session timestamp
+        ('m_frameIdentifier',           ctypes.c_uint),         # Identifier for the frame the data was retrieved on
+        ('m_playerCarIndex',            ctypes.c_uint8),        # Index of player's car in the array
     ]
 
 class CarMotionData(ctypes.LittleEndianStructure):
@@ -28,24 +28,24 @@ class CarMotionData(ctypes.LittleEndianStructure):
     """
     _pack_ = 1
     _fields_ = [
-        ('m_worldPositionX',    ctypes.c_float),    # World space X position
-        ('m_worldPositionY',    ctypes.c_float),    # World space Y position
-        ('m_worldPositionZ',    ctypes.c_float),    # World space Z position
-        ('m_worldVelocityX',    ctypes.c_float),    # Velocity in world space X
-        ('m_worldVelocityY',    ctypes.c_float),    # Velocity in world space Y
-        ('m_worldVelocityZ',    ctypes.c_float),    # Velocity in world space Z
-        ('m_worldForwardDirX',    ctypes.c_int16),     # World space forward X direction (normalised)
-        ('m_worldForwardDirY',    ctypes.c_int16),     # World space forward Y direction (normalised)
-        ('m_worldForwardDirZ',    ctypes.c_int16),     # World space forward Z direction (normalised)
-        ('m_worldRightDirX',    ctypes.c_int16),     # World space right X direction (normalised)
-        ('m_worldRightDirY',    ctypes.c_int16),     # World space right Y direction (normalised)
-        ('m_worldRightDirZ',    ctypes.c_int16),     # World space right Z direction (normalised)
-        ('m_gForceLateral',    ctypes.c_float),    # Lateral G-Force component
-        ('m_gForceLongitudinal',    ctypes.c_float),    # Longitudinal G-Force component
-        ('m_gForceVertical',    ctypes.c_float),    # Vertical G-Force component
-        ('m_yaw',    ctypes.c_float),    # Yaw angle in radians
-        ('m_pitch',    ctypes.c_float),    # Pitch angle in radians
-        ('m_roll',    ctypes.c_float),    # Roll angle in radians
+        ('m_worldPositionX',            ctypes.c_float),        # World space X position
+        ('m_worldPositionY',            ctypes.c_float),        # World space Y position
+        ('m_worldPositionZ',            ctypes.c_float),        # World space Z position
+        ('m_worldVelocityX',            ctypes.c_float),        # Velocity in world space X
+        ('m_worldVelocityY',            ctypes.c_float),        # Velocity in world space Y
+        ('m_worldVelocityZ',            ctypes.c_float),        # Velocity in world space Z
+        ('m_worldForwardDirX',          ctypes.c_int16),        # World space forward X direction (normalised)
+        ('m_worldForwardDirY',          ctypes.c_int16),        # World space forward Y direction (normalised)
+        ('m_worldForwardDirZ',          ctypes.c_int16),        # World space forward Z direction (normalised)
+        ('m_worldRightDirX',            ctypes.c_int16),        # World space right X direction (normalised)
+        ('m_worldRightDirY',            ctypes.c_int16),        # World space right Y direction (normalised)
+        ('m_worldRightDirZ',            ctypes.c_int16),        # World space right Z direction (normalised)
+        ('m_gForceLateral',             ctypes.c_float),        # Lateral G-Force component
+        ('m_gForceLongitudinal',        ctypes.c_float),        # Longitudinal G-Force component
+        ('m_gForceVertical',            ctypes.c_float),        # Vertical G-Force component
+        ('m_yaw',                       ctypes.c_float),        # Yaw angle in radians
+        ('m_pitch',                     ctypes.c_float),        # Pitch angle in radians
+        ('m_roll',                      ctypes.c_float),        # Roll angle in radians
     ]
 
 
@@ -55,24 +55,24 @@ class PacketMotionData(ctypes.LittleEndianStructure):
     """
     _pack_ = 1
     _fields_ = [
-        ('m_header',    PacketHeader),                 # Header
-        ('m_carMotionData',     CarMotionData * 20),        # Data for all cars on track
+        ('m_header',                    PacketHeader),          # Header
+        ('m_carMotionData',             CarMotionData * 20),    # Data for all cars on track
         # Extra player car ONLY data
-        ('m_suspensionPosition',    ctypes.c_float * 4),    # Note: All wheel arrays have the following order:
-        ('m_suspensionVelocity',    ctypes.c_float * 4),    # RL, RR, FL, FR
+        ('m_suspensionPosition',        ctypes.c_float * 4),    # Note: All wheel arrays have the following order:
+        ('m_suspensionVelocity',        ctypes.c_float * 4),    # RL, RR, FL, FR
         ('m_suspensionAcceleration',    ctypes.c_float * 4),    # RL, RR, FL, FR
-        ('m_wheelSpeed',    ctypes.c_float * 4),            # Speed of each wheel
-        ('m_wheelSlip',    ctypes.c_float * 4),             # Slip ratio for each wheel
-        ('m_localVelocityX',    ctypes.c_float),            # Velocity in local space
-        ('m_localVelocityY',    ctypes.c_float),            # Velocity in local space
-        ('m_localVelocityZ',    ctypes.c_float),            # Velocity in local space
-        ('m_angularVelocityX',    ctypes.c_float),          # Angular velocity x-component
-        ('m_angularVelocityY',    ctypes.c_float),          # Angular velocity y-component
-        ('m_angularVelocityZ',    ctypes.c_float),          # Angular velocity z-component
-        ('m_angularAccelerationX',    ctypes.c_float),      # Angular velocity x-component
-        ('m_angularAccelerationY',    ctypes.c_float),      # Angular velocity y-component
-        ('m_angularAccelerationZ',    ctypes.c_float),      # Angular velocity z-component
-        ('m_frontWheelsAngle',    ctypes.c_float),          # Current front wheels angle in radians
+        ('m_wheelSpeed',                ctypes.c_float * 4),    # Speed of each wheel
+        ('m_wheelSlip',                 ctypes.c_float * 4),    # Slip ratio for each wheel
+        ('m_localVelocityX',            ctypes.c_float),        # Velocity in local space
+        ('m_localVelocityY',            ctypes.c_float),        # Velocity in local space
+        ('m_localVelocityZ',            ctypes.c_float),        # Velocity in local space
+        ('m_angularVelocityX',          ctypes.c_float),        # Angular velocity x-component
+        ('m_angularVelocityY',          ctypes.c_float),        # Angular velocity y-component
+        ('m_angularVelocityZ',          ctypes.c_float),        # Angular velocity z-component
+        ('m_angularAccelerationX',      ctypes.c_float),        # Angular velocity x-component
+        ('m_angularAccelerationY',      ctypes.c_float),        # Angular velocity y-component
+        ('m_angularAccelerationZ',      ctypes.c_float),        # Angular velocity z-component
+        ('m_frontWheelsAngle',          ctypes.c_float),        # Current front wheels angle in radians
     ]
 
 
