@@ -492,106 +492,106 @@ def SessionData(packet):
         'frameIdentifier': packet.m_header.m_frameIdentifier,
         'playerCarIndex': packet.m_header.m_playerCarIndex
     },
-    'weather': weather_types[packet.m_weather],     # Weather - 0 = clear, 1 = light cloud, 2 = overcast, 3 = light rain, 4 = heavy rain, 5 = storm
+    'weather': packet.m_weather,     # Weather - 0 = clear, 1 = light cloud, 2 = overcast, 3 = light rain, 4 = heavy rain, 5 = storm
     'trackTemperature': packet.m_trackTemperature,
     'airTemperature': packet.m_airTemperature,
     'totalLaps': packet.m_totalLaps,
     'trackLength': packet.m_trackLength,
-    'sessionType': session_types[packet.m_sessionType], # 0 = unknown, 1 = P1, 2 = P2, 3 = P3, 4 = Short P, 5 = Q1, 6 = Q2, 7 = Q3, 8 = Short Q, 9 = OSQ, 10 = R, 11 = R2, 12 = Time Trial
-    'trackId': track_types[packet.m_trackId] if packet.m_trackId != -1 else 'unknown',  # -1 for unknown, 0-21 for tracks, see appendix
-    'era': era_types[packet.m_era], # Era, 0 = modern, 1 = classic
+    'sessionType': packet.m_sessionType, # 0 = unknown, 1 = P1, 2 = P2, 3 = P3, 4 = Short P, 5 = Q1, 6 = Q2, 7 = Q3, 8 = Short Q, 9 = OSQ, 10 = R, 11 = R2, 12 = Time Trial
+    'trackId': packet.m_trackId,  # -1 for unknown, 0-21 for tracks, see appendix
+    'era': packet.m_era, # Era, 0 = modern, 1 = classic
     'sessionTimeLeft': packet.m_sessionTimeLeft,
     'sessionDuration': packet.m_sessionDuration,
     'pitSpeedLimit': packet.m_pitSpeedLimit,
     'gamePaused': packet.m_gamePaused,
     'isSpectating': packet.m_isSpectating,
     'spectatorCarIndex': packet.m_spectatorCarIndex,
-    'sliProNativeSupport': SLI_pro_support_type[packet.m_sliProNativeSupport],  # SLI Pro support, 0 = inactive, 1 = active
+    'sliProNativeSupport': packet.m_sliProNativeSupport,  # SLI Pro support, 0 = inactive, 1 = active
     'numMarshalZones': packet.m_numMarshalZones,
     'marshalZones': [
         {
             'zoneStart': packet.m_marshalZones[0].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[0].m_zoneFlag] if packet.m_marshalZones[0].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[0].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[1].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[1].m_zoneFlag] if packet.m_marshalZones[1].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[1].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[2].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[2].m_zoneFlag] if packet.m_marshalZones[2].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[2].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[3].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[3].m_zoneFlag] if packet.m_marshalZones[3].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[3].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[4].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[4].m_zoneFlag] if packet.m_marshalZones[4].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[4].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[5].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[5].m_zoneFlag] if packet.m_marshalZones[5].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[5].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[6].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[6].m_zoneFlag] if packet.m_marshalZones[6].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[6].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[7].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[7].m_zoneFlag] if packet.m_marshalZones[7].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[7].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[8].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[8].m_zoneFlag] if packet.m_marshalZones[8].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[8].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[9].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[9].m_zoneFlag] if packet.m_marshalZones[9].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[9].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[10].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[10].m_zoneFlag] if packet.m_marshalZones[10].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[10].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[11].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[11].m_zoneFlag] if packet.m_marshalZones[11].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[11].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[12].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[12].m_zoneFlag] if packet.m_marshalZones[12].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[12].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[13].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[13].m_zoneFlag] if packet.m_marshalZones[13].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[13].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[14].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[14].m_zoneFlag] if packet.m_marshalZones[14].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[14].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[15].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[15].m_zoneFlag] if packet.m_marshalZones[15].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[15].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[16].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[16].m_zoneFlag] if packet.m_marshalZones[16].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[16].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[17].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[17].m_zoneFlag] if packet.m_marshalZones[17].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[17].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[18].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[18].m_zoneFlag] if packet.m_marshalZones[18].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[18].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[19].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[19].m_zoneFlag] if packet.m_marshalZones[19].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[19].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         },
         {
             'zoneStart': packet.m_marshalZones[20].m_zoneStart,
-            'zoneFlag': zone_flag_types[packet.m_marshalZones[20].m_zoneFlag] if packet.m_marshalZones[20].m_zoneFlag != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'zoneFlag': packet.m_marshalZones[20].m_zoneFlag, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
         }
     ],
     'safetyCarStatus': safety_car_types[packet.m_safetyCarStatus], # 0 = no safety car, 1 = full safety car, 2 = virtual safety car
@@ -620,6 +620,25 @@ def LapData(packet):
     },
     'lapData': [
         {
+        'lastLapTime': packet.m_lapData[0].m_lastLapTime,
+        'currentLapTime': packet.m_lapData[0].m_currentLapTime,
+        'bestLapTime': packet.m_lapData[0].m_bestLapTime,
+        'sector1Time': packet.m_lapData[0].m_sector1Time,
+        'sector2Time': packet.m_lapData[0].m_sector2Time,
+        'lapDistance': packet.m_lapData[0].m_lapDistance,
+        'totalDistance': packet.m_lapData[0].m_totalDistance,
+        'safetyCarDelta': packet.m_lapData[0].m_safetyCarDelta,
+        'carPosition': packet.m_lapData[0].m_carPosition,
+        'currentLapNum': packet.m_lapData[0].m_currentLapNum,
+        'pitStatus': packet.m_lapData[0].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[0].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[0].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
+        'penalties': packet.m_lapData[0].m_penalties,
+        'gridPosition': packet.m_lapData[0].m_gridPosition,
+        'driverStatus': packet.m_lapData[0].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[0].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        },
+        {
         'lastLapTime': packet.m_lapData[1].m_lastLapTime,
         'currentLapTime': packet.m_lapData[1].m_currentLapTime,
         'bestLapTime': packet.m_lapData[1].m_bestLapTime,
@@ -629,14 +648,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[1].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[1].m_safetyCarDelta,
         'carPosition': packet.m_lapData[1].m_carPosition,
-        'currentLapNum': packet.m_lapData[1].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[1].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[1].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[1].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[1].m_currentLapNum,
+        'pitStatus': packet.m_lapData[1].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[1].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[1].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[1].m_penalties,
         'gridPosition': packet.m_lapData[1].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[1].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[1].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[1].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[1].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[2].m_lastLapTime,
@@ -648,14 +667,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[2].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[2].m_safetyCarDelta,
         'carPosition': packet.m_lapData[2].m_carPosition,
-        'currentLapNum': packet.m_lapData[2].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[2].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[2].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[2].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[2].m_currentLapNum,
+        'pitStatus': packet.m_lapData[2].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[2].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[2].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[2].m_penalties,
         'gridPosition': packet.m_lapData[2].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[2].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[2].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[2].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[2].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[3].m_lastLapTime,
@@ -667,14 +686,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[3].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[3].m_safetyCarDelta,
         'carPosition': packet.m_lapData[3].m_carPosition,
-        'currentLapNum': packet.m_lapData[3].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[3].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[3].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[3].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[3].m_currentLapNum,
+        'pitStatus': packet.m_lapData[3].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[3].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[3].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[3].m_penalties,
         'gridPosition': packet.m_lapData[3].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[3].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[3].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[3].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[3].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[4].m_lastLapTime,
@@ -686,14 +705,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[4].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[4].m_safetyCarDelta,
         'carPosition': packet.m_lapData[4].m_carPosition,
-        'currentLapNum': packet.m_lapData[4].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[4].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[4].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[4].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[4].m_currentLapNum,
+        'pitStatus': packet.m_lapData[4].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[4].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[4].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[4].m_penalties,
         'gridPosition': packet.m_lapData[4].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[4].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[4].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[4].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[4].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[5].m_lastLapTime,
@@ -705,15 +724,16 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[5].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[5].m_safetyCarDelta,
         'carPosition': packet.m_lapData[5].m_carPosition,
-        'currentLapNum': packet.m_lapData[5].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[5].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[5].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[5].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[5].m_currentLapNum,
+        'pitStatus': packet.m_lapData[5].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[5].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[5].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[5].m_penalties,
         'gridPosition': packet.m_lapData[5].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[5].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[5].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
-        },{
+        'driverStatus': packet.m_lapData[5].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[5].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        },
+        {
         'lastLapTime': packet.m_lapData[6].m_lastLapTime,
         'currentLapTime': packet.m_lapData[6].m_currentLapTime,
         'bestLapTime': packet.m_lapData[6].m_bestLapTime,
@@ -723,14 +743,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[6].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[6].m_safetyCarDelta,
         'carPosition': packet.m_lapData[6].m_carPosition,
-        'currentLapNum': packet.m_lapData[6].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[6].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[6].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[6].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[6].m_currentLapNum,
+        'pitStatus': packet.m_lapData[6].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[6].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[6].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[6].m_penalties,
         'gridPosition': packet.m_lapData[6].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[6].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[6].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[6].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[6].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[7].m_lastLapTime,
@@ -742,14 +762,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[7].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[7].m_safetyCarDelta,
         'carPosition': packet.m_lapData[7].m_carPosition,
-        'currentLapNum': packet.m_lapData[7].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[7].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[7].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[7].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[7].m_currentLapNum,
+        'pitStatus': packet.m_lapData[7].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[7].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[7].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[7].m_penalties,
         'gridPosition': packet.m_lapData[7].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[7].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[7].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[7].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[7].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[8].m_lastLapTime,
@@ -761,14 +781,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[8].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[8].m_safetyCarDelta,
         'carPosition': packet.m_lapData[8].m_carPosition,
-        'currentLapNum': packet.m_lapData[8].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[8].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[8].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[8].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[8].m_currentLapNum,
+        'pitStatus': packet.m_lapData[8].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[8].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[8].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[8].m_penalties,
         'gridPosition': packet.m_lapData[8].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[8].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[8].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[8].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[8].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[9].m_lastLapTime,
@@ -780,14 +800,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[9].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[9].m_safetyCarDelta,
         'carPosition': packet.m_lapData[9].m_carPosition,
-        'currentLapNum': packet.m_lapData[9].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[9].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[9].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[9].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[9].m_currentLapNum,
+        'pitStatus': packet.m_lapData[9].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[9].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[9].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[9].m_penalties,
         'gridPosition': packet.m_lapData[9].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[9].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[9].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[9].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[9].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[10].m_lastLapTime,
@@ -799,14 +819,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[10].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[10].m_safetyCarDelta,
         'carPosition': packet.m_lapData[10].m_carPosition,
-        'currentLapNum': packet.m_lapData[10].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[10].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[10].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[10].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[10].m_currentLapNum,
+        'pitStatus': packet.m_lapData[10].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[10].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[10].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[10].m_penalties,
         'gridPosition': packet.m_lapData[10].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[10].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[10].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[10].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[10].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[11].m_lastLapTime,
@@ -818,14 +838,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[11].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[11].m_safetyCarDelta,
         'carPosition': packet.m_lapData[11].m_carPosition,
-        'currentLapNum': packet.m_lapData[11].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[11].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[11].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[11].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[11].m_currentLapNum,
+        'pitStatus': packet.m_lapData[11].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[11].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[11].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[11].m_penalties,
         'gridPosition': packet.m_lapData[11].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[11].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[11].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[11].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[11].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[12].m_lastLapTime,
@@ -837,14 +857,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[12].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[12].m_safetyCarDelta,
         'carPosition': packet.m_lapData[12].m_carPosition,
-        'currentLapNum': packet.m_lapData[12].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[12].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[12].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[12].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[12].m_currentLapNum,
+        'pitStatus': packet.m_lapData[12].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[12].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[12].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[12].m_penalties,
         'gridPosition': packet.m_lapData[12].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[12].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[12].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[12].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[12].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[13].m_lastLapTime,
@@ -856,14 +876,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[13].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[13].m_safetyCarDelta,
         'carPosition': packet.m_lapData[13].m_carPosition,
-        'currentLapNum': packet.m_lapData[13].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[13].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[13].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[13].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[13].m_currentLapNum,
+        'pitStatus': packet.m_lapData[13].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[13].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[13].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[13].m_penalties,
         'gridPosition': packet.m_lapData[13].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[13].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[13].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[13].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[13].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[14].m_lastLapTime,
@@ -875,14 +895,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[14].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[14].m_safetyCarDelta,
         'carPosition': packet.m_lapData[14].m_carPosition,
-        'currentLapNum': packet.m_lapData[14].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[14].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[14].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[14].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[14].m_currentLapNum,
+        'pitStatus': packet.m_lapData[14].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[14].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[14].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[14].m_penalties,
         'gridPosition': packet.m_lapData[14].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[14].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[14].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[14].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[14].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[15].m_lastLapTime,
@@ -894,14 +914,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[15].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[15].m_safetyCarDelta,
         'carPosition': packet.m_lapData[15].m_carPosition,
-        'currentLapNum': packet.m_lapData[15].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[15].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[15].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[15].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[15].m_currentLapNum,
+        'pitStatus': packet.m_lapData[15].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[15].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[15].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[15].m_penalties,
         'gridPosition': packet.m_lapData[15].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[15].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[15].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[15].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[15].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[16].m_lastLapTime,
@@ -913,14 +933,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[16].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[16].m_safetyCarDelta,
         'carPosition': packet.m_lapData[16].m_carPosition,
-        'currentLapNum': packet.m_lapData[16].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[16].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[16].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[16].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[16].m_currentLapNum,
+        'pitStatus': packet.m_lapData[16].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[16].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[16].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[16].m_penalties,
         'gridPosition': packet.m_lapData[16].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[16].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[16].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[16].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[16].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[17].m_lastLapTime,
@@ -932,14 +952,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[17].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[17].m_safetyCarDelta,
         'carPosition': packet.m_lapData[17].m_carPosition,
-        'currentLapNum': packet.m_lapData[17].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[17].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[17].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[17].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[17].m_currentLapNum,
+        'pitStatus': packet.m_lapData[17].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[17].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[17].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[17].m_penalties,
         'gridPosition': packet.m_lapData[17].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[17].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[17].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[17].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[17].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[18].m_lastLapTime,
@@ -951,14 +971,14 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[18].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[18].m_safetyCarDelta,
         'carPosition': packet.m_lapData[18].m_carPosition,
-        'currentLapNum': packet.m_lapData[18].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[18].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[18].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[18].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[18].m_currentLapNum,
+        'pitStatus': packet.m_lapData[18].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[18].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[18].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[18].m_penalties,
         'gridPosition': packet.m_lapData[18].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[18].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[18].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        'driverStatus': packet.m_lapData[18].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[18].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
         },
         {
         'lastLapTime': packet.m_lapData[19].m_lastLapTime,
@@ -970,15 +990,15 @@ def LapData(packet):
         'totalDistance': packet.m_lapData[19].m_totalDistance,
         'safetyCarDelta': packet.m_lapData[19].m_safetyCarDelta,
         'carPosition': packet.m_lapData[19].m_carPosition,
-        'currentLapNum': packet.m_lapData[19].m_currentLapNum
-        'pitStatus': pit_status_types[packet.m_lapData[19].m_pitStatus], # 0 = none, 1 = pitting, 2 = in pit area
-        'sector': sector_types[packet.m_lapData[19].m_sector], # 0 = sector1, 1 = sector2, 2 = sector3
-        'currentLapInvalid': current_lap_invalid_types[packet.m_lapData[19].m_currentLapInvalid], # Current lap invalid - 0 = valid, 1 = invalid
+        'currentLapNum': packet.m_lapData[19].m_currentLapNum,
+        'pitStatus': packet.m_lapData[19].m_pitStatus, # 0 = none, 1 = pitting, 2 = in pit area
+        'sector': packet.m_lapData[19].m_sector, # 0 = sector1, 1 = sector2, 2 = sector3
+        'currentLapInvalid': packet.m_lapData[19].m_currentLapInvalid, # Current lap invalid - 0 = valid, 1 = invalid
         'penalties': packet.m_lapData[19].m_penalties,
         'gridPosition': packet.m_lapData[19].m_gridPosition,
-        'driverStatus': driver_status_types[packet.m_lapData[19].m_driverStatus], # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-        'resultStatus': result_status_types[packet.m_lapData[19].m_resultStatus], # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
-        },
+        'driverStatus': packet.m_lapData[19].m_driverStatus, # Status of driver - 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
+        'resultStatus': packet.m_lapData[19].m_resultStatus, # Result status - 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+        }
     ]
     }
 
@@ -1034,163 +1054,163 @@ def ParticipantData(packet):
     'numCars': packet.m_numCars,
     'participants':[
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[0].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[0].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[0].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[0].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[0].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[0].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[0].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[0].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[0].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[0].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[1].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[1].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[1].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[1].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[1].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[1].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[1].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[1].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[1].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[1].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[2].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[2].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[2].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[2].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[2].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[2].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[2].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[2].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[2].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[2].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[3].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[3].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[3].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[3].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[3].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[3].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[3].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[3].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[3].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[3].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[4].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[4].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[4].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[4].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[4].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[4].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[4].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[4].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[4].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[4].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[5].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[5].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[5].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[5].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[5].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[5].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[5].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[5].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[5].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[5].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[6].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[6].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[6].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[6].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[6].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[6].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[6].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[6].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[6].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[6].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[7].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[7].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[7].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[7].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[7].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[7].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[7].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[7].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[7].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[7].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[8].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[8].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[8].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[8].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[8].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[8].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[8].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[8].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[8].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[8].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[9].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[9].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[9].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[9].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[9].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[9].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[9].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[9].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[9].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[9].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[10].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[10].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[10].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[10].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[10].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[10].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[10].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[10].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[10].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[10].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[11].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[11].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[11].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[11].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[11].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[11].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[11].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[11].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[11].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[11].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[12].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[12].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[12].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[12].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[12].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[12].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[12].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[12].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[12].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[12].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[13].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[13].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[13].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[13].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[13].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[13].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[13].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[13].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[13].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[13].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[14].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[14].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[14].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[14].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[14].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[14].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[14].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[14].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[14].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[14].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[15].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[15].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[15].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[15].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[15].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[15].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[15].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[15].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[15].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[15].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[16].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[16].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[16].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[16].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[16].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[16].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[16].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[16].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[16].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[16].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[17].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[17].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[17].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[17].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[17].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[17].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[17].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[17].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[17].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[17].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[18].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[18].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[18].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[18].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[18].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[18].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[18].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[18].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[18].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[18].m_name
         },
         {
-            'aiControlled': ai_controlled_types[packet.m_participants[19].m_aiControlled], # Whether the vehicle is AI (1) or Human (0) controlled
-            'driverId': driver_id_types[packet.m_participants[19].m_driverId], # Driver id - see appendix
-            'teamId': team_id_types[packet.m_participants[19].m_teamId], # Team id - see appendix
+            'aiControlled': packet.m_participants[19].m_aiControlled, # Whether the vehicle is AI (1) or Human (0) controlled
+            'driverId': packet.m_participants[19].m_driverId, # Driver id - see appendix
+            'teamId': packet.m_participants[19].m_teamId, # Team id - see appendix
             'raceNumber': packet.m_participants[19].m_raceNumber,
-            'nationality': nationality_types[packet.m_participants[19].m_nationality], # Nationality of the driver - see appendix
+            'nationality': packet.m_participants[19].m_nationality, # Nationality of the driver - see appendix
             'name': packet.m_participants[19].m_name
         }
     ]
@@ -1684,7 +1704,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[0].m_clutch,
             'gear': packet.m_carTelemetryData[0].m_gear,
             'engineRPM': packet.m_carTelemetryData[0].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[0].m_drs],
+            'drs': packet.m_carTelemetryData[0].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[0].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[0].m_brakesTemperature[0],
@@ -1704,7 +1724,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[0].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[0].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[0].m_
+            'engineTemperature': packet.m_carTelemetryData[0].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[0].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[0].m_tyresPressure[1],
@@ -1720,7 +1740,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[1].m_clutch,
             'gear': packet.m_carTelemetryData[1].m_gear,
             'engineRPM': packet.m_carTelemetryData[1].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[1].m_drs],
+            'drs': packet.m_carTelemetryData[1].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[1].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[1].m_brakesTemperature[0],
@@ -1740,7 +1760,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[1].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[1].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[1].m_
+            'engineTemperature': packet.m_carTelemetryData[1].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[1].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[1].m_tyresPressure[1],
@@ -1756,7 +1776,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[2].m_clutch,
             'gear': packet.m_carTelemetryData[2].m_gear,
             'engineRPM': packet.m_carTelemetryData[2].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[2].m_drs],
+            'drs': packet.m_carTelemetryData[2].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[2].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[2].m_brakesTemperature[0],
@@ -1776,7 +1796,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[2].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[2].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[2].m_
+            'engineTemperature': packet.m_carTelemetryData[2].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[2].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[2].m_tyresPressure[1],
@@ -1792,7 +1812,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[3].m_clutch,
             'gear': packet.m_carTelemetryData[3].m_gear,
             'engineRPM': packet.m_carTelemetryData[3].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[3].m_drs],
+            'drs': packet.m_carTelemetryData[3].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[3].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[3].m_brakesTemperature[0],
@@ -1812,7 +1832,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[3].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[3].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[3].m_
+            'engineTemperature': packet.m_carTelemetryData[3].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[3].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[3].m_tyresPressure[1],
@@ -1828,7 +1848,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[4].m_clutch,
             'gear': packet.m_carTelemetryData[4].m_gear,
             'engineRPM': packet.m_carTelemetryData[4].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[4].m_drs],
+            'drs': packet.m_carTelemetryData[4].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[4].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[4].m_brakesTemperature[0],
@@ -1848,7 +1868,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[4].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[4].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[4].m_
+            'engineTemperature': packet.m_carTelemetryData[4].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[4].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[4].m_tyresPressure[1],
@@ -1864,7 +1884,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[5].m_clutch,
             'gear': packet.m_carTelemetryData[5].m_gear,
             'engineRPM': packet.m_carTelemetryData[5].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[5].m_drs],
+            'drs': packet.m_carTelemetryData[5].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[5].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[5].m_brakesTemperature[0],
@@ -1884,7 +1904,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[5].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[5].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[5].m_
+            'engineTemperature': packet.m_carTelemetryData[5].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[5].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[5].m_tyresPressure[1],
@@ -1900,7 +1920,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[6].m_clutch,
             'gear': packet.m_carTelemetryData[6].m_gear,
             'engineRPM': packet.m_carTelemetryData[6].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[6].m_drs],
+            'drs': packet.m_carTelemetryData[6].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[6].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[6].m_brakesTemperature[0],
@@ -1920,7 +1940,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[6].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[6].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[6].m_
+            'engineTemperature': packet.m_carTelemetryData[6].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[6].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[6].m_tyresPressure[1],
@@ -1936,7 +1956,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[7].m_clutch,
             'gear': packet.m_carTelemetryData[7].m_gear,
             'engineRPM': packet.m_carTelemetryData[7].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[7].m_drs],
+            'drs': packet.m_carTelemetryData[7].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[7].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[7].m_brakesTemperature[0],
@@ -1956,7 +1976,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[7].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[7].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[7].m_
+            'engineTemperature': packet.m_carTelemetryData[7].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[7].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[7].m_tyresPressure[1],
@@ -1972,7 +1992,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[8].m_clutch,
             'gear': packet.m_carTelemetryData[8].m_gear,
             'engineRPM': packet.m_carTelemetryData[8].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[8].m_drs],
+            'drs': packet.m_carTelemetryData[8].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[8].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[8].m_brakesTemperature[0],
@@ -1992,7 +2012,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[8].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[8].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[8].m_
+            'engineTemperature': packet.m_carTelemetryData[8].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[8].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[8].m_tyresPressure[1],
@@ -2008,7 +2028,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[9].m_clutch,
             'gear': packet.m_carTelemetryData[9].m_gear,
             'engineRPM': packet.m_carTelemetryData[9].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[9].m_drs],
+            'drs': packet.m_carTelemetryData[9].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[9].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[9].m_brakesTemperature[0],
@@ -2028,7 +2048,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[9].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[9].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[9].m_
+            'engineTemperature': packet.m_carTelemetryData[9].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[9].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[9].m_tyresPressure[1],
@@ -2044,7 +2064,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[10].m_clutch,
             'gear': packet.m_carTelemetryData[10].m_gear,
             'engineRPM': packet.m_carTelemetryData[10].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[10].m_drs],
+            'drs': packet.m_carTelemetryData[10].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[10].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[10].m_brakesTemperature[0],
@@ -2064,7 +2084,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[10].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[10].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[10].m_
+            'engineTemperature': packet.m_carTelemetryData[10].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[10].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[10].m_tyresPressure[1],
@@ -2080,7 +2100,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[11].m_clutch,
             'gear': packet.m_carTelemetryData[11].m_gear,
             'engineRPM': packet.m_carTelemetryData[11].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[11].m_drs],
+            'drs': packet.m_carTelemetryData[11].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[11].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[11].m_brakesTemperature[0],
@@ -2100,7 +2120,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[11].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[11].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[11].m_
+            'engineTemperature': packet.m_carTelemetryData[11].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[11].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[11].m_tyresPressure[1],
@@ -2116,7 +2136,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[12].m_clutch,
             'gear': packet.m_carTelemetryData[12].m_gear,
             'engineRPM': packet.m_carTelemetryData[12].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[12].m_drs],
+            'drs': packet.m_carTelemetryData[12].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[12].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[12].m_brakesTemperature[0],
@@ -2136,7 +2156,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[12].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[12].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[12].m_
+            'engineTemperature': packet.m_carTelemetryData[12].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[12].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[12].m_tyresPressure[1],
@@ -2152,7 +2172,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[13].m_clutch,
             'gear': packet.m_carTelemetryData[13].m_gear,
             'engineRPM': packet.m_carTelemetryData[13].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[13].m_drs],
+            'drs': packet.m_carTelemetryData[13].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[13].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[13].m_brakesTemperature[0],
@@ -2172,7 +2192,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[13].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[13].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[13].m_
+            'engineTemperature': packet.m_carTelemetryData[13].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[13].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[13].m_tyresPressure[1],
@@ -2188,7 +2208,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[14].m_clutch,
             'gear': packet.m_carTelemetryData[14].m_gear,
             'engineRPM': packet.m_carTelemetryData[14].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[14].m_drs],
+            'drs': packet.m_carTelemetryData[14].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[14].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[14].m_brakesTemperature[0],
@@ -2208,7 +2228,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[14].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[14].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[14].m_
+            'engineTemperature': packet.m_carTelemetryData[14].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[14].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[14].m_tyresPressure[1],
@@ -2224,7 +2244,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[15].m_clutch,
             'gear': packet.m_carTelemetryData[15].m_gear,
             'engineRPM': packet.m_carTelemetryData[15].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[15].m_drs],
+            'drs': packet.m_carTelemetryData[15].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[15].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[15].m_brakesTemperature[0],
@@ -2244,7 +2264,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[15].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[15].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[15].m_
+            'engineTemperature': packet.m_carTelemetryData[15].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[15].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[15].m_tyresPressure[1],
@@ -2260,7 +2280,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[16].m_clutch,
             'gear': packet.m_carTelemetryData[16].m_gear,
             'engineRPM': packet.m_carTelemetryData[16].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[16].m_drs],
+            'drs': packet.m_carTelemetryData[16].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[16].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[16].m_brakesTemperature[0],
@@ -2280,7 +2300,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[16].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[16].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[16].m_
+            'engineTemperature': packet.m_carTelemetryData[16].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[16].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[16].m_tyresPressure[1],
@@ -2296,7 +2316,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[17].m_clutch,
             'gear': packet.m_carTelemetryData[17].m_gear,
             'engineRPM': packet.m_carTelemetryData[17].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[17].m_drs],
+            'drs': packet.m_carTelemetryData[17].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[17].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[17].m_brakesTemperature[0],
@@ -2316,7 +2336,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[17].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[17].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[17].m_
+            'engineTemperature': packet.m_carTelemetryData[17].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[17].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[17].m_tyresPressure[1],
@@ -2332,7 +2352,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[18].m_clutch,
             'gear': packet.m_carTelemetryData[18].m_gear,
             'engineRPM': packet.m_carTelemetryData[18].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[18].m_drs],
+            'drs': packet.m_carTelemetryData[18].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[18].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[18].m_brakesTemperature[0],
@@ -2352,7 +2372,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[18].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[18].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[18].m_
+            'engineTemperature': packet.m_carTelemetryData[18].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[18].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[18].m_tyresPressure[1],
@@ -2368,7 +2388,7 @@ def CarTelemetryData(packet):
             'clutch': packet.m_carTelemetryData[19].m_clutch,
             'gear': packet.m_carTelemetryData[19].m_gear,
             'engineRPM': packet.m_carTelemetryData[19].m_engineRPM,
-            'drs': drs_types[: packet.m_carTelemetryData[19].m_drs],
+            'drs': packet.m_carTelemetryData[19].m_drs,
             'revLightsPercent': packet.m_carTelemetryData[19].m_revLightsPercent,
             'brakesTemperature':{
                 'RL': packet.m_carTelemetryData[19].m_brakesTemperature[0],
@@ -2388,7 +2408,7 @@ def CarTelemetryData(packet):
                 'FL': packet.m_carTelemetryData[19].m_tyresInnerTemperature[2],
                 'FR': packet.m_carTelemetryData[19].m_tyresInnerTemperature[3]
             },
-            'engineTemperature': packet.m_carTelemetryData[19].m_
+            'engineTemperature': packet.m_carTelemetryData[19].m_engineTemperature,
             'tyresPressure':{
                 'RL': packet.m_carTelemetryData[19].m_tyresPressure[0],
                 'RR': packet.m_carTelemetryData[19].m_tyresPressure[1],
@@ -2397,7 +2417,8 @@ def CarTelemetryData(packet):
             }
         }
     ],
-    'buttonStatus': button_status_types[packet.m_buttonStatus]
+    'buttonStatus': 'not implemented'
+    # 'buttonStatus': button_status_types[packet.m_buttonStatus]
     }
 
     return telemetry_data_json
@@ -2426,19 +2447,19 @@ def PacketCarStatusData(packet):
     },
     'carStatusData':[
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[0].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[0].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[0].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[0].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[0].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[0].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[0].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[0].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[0].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[0].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[0].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[0].m_maxRPM,
             'idleRPM': packet.m_carStatusData[0].m_idleRPM,
             'maxGears': packet.m_carStatusData[0].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[0].m_drsAllowed] if packet.m_carStatusData[0].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[0].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[0].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[0].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[0].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[0].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[0].m_tyresDamage[1],
@@ -2451,27 +2472,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[0].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[0].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[0].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[0].m_vehicleFiaFlags] if packet.m_carStatusData[0].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[0].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[0].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[0].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[0].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[0].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[0].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[0].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[0].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[0].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[0].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[1].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[1].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[1].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[1].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[1].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[1].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[1].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[1].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[1].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[1].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[1].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[1].m_maxRPM,
             'idleRPM': packet.m_carStatusData[1].m_idleRPM,
             'maxGears': packet.m_carStatusData[1].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[1].m_drsAllowed] if packet.m_carStatusData[1].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[1].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[1].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[1].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[1].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[1].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[1].m_tyresDamage[1],
@@ -2484,27 +2505,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[1].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[1].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[1].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[1].m_vehicleFiaFlags] if packet.m_carStatusData[1].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[1].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[1].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[1].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[1].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[1].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[1].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[1].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[1].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[1].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[1].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[2].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[2].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[2].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[2].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[2].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[2].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[2].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[2].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[2].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[2].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[2].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[2].m_maxRPM,
             'idleRPM': packet.m_carStatusData[2].m_idleRPM,
             'maxGears': packet.m_carStatusData[2].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[2].m_drsAllowed] if packet.m_carStatusData[2].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[2].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[2].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[2].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[2].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[2].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[2].m_tyresDamage[1],
@@ -2517,27 +2538,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[2].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[2].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[2].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[2].m_vehicleFiaFlags] if packet.m_carStatusData[2].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[2].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[2].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[2].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[2].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[2].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[2].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[2].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[2].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[2].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[2].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[3].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[3].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[3].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[3].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[3].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[3].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[3].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[3].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[3].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[3].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[3].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[3].m_maxRPM,
             'idleRPM': packet.m_carStatusData[3].m_idleRPM,
             'maxGears': packet.m_carStatusData[3].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[3].m_drsAllowed] if packet.m_carStatusData[3].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[3].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[3].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[3].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[3].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[3].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[3].m_tyresDamage[1],
@@ -2550,27 +2571,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[3].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[3].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[3].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[3].m_vehicleFiaFlags] if packet.m_carStatusData[3].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[3].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[3].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[3].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[3].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[3].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[3].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[3].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[3].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[3].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[3].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[4].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[4].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[4].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[4].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[4].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[4].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[4].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[4].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[4].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[4].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[4].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[4].m_maxRPM,
             'idleRPM': packet.m_carStatusData[4].m_idleRPM,
             'maxGears': packet.m_carStatusData[4].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[4].m_drsAllowed] if packet.m_carStatusData[4].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[4].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[4].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[4].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[4].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[4].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[4].m_tyresDamage[1],
@@ -2583,27 +2604,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[4].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[4].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[4].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[4].m_vehicleFiaFlags] if packet.m_carStatusData[4].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[4].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[4].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[4].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[4].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[4].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[4].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[4].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[4].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[4].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[4].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[5].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[5].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[5].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[5].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[5].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[5].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[5].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[5].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[5].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[5].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[5].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[5].m_maxRPM,
             'idleRPM': packet.m_carStatusData[5].m_idleRPM,
             'maxGears': packet.m_carStatusData[5].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[5].m_drsAllowed] if packet.m_carStatusData[5].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[5].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[5].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[5].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[5].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[5].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[5].m_tyresDamage[1],
@@ -2616,27 +2637,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[5].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[5].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[5].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[5].m_vehicleFiaFlags] if packet.m_carStatusData[5].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[5].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[5].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[5].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[5].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[5].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[5].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[5].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[5].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[5].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[5].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[6].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[6].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[6].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[6].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[6].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[6].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[6].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[6].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[6].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[6].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[6].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[6].m_maxRPM,
             'idleRPM': packet.m_carStatusData[6].m_idleRPM,
             'maxGears': packet.m_carStatusData[6].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[6].m_drsAllowed] if packet.m_carStatusData[6].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[6].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[6].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[6].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[6].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[6].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[6].m_tyresDamage[1],
@@ -2649,27 +2670,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[6].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[6].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[6].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[6].m_vehicleFiaFlags] if packet.m_carStatusData[6].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[6].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[6].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[6].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[6].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[6].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[6].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[6].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[6].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[6].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[6].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[7].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[7].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[7].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[7].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[7].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[7].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[7].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[7].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[7].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[7].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[7].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[7].m_maxRPM,
             'idleRPM': packet.m_carStatusData[7].m_idleRPM,
             'maxGears': packet.m_carStatusData[7].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[7].m_drsAllowed] if packet.m_carStatusData[7].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[7].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[7].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[7].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[7].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[7].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[7].m_tyresDamage[1],
@@ -2682,27 +2703,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[7].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[7].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[7].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[7].m_vehicleFiaFlags] if packet.m_carStatusData[7].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[7].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[7].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[7].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[7].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[7].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[7].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[7].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[7].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[7].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[7].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[8].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[8].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[8].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[8].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[8].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[8].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[8].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[8].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[8].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[8].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[8].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[8].m_maxRPM,
             'idleRPM': packet.m_carStatusData[8].m_idleRPM,
             'maxGears': packet.m_carStatusData[8].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[8].m_drsAllowed] if packet.m_carStatusData[8].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[8].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[8].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[8].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[8].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[8].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[8].m_tyresDamage[1],
@@ -2715,27 +2736,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[8].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[8].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[8].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[8].m_vehicleFiaFlags] if packet.m_carStatusData[8].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[8].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[8].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[8].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[8].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[8].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[8].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[8].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[8].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[8].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[8].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[9].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[9].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[9].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[9].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[9].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[9].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[9].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[9].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[9].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[9].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[9].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[9].m_maxRPM,
             'idleRPM': packet.m_carStatusData[9].m_idleRPM,
             'maxGears': packet.m_carStatusData[9].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[9].m_drsAllowed] if packet.m_carStatusData[9].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[9].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[9].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[9].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[9].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[9].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[9].m_tyresDamage[1],
@@ -2748,27 +2769,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[9].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[9].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[9].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[9].m_vehicleFiaFlags] if packet.m_carStatusData[9].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[9].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[9].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[9].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[9].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[9].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[9].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[9].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[9].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[9].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[9].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[10].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[10].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[10].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[10].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[10].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[10].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[10].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[10].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[10].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[10].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[10].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[10].m_maxRPM,
             'idleRPM': packet.m_carStatusData[10].m_idleRPM,
             'maxGears': packet.m_carStatusData[10].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[10].m_drsAllowed] if packet.m_carStatusData[10].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[10].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[10].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[10].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[10].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[10].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[10].m_tyresDamage[1],
@@ -2781,27 +2802,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[10].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[10].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[10].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[10].m_vehicleFiaFlags] if packet.m_carStatusData[10].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[10].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[10].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[10].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[10].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[10].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[10].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[10].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[10].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[10].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[10].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[11].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[11].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[11].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[11].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[11].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[11].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[11].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[11].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[11].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[11].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[11].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[11].m_maxRPM,
             'idleRPM': packet.m_carStatusData[11].m_idleRPM,
             'maxGears': packet.m_carStatusData[11].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[11].m_drsAllowed] if packet.m_carStatusData[11].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[11].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[11].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[11].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[11].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[11].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[11].m_tyresDamage[1],
@@ -2814,27 +2835,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[11].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[11].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[11].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[11].m_vehicleFiaFlags] if packet.m_carStatusData[11].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[11].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[11].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[11].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[11].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[11].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[11].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[11].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[11].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[11].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[11].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[12].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[12].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[12].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[12].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[12].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[12].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[12].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[12].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[12].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[12].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[12].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[12].m_maxRPM,
             'idleRPM': packet.m_carStatusData[12].m_idleRPM,
             'maxGears': packet.m_carStatusData[12].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[12].m_drsAllowed] if packet.m_carStatusData[12].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[12].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[12].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[12].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[12].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[12].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[12].m_tyresDamage[1],
@@ -2847,27 +2868,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[12].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[12].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[12].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[12].m_vehicleFiaFlags] if packet.m_carStatusData[12].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[12].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[12].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[12].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[12].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[12].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[12].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[12].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[12].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[12].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[12].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[13].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[13].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[13].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[13].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[13].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[13].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[13].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[13].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[13].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[13].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[13].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[13].m_maxRPM,
             'idleRPM': packet.m_carStatusData[13].m_idleRPM,
             'maxGears': packet.m_carStatusData[13].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[13].m_drsAllowed] if packet.m_carStatusData[13].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[13].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[13].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[13].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[13].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[13].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[13].m_tyresDamage[1],
@@ -2880,27 +2901,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[13].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[13].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[13].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[13].m_vehicleFiaFlags] if packet.m_carStatusData[13].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[13].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[13].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[13].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[13].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[13].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[13].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[13].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[13].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[13].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[13].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[14].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[14].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[14].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[14].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[14].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[14].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[14].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[14].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[14].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[14].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[14].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[14].m_maxRPM,
             'idleRPM': packet.m_carStatusData[14].m_idleRPM,
             'maxGears': packet.m_carStatusData[14].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[14].m_drsAllowed] if packet.m_carStatusData[14].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[14].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[14].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[14].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[14].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[14].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[14].m_tyresDamage[1],
@@ -2913,27 +2934,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[14].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[14].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[14].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[14].m_vehicleFiaFlags] if packet.m_carStatusData[14].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[14].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[14].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[14].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[14].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[14].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[14].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[14].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[14].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[14].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[14].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[15].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[15].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[15].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[15].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[15].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[15].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[15].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[15].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[15].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[15].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[15].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[15].m_maxRPM,
             'idleRPM': packet.m_carStatusData[15].m_idleRPM,
             'maxGears': packet.m_carStatusData[15].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[15].m_drsAllowed] if packet.m_carStatusData[15].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[15].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[15].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[15].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[15].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[15].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[15].m_tyresDamage[1],
@@ -2946,27 +2967,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[15].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[15].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[15].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[15].m_vehicleFiaFlags] if packet.m_carStatusData[15].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[15].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[15].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[15].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[15].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[15].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[15].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[15].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[15].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[15].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[15].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[16].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[16].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[16].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[16].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[16].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[16].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[16].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[16].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[16].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[16].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[16].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[16].m_maxRPM,
             'idleRPM': packet.m_carStatusData[16].m_idleRPM,
             'maxGears': packet.m_carStatusData[16].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[16].m_drsAllowed] if packet.m_carStatusData[16].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[16].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[16].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[16].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[16].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[16].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[16].m_tyresDamage[1],
@@ -2979,27 +3000,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[16].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[16].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[16].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[16].m_vehicleFiaFlags] if packet.m_carStatusData[16].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[16].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[16].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[16].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[16].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[16].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[16].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[16].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[16].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[16].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[16].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[17].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[17].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[17].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[17].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[17].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[17].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[17].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[17].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[17].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[17].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[17].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[17].m_maxRPM,
             'idleRPM': packet.m_carStatusData[17].m_idleRPM,
             'maxGears': packet.m_carStatusData[17].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[17].m_drsAllowed] if packet.m_carStatusData[17].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[17].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[17].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[17].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[17].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[17].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[17].m_tyresDamage[1],
@@ -3012,27 +3033,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[17].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[17].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[17].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[17].m_vehicleFiaFlags] if packet.m_carStatusData[17].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[17].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[17].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[17].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[17].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[17].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[17].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[17].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[17].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[17].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[17].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[18].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[18].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[18].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[18].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[18].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[18].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[18].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[18].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[18].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[18].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[18].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[18].m_maxRPM,
             'idleRPM': packet.m_carStatusData[18].m_idleRPM,
             'maxGears': packet.m_carStatusData[18].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[18].m_drsAllowed] if packet.m_carStatusData[18].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[18].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[18].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[18].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[18].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[18].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[18].m_tyresDamage[1],
@@ -3045,27 +3066,27 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[18].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[18].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[18].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[18].m_vehicleFiaFlags] if packet.m_carStatusData[18].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[18].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[18].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[18].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[18].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[18].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[18].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[18].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[18].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[18].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[18].m_ersDeployedThisLap
         },
         {
-            'tractionControl': traction_control_types[packet.m_carStatusData[19].m_tractionControl], # 0 (off) - 2 (high)
-            'antiLockBrakes': anti_lock_brakes_type[packet.m_carStatusData[19].m_antiLockBrakes], # 0 (off) - 1 (on)
-            'fuelMix': fuel_mix_types[packet.m_carStatusData[19].m_fuelMix], # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
+            'tractionControl': packet.m_carStatusData[19].m_tractionControl, # 0 (off) - 2 (high)
+            'antiLockBrakes': packet.m_carStatusData[19].m_antiLockBrakes, # 0 (off) - 1 (on)
+            'fuelMix': packet.m_carStatusData[19].m_fuelMix, # Fuel mix - 0 = lean, 1 = standard, 2 = rich, 3 = max
             'frontBrakeBias': packet.m_carStatusData[19].m_frontBrakeBias,
-            'pitLimiterStatus': pit_limiter_types[packet.m_carStatusData[19].m_pitLimiterStatus], # Pit limiter status - 0 = off, 1 = on
+            'pitLimiterStatus': packet.m_carStatusData[19].m_pitLimiterStatus, # Pit limiter status - 0 = off, 1 = on
             'fuelInTank': packet.m_carStatusData[19].m_fuelInTank,
             'fuelCapacity': packet.m_carStatusData[19].m_fuelCapacity,
             'maxRPM': packet.m_carStatusData[19].m_maxRPM,
             'idleRPM': packet.m_carStatusData[19].m_idleRPM,
             'maxGears': packet.m_carStatusData[19].m_maxGears,
-            'drsAllowed': drs_allowed_types[packet.m_carStatusData[19].m_drsAllowed] if packet.m_carStatusData[19].m_drsAllowed != -1 else 'unknown', # 0 = not allowed, 1 = allowed, -1 = unknown
+            'drsAllowed': packet.m_carStatusData[19].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
             'tyresWear': packet.m_carStatusData[19].m_tyresWear,
-            'tyreCompound': tyre_compound_types[packet.m_carStatusData[19].m_tyreCompound], # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
+            'tyreCompound': packet.m_carStatusData[19].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
             'tyresDamage':{
                 'RL': packet.m_carStatusData[19].m_tyresDamage[0],
                 'RR': packet.m_carStatusData[19].m_tyresDamage[1],
@@ -3078,11 +3099,11 @@ def PacketCarStatusData(packet):
             'engineDamage': packet.m_carStatusData[19].m_engineDamage,
             'gearBoxDamage': packet.m_carStatusData[19].m_gearBoxDamage,
             'exhaustDamage': packet.m_carStatusData[19].m_exhaustDamage,
-            'vehicleFiaFlags': vehicle_fia_flags_types[packet.m_carStatusData[19].m_vehicleFiaFlags] if packet.m_carStatusData[19].m_vehicleFiaFlags != -1 else 'invalid/unknown', # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-            'ersStoreEnergy': packet.m_carStatusData[19].m_ersStoreEnergy
-            'ersDeployMode': ers_deploy_mode_types[packet.m_carStatusData[19].m_ersDeployMode], # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
-            'ersHarvestedThisLapMGUK': packet.m_carStatusData[19].m_ersHarvestedThisLapMGUK
-            'ersHarvestedThisLapMGUH': packet.m_carStatusData[19].m_ersHarvestedThisLapMGUH
+            'vehicleFiaFlags': packet.m_carStatusData[19].m_vehicleFiaFlags, # -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+            'ersStoreEnergy': packet.m_carStatusData[19].m_ersStoreEnergy,
+            'ersDeployMode': packet.m_carStatusData[19].m_ersDeployMode, # ERS deployment mode, 0 = none, 1 = low, 2 = medium, 3 = high, 4 = overtake, 5 = hotlap
+            'ersHarvestedThisLapMGUK': packet.m_carStatusData[19].m_ersHarvestedThisLapMGUK,
+            'ersHarvestedThisLapMGUH': packet.m_carStatusData[19].m_ersHarvestedThisLapMGUH,
             'ersDeployedThisLap': packet.m_carStatusData[19].m_ersDeployedThisLap
         }
     ]
