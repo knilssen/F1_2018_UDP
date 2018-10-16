@@ -24,6 +24,9 @@ import json
 # Import udp data structs
 import structs
 
+# Import out packet to json converter
+import structs_to_json
+
 class Notifier():
     """ Notifier utility class """
 
@@ -85,18 +88,15 @@ def handle_udp_messages(sock, fd, events):
         try:
             data, addr = sock.recvfrom(1341) # buffer size is 1341 bytes
 
-            if not data:
-                print "connection closed"
-                sock.close()
-                break
-            else:
-                # print "Received %d bytes: '%s'" % (len(data), data)
-                header_data = data[0:21]
-                packet_header = structs.PacketHeader.from_buffer_copy(header_data)
-                packet_id = packet_header.m_packetId
-                packet = packet_structures[packet_id].from_buffer_copy(data)
-                # notify that we have new data
-                notifier.notify(packet)
+
+            # print "Received %d bytes: '%s'" % (len(data), data)
+            header_data = data[0:21]
+            packet_header = structs.PacketHeader.from_buffer_copy(header_data)
+            packet_id = packet_header.m_packetId
+            packet = packet_structures[packet_id].from_buffer_copy(data)
+            packet = structs_to_json.structs(packet_names[packet_id], packet)
+            # notify that we have new data
+            notifier.notify(packet)
         except socket.error, e:
             break
 
@@ -113,14 +113,15 @@ if __name__ == '__main__':
     # Config = ConfigParser.ConfigParser()
     # Config.read("settings.ini")
     server_port = '9090'
-    udp_port    = '20777'
+    # udp_port    = '20777'
+    udp_port    = 5003
 
     # application start listening on port 9090
     application.listen(server_port)
 
     # setup socket for UDP listening
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind(('',udp_port))
+    sock.bind(('127.0.0.1',udp_port))
     sock.setblocking(False)
 
     # create handler that deals with our UDP messages
