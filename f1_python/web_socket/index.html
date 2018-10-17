@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>F1 UDP</title>
+  <link rel="stylesheet" href="static/app.css">
+</head>
+<body>
+  <canvas id="packet_canvas"></canvas>
+  <br />
+
+  packetFormat: <span id="packetFormat"></span><br />
+  packetVersion: <span id="packetVersion"></span><br />
+  packetId: <span id="packetId"></span><br />
+  sessionUID: <span id="sessionUID"></span><br />
+  sessionTime: <span id="sessionTime"></span><br />
+  frameIdentifier: <span id="frameIdentifier"></span><br />
+  playerCarIndex: <span id="playerCarIndex"></span><br /><br />
+
+  <div class="grid-container">
+    <div class="carTelemetryData">
+      carTelemetryData: <br /><br />
+        speed: <span id="speed"></span><br />
+        throttle: <span id="throttle"></span><br />
+        steer: <span id="steer"></span><br />
+        brake: <span id="brake"></span><br />
+        clutch: <span id="clutch"></span><br />
+        gear: <span id="gear"></span><br />
+        engineRPM: <span id="engineRPM"></span><br />
+        drs: <span id="drs"></span><br />
+        revLightsPercent: <span id="revLightsPercent"></span><br />
+        engineTemperature: <span id="engineTemperature"></span><br />
+
+        brakesTemperature: <br />
+            RL: <span id="brakesTemperatureRL"></span><br />
+            RR: <span id="brakesTemperatureRR"></span><br />
+            FL: <span id="brakesTemperatureFL"></span><br />
+            FR: <span id="brakesTemperatureFR"></span><br />
+
+        tyresSurfaceTemperature: <br />
+            RL: <span id="tyresSurfaceTemperatureRL"></span><br />
+            RR: <span id="tyresSurfaceTemperatureRR"></span><br />
+            FL: <span id="tyresSurfaceTemperatureFL"></span><br />
+            FR: <span id="tyresSurfaceTemperatureFR"></span><br />
+
+        tyresInnerTemperature: <br />
+            RL: <span id="tyresInnerTemperatureRL"></span><br />
+            RR: <span id="tyresInnerTemperatureRR"></span><br />
+            FL: <span id="tyresInnerTemperatureFL"></span><br />
+            FR: <span id="tyresInnerTemperatureFR"></span><br />
+
+        tyresPressure: <br />
+            RL: <span id="tyresPressureRL"></span><br />
+            RR: <span id="tyresPressureRR"></span><br />
+            FL: <span id="tyresPressureFL"></span><br />
+            FR: <span id="tyresPressureFR"></span><br />
+
+        buttonStatus: <span id="buttonStatus"></span><br />
+    </div>
+    <div class="CarMotionData">
+      CarMotionData: <br /><br />
+        worldPositionX: <span id="worldPositionX"></span><br />
+        worldPositionY: <span id="worldPositionY"></span><br />
+        worldPositionZ: <span id="worldPositionZ"></span><br />
+        worldVelocityX: <span id="worldVelocityX"></span><br />
+        worldVelocityY: <span id="worldVelocityY"></span><br />
+        worldVelocityZ: <span id="worldVelocityZ"></span><br />
+        worldForwardDirX: <span id="worldForwardDirX"></span><br />
+        worldForwardDirY: <span id="worldForwardDirY"></span><br />
+        worldForwardDirZ: <span id="worldForwardDirZ"></span><br />
+        worldRightDirX: <span id="worldRightDirX"></span><br />
+        worldRightDirY: <span id="worldRightDirY"></span><br />
+        worldRightDirZ: <span id="worldRightDirZ"></span><br />
+        gForceLateral: <span id="gForceLateral"></span><br />
+        gForceLongitudinal: <span id="gForceLongitudinal"></span><br />
+        gForceVertical: <span id="gForceVertical"></span><br />
+        yaw: <span id="yaw"></span><br />
+        pitch: <span id="pitch"></span><br />
+        roll: <span id="roll"></span><br />
+        suspensionPosition: <br />
+            RL: <span id="suspensionPositionRL"></span><br />
+            RR: <span id="suspensionPositionRR"></span><br />
+            FL: <span id="suspensionPositionFL"></span><br />
+            FR: <span id="suspensionPositionFR"></span><br />
+        suspensionVelocity: <br />
+            RL: <span id="suspensionVelocityRL"></span><br />
+            RR: <span id="suspensionVelocityRR"></span><br />
+            FL: <span id="suspensionVelocityFL"></span><br />
+            FR: <span id="suspensionVelocityFR"></span><br />
+        suspensionAcceleration: <br />
+            RL: <span id="suspensionAccelerationRL"></span><br />
+            RR: <span id="suspensionAccelerationRR"></span><br />
+            FL: <span id="suspensionAccelerationFL"></span><br />
+            FR: <span id="suspensionAccelerationFR"></span><br />
+        wheelSpeed: <br />
+            RL: <span id="wheelSpeedRL"></span><br />
+            RR: <span id="wheelSpeedRR"></span><br />
+            FL: <span id="wheelSpeedFL"></span><br />
+            FR: <span id="wheelSpeedFR"></span><br />
+        wheelSlip: <br />
+            RL: <span id="wheelSlipRL"></span><br />
+            RR: <span id="wheelSlipRR"></span><br />
+            FL: <span id="wheelSlipFL"></span><br />
+            FR: <span id="wheelSlipFR"></span><br />
+        localVelocityX: <span id="localVelocityX"></span><br />
+        localVelocityY: <span id="localVelocityY"></span><br />
+        localVelocityZ: <span id="localVelocityZ"></span><br />
+        angularVelocityX: <span id="angularVelocityX"></span><br />
+        angularVelocityY: <span id="angularVelocityY"></span><br />
+        angularVelocityZ: <span id="angularVelocityZ"></span><br />
+        angularAccelerationX: <span id="angularAccelerationX"></span><br />
+        angularAccelerationY: <span id="angularAccelerationY"></span><br />
+        angularAccelerationZ: <span id="angularAccelerationZ"></span><br />
+        frontWheelsAngle: <span id="frontWheelsAngle"></span><br />
+    </div>
+    <div class="item3">
+
+    </div>
+    <div class="item4">4</div>
+    <div class="item5">5</div>
+    <div class="item6">6</div>
+  </div>
+
+
+
+
+</body>
+<script src="static/app.js"></script>
+</html>
