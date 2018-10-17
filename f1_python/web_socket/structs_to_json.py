@@ -13,16 +13,17 @@
 import json
 
 
-
 def MotionData(packet):
     motion_data_json = {
-    'packetFormat': packet.m_header.m_packetFormat,
-    'packetVersion': packet.m_header.m_packetVersion,
-    'packetId': packet.m_header.m_packetId,
-    'sessionUID': packet.m_header.m_sessionUID,
-    'sessionTime': packet.m_header.m_sessionTime,
-    'frameIdentifier': packet.m_header.m_frameIdentifier,
-    'playerCarIndex': packet.m_header.m_playerCarIndex,
+    'header': {
+        'packetFormat': packet.m_header.m_packetFormat,
+        'packetVersion': packet.m_header.m_packetVersion,
+        'packetId': packet.m_header.m_packetId,
+        'sessionUID': packet.m_header.m_sessionUID,
+        'sessionTime': packet.m_header.m_sessionTime,
+        'frameIdentifier': packet.m_header.m_frameIdentifier,
+        'playerCarIndex': packet.m_header.m_playerCarIndex
+    },
     'carMotionData': [
         {
             'worldPositionX': packet.m_carMotionData[0].m_worldPositionX,
@@ -2417,7 +2418,7 @@ def CarTelemetryData(packet):
             }
         }
     ],
-    'buttonStatus': 'not implemented'
+    'buttonStatus': 'N/A'
     # 'buttonStatus': button_status_types[packet.m_buttonStatus]
     }
 
