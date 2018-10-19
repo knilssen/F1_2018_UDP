@@ -16,44 +16,33 @@ import binascii
 import structs
 # from __future__ import print_function
 from pprint import pprint
-import f1_udp_client_test
+# import f1_udp_client_test
 
 class GuiPart(Frame):
     def __init__(self, master, queue, endCommand):
         Frame.__init__(self)
+        self.configure(background='grey')
         self.queue = queue
+
         # Set up the GUI
         console = Tkinter.Button(master, text='Done', command=endCommand)
         console.grid(row=0, column=0, sticky=W, padx=5, pady=5)
 
-        # self.QUIT = Button(self)
-        # self.QUIT["text"] = "QUIT"
-        # self.QUIT["command"] =  self.quit
-        #
-        # self.QUIT.grid(row=0, sticky=W, padx=5, pady=5)
-
         # Show data from UDP stream
-
         # Set lables for the different packets
-        self.motion_data_title = Label(self, text = "MOTION DATA").grid(row=4, column=0, sticky=W, columnspan=2, padx=5)
-        self.session_data_title = Label(self, text = "SESSION DATA").grid(row=4, column=2, sticky=W, columnspan=2)
-        self.lap_data_title = Label(self, text = "LAP DATA").grid(row=4, column=4, sticky=W, columnspan=2)
-        self.event_data_title = Label(self, text = "EVENT DATA").grid(row=4, column=6, sticky=W, columnspan=2)
-        self.participant_data_title = Label(self, text = "PARTICIPANT DATA").grid(row=4, column=8, sticky=W, columnspan=2)
-        self.car_setup_data_title = Label(self, text = "CAR SETUP DATA").grid(row=4, column=10, sticky=W, columnspan=2)
-        self.car_telemetry_data_title = Label(self, text = "CAR TELEMETRY DATA").grid(row=4, column=12, sticky=W, columnspan=2)
-        self.packet_car_status_data_title = Label(self, text = "PACKET CAR STATUS DATA").grid(row=4, column=14, sticky=W, columnspan=2)
-
-
-
+        self.motion_data_title = Label(self, text = "MOTION DATA", anchor=W).grid(row=4, column=0, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, columnspan=2)
+        self.session_data_title = Label(self, text = "SESSION DATA", anchor=W).grid(row=4, column=2, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, columnspan=2)
+        self.lap_data_title = Label(self, text = "LAP DATA", anchor=W).grid(row=4, column=4, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, columnspan=2)
+        self.event_data_title = Label(self, text = "EVENT DATA", anchor=W).grid(row=4, column=6, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, columnspan=2)
+        self.participant_data_title = Label(self, text = "PARTICIPANT DATA", anchor=W).grid(row=4, column=8, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, columnspan=2)
+        self.car_setup_data_title = Label(self, text = "CAR SETUP DATA", anchor=W).grid(row=4, column=10, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, columnspan=2)
+        self.car_telemetry_data_title = Label(self, text = "CAR TELEMETRY DATA", anchor=W).grid(row=4, column=12, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, columnspan=2)
+        self.packet_car_status_data_title = Label(self, text = "PACKET CAR STATUS DATA", anchor=W).grid(row=4, column=14, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, columnspan=2)
 
 
 
         # Set lables for each of the packets datas
-
         # Motion data
-        # self.md_header = Label(self, text = "").grid(row=4, column=0, sticky=W)
-        # self.md_car_motion_data = Label(self, text = "").grid(row=5, column=0, sticky=W)                            # For all cars, need to isolate only users car for now/this test
         self.md_world_position_x = Label(self, text = "worldPositionX", background='grey').grid(row=6, column=0, sticky=W)
         self.md_world_position_y = Label(self, text = "worldPositionY", background='grey').grid(row=7, column=0, sticky=W)
         self.md_world_position_z = Label(self, text = "worldPositionZ", background='grey').grid(row=8, column=0, sticky=W)
@@ -72,32 +61,26 @@ class GuiPart(Frame):
         self.md_yaw = Label(self, text = "yaw", background='grey').grid(row=21, column=0, sticky=W)
         self.md_pitch = Label(self, text = "pitch", background='grey').grid(row=22, column=0, sticky=W)
         self.md_roll = Label(self, text = "roll", background='grey').grid(row=23, column=0, sticky=W)
-
         self.md_suspension_position_rl = Label(self, text = "suspension_positions [rl]  [rr]    [fl]    [fr]", background='grey').grid(row=24, column=0, sticky=W, columnspan=2)                   # All wheel arrays have the following order RL, RR, FL, FR
         # self.md_suspension_position_rr = Label(self, text = "suspension_position_rr").grid(row=25, column=0, sticky=W)
         # self.md_suspension_position_fl = Label(self, text = "suspension_position_fl").grid(row=26, column=0, sticky=W)
         # self.md_suspension_position_fr = Label(self, text = "suspension_position_fr").grid(row=27, column=0, sticky=W)
-
         self.md_suspension_velocity_rl = Label(self, text = "suspension_velocity  [rl]  [rr]    [fl]    [fr]", background='grey').grid(row=27, column=0, sticky=W, columnspan=2)
         # self.md_suspension_velocity_rr = Label(self, text = "suspension_velocity_rr").grid(row=29, column=0, sticky=W)
         # self.md_suspension_velocity_fl = Label(self, text = "suspension_velocity_fl").grid(row=30, column=0, sticky=W)
         # self.md_suspension_velocity_fr = Label(self, text = "suspension_velocity_fr").grid(row=31, column=0, sticky=W)
-
         self.md_suspension_acceleration_rl = Label(self, text = "suspension_acceleration  [rl]  [rr]    [fl]    [fr]", background='grey').grid(row=30, column=0, sticky=W, columnspan=2)
         # self.md_suspension_acceleration_rr = Label(self, text = "suspension_acceleration_rr").grid(row=33, column=0, sticky=W)
         # self.md_suspension_acceleration_fl = Label(self, text = "suspension_acceleration_fl").grid(row=34, column=0, sticky=W)
         # self.md_suspension_acceleration_fr = Label(self, text = "suspension_acceleration_fr").grid(row=35, column=0, sticky=W)
-
         self.md_wheel_speed_rl = Label(self, text = "wheel_speed  [rl]  [rr]    [fl]    [fr]", background='grey').grid(row=33, column=0, sticky=W, columnspan=2)
         # self.md_wheel_speed_rr = Label(self, text = "wheel_speed_rr").grid(row=37, column=0, sticky=W)
         # self.md_wheel_speed_fl = Label(self, text = "wheel_speed_fl").grid(row=38, column=0, sticky=W)
         # self.md_wheel_speed_fr = Label(self, text = "wheel_speed_fr").grid(row=39, column=0, sticky=W)
-
         self.md_wheel_slip_rl = Label(self, text = "wheel_slip  [rl]  [rr]    [fl]    [fr]", background='grey').grid(row=36, column=0, sticky=W, columnspan=2)
         # self.md_wheel_slip_rr = Label(self, text = "wheel_slip_rr").grid(row=41, column=0, sticky=W)
         # self.md_wheel_slip_fl = Label(self, text = "wheel_slip_fl").grid(row=42, column=0, sticky=W)
         # self.md_wheel_slip_fr = Label(self, text = "wheel_slip_fr").grid(row=43, column=0, sticky=W)
-
         self.md_local_velocityX = Label(self, text = "localVelocityX", background='grey').grid(row=39, column=0, sticky=W)
         self.md_local_velocityY = Label(self, text = "localVelocityY", background='grey').grid(row=40, column=0, sticky=W)
         self.md_local_velocityZ = Label(self, text = "localVelocityZ", background='grey').grid(row=41, column=0, sticky=W)
@@ -133,27 +116,91 @@ class GuiPart(Frame):
         self.sd_safetyCarStatus = Label(self, text = "safetyCarStatus", background='grey').grid(row=23, column=2, sticky=W)
         self.sd_networkGame = Label(self, text = "networkGame", background='grey').grid(row=24, column=2, sticky=W)
 
-
-
         # Lap data
-
-
+        # self.ld_lapData = Label(self, text = "lapData", background='grey').grid(row=6, column=4, sticky=W)
+        self.ld_lastLapTime = Label(self, text = "lastLapTime", background='grey').grid(row=6, column=4, sticky=W)
+        self.ld_currentLapTime = Label(self, text = "currentLapTime", background='grey').grid(row=7, column=4, sticky=W)
+        self.ld_bestLapTime = Label(self, text = "bestLapTime", background='grey').grid(row=8, column=4, sticky=W)
+        self.ld_sector1Time = Label(self, text = "sector1Time", background='grey').grid(row=9, column=4, sticky=W)
+        self.ld_sector2Time = Label(self, text = "sector2Time", background='grey').grid(row=10, column=4, sticky=W)
+        self.ld_lapDistance = Label(self, text = "lapDistance", background='grey').grid(row=11, column=4, sticky=W)
+        self.ld_totalDistance = Label(self, text = "totalDistance", background='grey').grid(row=12, column=4, sticky=W)
+        self.ld_safetyCarDelta = Label(self, text = "safetyCarDelta", background='grey').grid(row=13, column=4, sticky=W)
+        self.ld_carPosition = Label(self, text = "carPosition", background='grey').grid(row=14, column=4, sticky=W)
+        self.ld_currentLapNum = Label(self, text = "currentLapNum", background='grey').grid(row=15, column=4, sticky=W)
+        self.ld_pitStatus = Label(self, text = "pitStatus", background='grey').grid(row=16, column=4, sticky=W)
+        self.ld_sector = Label(self, text = "sector", background='grey').grid(row=17, column=4, sticky=W)
+        self.ld_currentLapInvalid = Label(self, text = "currentLapInvalid", background='grey').grid(row=18, column=4, sticky=W)
+        self.ld_penalties = Label(self, text = "penalties", background='grey').grid(row=19, column=4, sticky=W)
+        self.ld_gridPosition = Label(self, text = "gridPosition", background='grey').grid(row=20, column=4, sticky=W)
+        self.ld_driverStatus = Label(self, text = "driverStatus", background='grey').grid(row=21, column=4, sticky=W)
+        self.ld_resultStatus = Label(self, text = "resultStatus", background='grey').grid(row=22, column=4, sticky=W)
 
         # Event data
-
+        self.ed_eventStringCode = Label(self, text = "eventStringCode", background='grey').grid(row=6, column=6, sticky=W)
 
 
         # Partcipant data
-
+        self.pd_numCars = Label(self, text = "numCars", background='grey').grid(row=6, column=8, sticky=W)
+        self.pd_aiControlled = Label(self, text = "aiControlled", background='grey').grid(row=7, column=8, sticky=W)
+        self.pd_driverId = Label(self, text = "driverId", background='grey').grid(row=8, column=8, sticky=W)
+        self.pd_teamId = Label(self, text = "teamId", background='grey').grid(row=9, column=8, sticky=W)
+        self.pd_raceNumber = Label(self, text = "raceNumber", background='grey').grid(row=10, column=8, sticky=W)
+        self.pd_nationality = Label(self, text = "nationality", background='grey').grid(row=11, column=8, sticky=W)
+        self.pd_name = Label(self, text = "name", background='grey').grid(row=12, column=8, sticky=W)
 
 
         # Car Setup Data
-
+        self.csd_frontWing = Label(self, text = "frontWing", background='grey').grid(row=6, column=10, sticky=W)
+        self.csd_rearWing = Label(self, text = "rearWing", background='grey').grid(row=7, column=10, sticky=W)
+        self.csd_onThrottle = Label(self, text = "onThrottle", background='grey').grid(row=8, column=10, sticky=W)
+        self.csd_offThrottle = Label(self, text = "offThrottle", background='grey').grid(row=9, column=10, sticky=W)
+        self.csd_frontCamber = Label(self, text = "frontCamber", background='grey').grid(row=10, column=10, sticky=W)
+        self.csd_rearCamber = Label(self, text = "rearCamber", background='grey').grid(row=11, column=10, sticky=W)
+        self.csd_frontToe = Label(self, text = "frontToe", background='grey').grid(row=12, column=10, sticky=W)
+        self.csd_rearToe = Label(self, text = "rearToe", background='grey').grid(row=13, column=10, sticky=W)
+        self.csd_frontSuspension = Label(self, text = "frontSuspension", background='grey').grid(row=14, column=10, sticky=W)
+        self.csd_rearSuspension = Label(self, text = "rearSuspension", background='grey').grid(row=15, column=10, sticky=W)
+        self.csd_frontAntiRollBar = Label(self, text = "frontAntiRollBar", background='grey').grid(row=16, column=10, sticky=W)
+        self.csd_rearAntiRollBar = Label(self, text = "rearAntiRollBar", background='grey').grid(row=17, column=10, sticky=W)
+        self.csd_frontSuspensionHeight = Label(self, text = "frontSuspensionHeight", background='grey').grid(row=18, column=10, sticky=W)
+        self.csd_rearSuspensionHeight = Label(self, text = "rearSuspensionHeight", background='grey').grid(row=19, column=10, sticky=W)
+        self.csd_brakePressure = Label(self, text = "brakePressure", background='grey').grid(row=20, column=10, sticky=W)
+        self.csd_brakeBias = Label(self, text = "brakeBias", background='grey').grid(row=21, column=10, sticky=W)
+        self.csd_frontTyrePressure = Label(self, text = "frontTyrePressure", background='grey').grid(row=22, column=10, sticky=W)
+        self.csd_rearTyrePressure = Label(self, text = "rearTyrePressure", background='grey').grid(row=23, column=10, sticky=W)
+        self.csd_ballast = Label(self, text = "ballast", background='grey').grid(row=24, column=10, sticky=W)
+        self.csd_fuelLoad = Label(self, text = "fuelLoad", background='grey').grid(row=25, column=10, sticky=W)
 
 
         # Car Telemetry Data
-
-
+        self.ctd_speed = Label(self, text = "speed", background='grey').grid(row=6, column=12, sticky=W)
+        self.ctd_throttle = Label(self, text = "throttle", background='grey').grid(row=7, column=12, sticky=W)
+        self.ctd_steer = Label(self, text = "steer", background='grey').grid(row=8, column=12, sticky=W)
+        self.ctd_brake = Label(self, text = "brake", background='grey').grid(row=9, column=12, sticky=W)
+        self.ctd_clutch = Label(self, text = "clutch", background='grey').grid(row=10, column=12, sticky=W)
+        self.ctd_gear = Label(self, text = "gear", background='grey').grid(row=11, column=12, sticky=W)
+        self.ctd_engineRPM = Label(self, text = "engineRPM", background='grey').grid(row=12, column=12, sticky=W)
+        self.ctd_drs = Label(self, text = "drs", background='grey').grid(row=13, column=12, sticky=W)
+        self.ctd_revLightsPercent = Label(self, text = "revLightsPercent", background='grey').grid(row=14, column=12, sticky=W)
+        self.ctd_brakesTemperature_rl = Label(self, text = "brakesTemperature  [rl]  [rr]    [fl]    [fr]", background='grey').grid(row=15, column=12, sticky=W, columnspan=2)
+        # self.ctd_brakesTemperature_rr = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        # self.ctd_brakesTemperature_fl = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        # self.ctd_brakesTemperature_fr = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        self.ctd_tyresSurfaceTemperature_rl = Label(self, text = "tyresSurfaceTemperature  [rl]  [rr]    [fl]    [fr]", background='grey').grid(row=18, column=12, sticky=W, columnspan=2)
+        # self.ctd_tyresSurfaceTemperature_rr = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        # self.ctd_tyresSurfaceTemperature_fl = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        # self.ctd_tyresSurfaceTemperature_fr = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        self.ctd_tyresInnerTemperature_rl = Label(self, text = "tyresInnerTemperature  [rl]  [rr]    [fl]    [fr]", background='grey').grid(row=21, column=12, sticky=W, columnspan=2)
+        # self.ctd_tyresInnerTemperature_rr = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        # self.ctd_tyresInnerTemperature_fl = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        # self.ctd_tyresInnerTemperature_fr = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        self.ctd_engineTemperature = Label(self, text = "engineTemperature", background='grey').grid(row=24, column=12, sticky=W)
+        self.ctd_tyresPressure_rl = Label(self, text = "tyresPressure [rl]  [rr]    [fl]    [fr]", background='grey').grid(row=25, column=12, sticky=W, columnspan=2)
+        # self.ctd_tyresPressure_rr = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        # self.ctd_tyresPressure_fl = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        # self.ctd_tyresPressure_fr = Label(self, text = "", background='grey').grid(row=6, column=12, sticky=W)
+        self.ctd_buttonStatus = Label(self, text = "buttonStatus", background='grey').grid(row=28, column=12, sticky=W)
 
         # Packet Car Status Data
 
@@ -171,86 +218,161 @@ class GuiPart(Frame):
         # Data for each of the packets
 
         # Motion data
-        # self.md_car_motion_data = Label(self, text = "").grid(row=5, column=0, sticky=W)
-
-        # ttk.Label(frame, textvariable = credit).pack()
-
-        self.md_world_position_x_data_label = Label(self, textvariable = md_world_position_x_data).grid(row=6, column=1, sticky=W, padx=5)
-        self.md_world_position_y_data_label = Label(self, textvariable = md_world_position_y_data).grid(row=7, column=1, sticky=W, padx=5)
-        self.md_world_position_z_data_label = Label(self, textvariable = md_world_position_z_data).grid(row=8, column=1, sticky=W, padx=5)
-        self.md_world_velocity_x_data_label = Label(self, textvariable = md_world_velocity_x_data).grid(row=9, column=1, sticky=W, padx=5)
-        self.md_world_velocity_y_data_label = Label(self, textvariable = md_world_velocity_y_data).grid(row=10, column=1, sticky=W, padx=5)
-        self.md_world_velocity_z_data_label = Label(self, textvariable = md_world_velocity_z_data).grid(row=11, column=1, sticky=W, padx=5)
-        self.md_world_forward_dir_x_data_label = Label(self, textvariable = md_world_forward_dir_x_data).grid(row=12, column=1, sticky=W, padx=5)
-        self.md_world_forward_dir_y_data_label = Label(self, textvariable = md_world_forward_dir_y_data).grid(row=13, column=1, sticky=W, padx=5)
-        self.md_world_forward_dir_z_data_label = Label(self, textvariable = md_world_forward_dir_z_data).grid(row=14, column=1, sticky=W, padx=5)
-        self.md_world_right_dir_x_data_label = Label(self, textvariable = md_world_right_dir_x_data).grid(row=15, column=1, sticky=W, padx=5)
-        self.md_world_right_dir_y_data_label = Label(self, textvariable = md_world_right_dir_y_data).grid(row=16, column=1, sticky=W, padx=5)
-        self.md_world_right_dir_z_data_label = Label(self, textvariable = md_world_right_dir_z_data).grid(row=17, column=1, sticky=W, padx=5)
-        self.md_g_force_lateral_data_label = Label(self, textvariable = md_g_force_lateral_data).grid(row=18, column=1, sticky=W, padx=5)
-        self.md_g_force_longitudinal_data_label = Label(self, textvariable = md_g_force_longitudinal_data).grid(row=19, column=1, sticky=W, padx=5)
-        self.md_g_force_vertical_data_label = Label(self, textvariable = md_g_force_vertical_data).grid(row=20, column=1, sticky=W, padx=5)
-        self.md_yaw_data_label = Label(self, textvariable = md_yaw_data).grid(row=21, column=1, sticky=W, padx=5)
-        self.md_pitch_data_label = Label(self, textvariable = md_pitch_data).grid(row=22, column=1, sticky=W, padx=5)
-        self.md_roll_data_label = Label(self, textvariable = md_roll_data).grid(row=23, column=1, sticky=W, padx=5)
-
-        self.md_suspension_position_rl_data_label = Label(self, textvariable = md_suspension_position_rl_data).grid(row=25, column=0, sticky=W, padx=5)                   # All wheel arrays have the following order RL, RR, FL, FR
-        self.md_suspension_position_rr_data_label = Label(self, textvariable = md_suspension_position_rr_data).grid(row=25, column=1, sticky=W, padx=5)
-        self.md_suspension_position_fl_data_label = Label(self, textvariable = md_suspension_position_fl_data).grid(row=26, column=0, sticky=W, padx=5)
-        self.md_suspension_position_fr_data_label = Label(self, textvariable = md_suspension_position_fr_data).grid(row=26, column=1, sticky=W, padx=5)
-
-        self.md_suspension_velocity_rl_data_label = Label(self, textvariable = md_suspension_velocity_rl_data).grid(row=28, column=0, sticky=W, padx=5)
-        self.md_suspension_velocity_rr_data_label = Label(self, textvariable = md_suspension_velocity_rr_data).grid(row=28, column=1, sticky=W, padx=5)
-        self.md_suspension_velocity_fl_data_label = Label(self, textvariable = md_suspension_velocity_fl_data).grid(row=29, column=0, sticky=W, padx=5)
-        self.md_suspension_velocity_fr_data_label = Label(self, textvariable = md_suspension_velocity_fr_data).grid(row=29, column=1, sticky=W, padx=5)
-
-        self.md_suspension_acceleration_rl_data_label = Label(self, textvariable = md_suspension_acceleration_rl_data).grid(row=31, column=0, sticky=W, padx=5)
-        self.md_suspension_acceleration_rr_data_label = Label(self, textvariable = md_suspension_acceleration_rr_data).grid(row=31, column=1, sticky=W, padx=5)
-        self.md_suspension_acceleration_fl_data_label = Label(self, textvariable = md_suspension_acceleration_fl_data).grid(row=32, column=0, sticky=W, padx=5)
-        self.md_suspension_acceleration_fr_data_label = Label(self, textvariable = md_suspension_acceleration_fr_data).grid(row=32, column=1, sticky=W, padx=5)
-
-        self.md_wheel_speed_rl_data_label = Label(self, textvariable = md_wheel_speed_rl_data).grid(row=34, column=0, sticky=W, padx=5)
-        self.md_wheel_speed_rr_data_label = Label(self, textvariable = md_wheel_speed_rr_data).grid(row=34, column=1, sticky=W, padx=5)
-        self.md_wheel_speed_fl_data_label = Label(self, textvariable = md_wheel_speed_fl_data).grid(row=35, column=0, sticky=W, padx=5)
-        self.md_wheel_speed_fr_data_label = Label(self, textvariable = md_wheel_speed_fr_data).grid(row=35, column=1, sticky=W, padx=5)
-
-        self.md_wheel_slip_rl_data_label = Label(self, textvariable = md_wheel_slip_rl_data).grid(row=37, column=0, sticky=W, padx=5)
-        self.md_wheel_slip_rr_data_label = Label(self, textvariable = md_wheel_slip_rr_data).grid(row=37, column=1, sticky=W, padx=5)
-        self.md_wheel_slip_fl_data_label = Label(self, textvariable = md_wheel_slip_fl_data).grid(row=38, column=0, sticky=W, padx=5)
-        self.md_wheel_slip_fr_data_label = Label(self, textvariable = md_wheel_slip_fr_data).grid(row=38, column=1, sticky=W, padx=5)
-
-        self.md_local_velocityX_data_label = Label(self, textvariable = md_local_velocityX_data).grid(row=39, column=1, sticky=W, padx=5)
-        self.md_local_velocityY_data_label = Label(self, textvariable = md_local_velocityY_data).grid(row=40, column=1, sticky=W, padx=5)
-        self.md_local_velocityZ_data_label = Label(self, textvariable = md_local_velocityZ_data).grid(row=41, column=1, sticky=W, padx=5)
-        self.md_angular_velocityX_data_label = Label(self, textvariable = md_angular_velocityX_data).grid(row=42, column=1, sticky=W, padx=5)
-        self.md_angular_velocityY_data_label = Label(self, textvariable = md_angular_velocityY_data).grid(row=43, column=1, sticky=W, padx=5)
-        self.md_angular_velocityZ_data_label = Label(self, textvariable = md_angular_velocityZ_data).grid(row=44, column=1, sticky=W, padx=5)
-        self.md_angular_accelerationX_data_label = Label(self, textvariable = md_angular_accelerationX_data).grid(row=45, column=1, sticky=W, padx=5)
-        self.md_angular_accelerationY_data_label = Label(self, textvariable = md_angular_accelerationY_data).grid(row=46, column=1, sticky=W, padx=5)
-        self.md_angular_accelerationZ_data_label = Label(self, textvariable = md_angular_accelerationZ_data).grid(row=47, column=1, sticky=W, padx=5)
-        self.md_front_wheels_angle_data_label = Label(self, textvariable = md_front_wheels_angle_data).grid(row=48, column=1, sticky=W, padx=5)
+        self.md_world_position_x_data_label = Label(self, textvariable = md_world_position_x_data, anchor=W).grid(row=6, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_world_position_y_data_label = Label(self, textvariable = md_world_position_y_data, anchor=W).grid(row=7, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_world_position_z_data_label = Label(self, textvariable = md_world_position_z_data, anchor=W).grid(row=8, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_world_velocity_x_data_label = Label(self, textvariable = md_world_velocity_x_data, anchor=W).grid(row=9, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_world_velocity_y_data_label = Label(self, textvariable = md_world_velocity_y_data, anchor=W).grid(row=10, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_world_velocity_z_data_label = Label(self, textvariable = md_world_velocity_z_data, anchor=W).grid(row=11, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_world_forward_dir_x_data_label = Label(self, textvariable = md_world_forward_dir_x_data, anchor=W).grid(row=12, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_world_forward_dir_y_data_label = Label(self, textvariable = md_world_forward_dir_y_data, anchor=W).grid(row=13, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_world_forward_dir_z_data_label = Label(self, textvariable = md_world_forward_dir_z_data, anchor=W).grid(row=14, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_world_right_dir_x_data_label = Label(self, textvariable = md_world_right_dir_x_data, anchor=W).grid(row=15, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_world_right_dir_y_data_label = Label(self, textvariable = md_world_right_dir_y_data, anchor=W).grid(row=16, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_world_right_dir_z_data_label = Label(self, textvariable = md_world_right_dir_z_data, anchor=W).grid(row=17, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_g_force_lateral_data_label = Label(self, textvariable = md_g_force_lateral_data, anchor=W).grid(row=18, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_g_force_longitudinal_data_label = Label(self, textvariable = md_g_force_longitudinal_data, anchor=W).grid(row=19, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_g_force_vertical_data_label = Label(self, textvariable = md_g_force_vertical_data, anchor=W).grid(row=20, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_yaw_data_label = Label(self, textvariable = md_yaw_data, anchor=W).grid(row=21, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_pitch_data_label = Label(self, textvariable = md_pitch_data, anchor=W).grid(row=22, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_roll_data_label = Label(self, textvariable = md_roll_data, anchor=W).grid(row=23, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_suspension_position_rl_data_label = Label(self, textvariable = md_suspension_position_rl_data, anchor=W).grid(row=25, column=0, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)                   # All wheel arrays have the following order RL, RR, FL, FR
+        self.md_suspension_position_rr_data_label = Label(self, textvariable = md_suspension_position_rr_data, anchor=W).grid(row=25, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_suspension_position_fl_data_label = Label(self, textvariable = md_suspension_position_fl_data, anchor=W).grid(row=26, column=0, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_suspension_position_fr_data_label = Label(self, textvariable = md_suspension_position_fr_data, anchor=W).grid(row=26, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_suspension_velocity_rl_data_label = Label(self, textvariable = md_suspension_velocity_rl_data, anchor=W).grid(row=28, column=0, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_suspension_velocity_rr_data_label = Label(self, textvariable = md_suspension_velocity_rr_data, anchor=W).grid(row=28, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_suspension_velocity_fl_data_label = Label(self, textvariable = md_suspension_velocity_fl_data, anchor=W).grid(row=29, column=0, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_suspension_velocity_fr_data_label = Label(self, textvariable = md_suspension_velocity_fr_data, anchor=W).grid(row=29, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_suspension_acceleration_rl_data_label = Label(self, textvariable = md_suspension_acceleration_rl_data, anchor=W).grid(row=31, column=0, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_suspension_acceleration_rr_data_label = Label(self, textvariable = md_suspension_acceleration_rr_data, anchor=W).grid(row=31, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_suspension_acceleration_fl_data_label = Label(self, textvariable = md_suspension_acceleration_fl_data, anchor=W).grid(row=32, column=0, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_suspension_acceleration_fr_data_label = Label(self, textvariable = md_suspension_acceleration_fr_data, anchor=W).grid(row=32, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_wheel_speed_rl_data_label = Label(self, textvariable = md_wheel_speed_rl_data, anchor=W).grid(row=34, column=0, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_wheel_speed_rr_data_label = Label(self, textvariable = md_wheel_speed_rr_data, anchor=W).grid(row=34, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_wheel_speed_fl_data_label = Label(self, textvariable = md_wheel_speed_fl_data, anchor=W).grid(row=35, column=0, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_wheel_speed_fr_data_label = Label(self, textvariable = md_wheel_speed_fr_data, anchor=W).grid(row=35, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_wheel_slip_rl_data_label = Label(self, textvariable = md_wheel_slip_rl_data, anchor=W).grid(row=37, column=0, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_wheel_slip_rr_data_label = Label(self, textvariable = md_wheel_slip_rr_data, anchor=W).grid(row=37, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_wheel_slip_fl_data_label = Label(self, textvariable = md_wheel_slip_fl_data, anchor=W).grid(row=38, column=0, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_wheel_slip_fr_data_label = Label(self, textvariable = md_wheel_slip_fr_data, anchor=W).grid(row=38, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_local_velocityX_data_label = Label(self, textvariable = md_local_velocityX_data, anchor=W).grid(row=39, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_local_velocityY_data_label = Label(self, textvariable = md_local_velocityY_data, anchor=W).grid(row=40, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_local_velocityZ_data_label = Label(self, textvariable = md_local_velocityZ_data, anchor=W).grid(row=41, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_angular_velocityX_data_label = Label(self, textvariable = md_angular_velocityX_data, anchor=W).grid(row=42, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_angular_velocityY_data_label = Label(self, textvariable = md_angular_velocityY_data, anchor=W).grid(row=43, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_angular_velocityZ_data_label = Label(self, textvariable = md_angular_velocityZ_data, anchor=W).grid(row=44, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_angular_accelerationX_data_label = Label(self, textvariable = md_angular_accelerationX_data, anchor=W).grid(row=45, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_angular_accelerationY_data_label = Label(self, textvariable = md_angular_accelerationY_data, anchor=W).grid(row=46, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_angular_accelerationZ_data_label = Label(self, textvariable = md_angular_accelerationZ_data, anchor=W).grid(row=47, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
+        self.md_front_wheels_angle_data_label = Label(self, textvariable = md_front_wheels_angle_data, anchor=W).grid(row=48, column=1, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W, padx=5)
 
 
         # session DATA
-        self.sd_weather = Label(self, textvariable = sd_weather_data).grid(row=6, column=3, sticky=W)
-        self.sd_trackTemperature = Label(self, textvariable = sd_trackTemperature_data).grid(row=7, column=3, sticky=W)
-        self.sd_airTemperature = Label(self, textvariable = sd_airTemperature_data).grid(row=8, column=3, sticky=W)
-        self.sd_totalLaps = Label(self, textvariable = sd_totalLaps_data).grid(row=9, column=3, sticky=W)
-        self.sd_trackLength = Label(self, textvariable = sd_trackLength_data).grid(row=10, column=3, sticky=W)
-        self.sd_sessionType = Label(self, textvariable = sd_sessionType_data).grid(row=11, column=3, sticky=W)
-        self.sd_trackId = Label(self, textvariable = sd_trackId_data).grid(row=12, column=3, sticky=W)
-        self.sd_era = Label(self, textvariable = sd_era_data).grid(row=13, column=3, sticky=W)
-        self.sd_sessionTimeLeft = Label(self, textvariable = sd_sessionTimeLeft_data).grid(row=14, column=3, sticky=W)
-        self.sd_sessionDuration = Label(self, textvariable = sd_sessionDuration_data).grid(row=15, column=3, sticky=W)
-        self.sd_pitSpeedLimit = Label(self, textvariable = sd_pitSpeedLimit_data).grid(row=16, column=3, sticky=W)
-        self.sd_gamePaused = Label(self, textvariable = sd_gamePaused_data).grid(row=17, column=3, sticky=W)
-        self.sd_isSpectating = Label(self, textvariable = sd_isSpectating_data).grid(row=18, column=3, sticky=W)
-        self.sd_spectatorCarIndex = Label(self, textvariable = sd_spectatorCarIndex_data).grid(row=19, column=3, sticky=W)
-        self.sd_sliProNativeSupport = Label(self, textvariable = sd_sliProNativeSupport_data).grid(row=20, column=3, sticky=W)
-        self.sd_numMarshalZones = Label(self, textvariable = sd_numMarshalZones_data).grid(row=21, column=3, sticky=W)
-        self.sd_marshalZones = Label(self, textvariable = sd_marshalZones_data).grid(row=22, column=3, sticky=W)
-        self.sd_safetyCarStatus = Label(self, textvariable = sd_safetyCarStatus_data).grid(row=23, column=3, sticky=W)
-        self.sd_networkGame = Label(self, textvariable = sd_networkGame_data).grid(row=24, column=3, sticky=W)
+        self.sd_weather_data_label = Label(self, textvariable = sd_weather_data, anchor=W).grid(row=6, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_trackTemperature_data_label = Label(self, textvariable = sd_trackTemperature_data, anchor=W).grid(row=7, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_airTemperature_data_label = Label(self, textvariable = sd_airTemperature_data, anchor=W).grid(row=8, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_totalLaps_data_label = Label(self, textvariable = sd_totalLaps_data, anchor=W).grid(row=9, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_trackLength_data_label = Label(self, textvariable = sd_trackLength_data, anchor=W).grid(row=10, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_sessionType_data_label = Label(self, textvariable = sd_sessionType_data, anchor=W).grid(row=11, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_trackId_data_label = Label(self, textvariable = sd_trackId_data, anchor=W).grid(row=12, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_era_data_label = Label(self, textvariable = sd_era_data, anchor=W).grid(row=13, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_sessionTimeLeft_data_label = Label(self, textvariable = sd_sessionTimeLeft_data, anchor=W).grid(row=14, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_sessionDuration_data_label = Label(self, textvariable = sd_sessionDuration_data, anchor=W).grid(row=15, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_pitSpeedLimit_data_label = Label(self, textvariable = sd_pitSpeedLimit_data, anchor=W).grid(row=16, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_gamePaused_data_label = Label(self, textvariable = sd_gamePaused_data, anchor=W).grid(row=17, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_isSpectating_data_label = Label(self, textvariable = sd_isSpectating_data, anchor=W).grid(row=18, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_spectatorCarIndex_data_label = Label(self, textvariable = sd_spectatorCarIndex_data, anchor=W).grid(row=19, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_sliProNativeSupport_data_label = Label(self, textvariable = sd_sliProNativeSupport_data, anchor=W).grid(row=20, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_numMarshalZones_data_label = Label(self, textvariable = sd_numMarshalZones_data, anchor=W).grid(row=21, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_marshalZones_data_label = Label(self, textvariable = sd_marshalZones_data, anchor=W).grid(row=22, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_safetyCarStatus_data_label = Label(self, textvariable = sd_safetyCarStatus_data, anchor=W).grid(row=23, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.sd_networkGame_data_label = Label(self, textvariable = sd_networkGame_data, anchor=W).grid(row=24, column=3, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+
+
+        # Lap data
+        # self.ld_lapData_data_label = Label(self, textvariable = ld_lapData_data, anchor=W).grid(row=6, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_lastLapTime_data_label = Label(self, textvariable = ld_lastLapTime_data, anchor=W).grid(row=6, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_currentLapTime_data_label = Label(self, textvariable = ld_currentLapTime_data, anchor=W).grid(row=7, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_bestLapTime_data_label = Label(self, textvariable = ld_bestLapTime_data, anchor=W).grid(row=8, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_sector1Time_data_label = Label(self, textvariable = ld_sector1Time_data, anchor=W).grid(row=9, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_sector2Time_data_label = Label(self, textvariable = ld_sector2Time_data, anchor=W).grid(row=10, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_lapDistance_data_label = Label(self, textvariable = ld_lapDistance_data, anchor=W).grid(row=11, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_totalDistance_data_label = Label(self, textvariable = ld_totalDistance_data, anchor=W).grid(row=12, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_safetyCarDelta_data_label = Label(self, textvariable = ld_safetyCarDelta_data, anchor=W).grid(row=13, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_carPosition_data_label = Label(self, textvariable = ld_carPosition_data, anchor=W).grid(row=14, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_currentLapNum_data_label = Label(self, textvariable = ld_currentLapNum_data, anchor=W).grid(row=15, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_pitStatus_data_label = Label(self, textvariable = ld_pitStatus_data, anchor=W).grid(row=16, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_sector_data_label = Label(self, textvariable = ld_sector_data, anchor=W).grid(row=17, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_currentLapInvalid_data_label = Label(self, textvariable = ld_currentLapInvalid_data, anchor=W).grid(row=18, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_penalties_data_label = Label(self, textvariable = ld_penalties_data, anchor=W).grid(row=19, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_gridPosition_data_label = Label(self, textvariable = ld_gridPosition_data, anchor=W).grid(row=20, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_driverStatus_data_label = Label(self, textvariable = ld_driverStatus_data, anchor=W).grid(row=21, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ld_resultStatus_data_label = Label(self, textvariable = ld_resultStatus_data, anchor=W).grid(row=22, column=5, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+
+        # Event data
+        self.ed_eventStringCode_data_label = Label(self, textvariable = ed_eventStringCode_data, anchor=W).grid(row=6, column=7, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+
+        # Participant data
+        self.pd_numCars_data_label = Label(self, textvariable = pd_numCars_data, anchor=W).grid(row=6, column=9, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.pd_aiControlled_data_label = Label(self, textvariable = pd_aiControlled_data, anchor=W).grid(row=7, column=9, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.pd_driverId_data_label = Label(self, textvariable = pd_driverId_data, anchor=W).grid(row=8, column=9, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.pd_teamId_data_label = Label(self, textvariable = pd_teamId_data, anchor=W).grid(row=9, column=9, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.pd_raceNumber_data_label = Label(self, textvariable = pd_raceNumber_data, anchor=W).grid(row=10, column=9, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.pd_nationality_data_label = Label(self, textvariable = pd_nationality_data, anchor=W).grid(row=11, column=9, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.pd_name_data_label = Label(self, textvariable = pd_name_data, anchor=W).grid(row=12, column=9, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+
+        # Car Setup data
+        self.csd_frontWing_data_label = Label(self, textvariable = csd_frontWing_data, anchor=W).grid(row=6, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_rearWing_data_label = Label(self, textvariable = csd_rearWing_data, anchor=W).grid(row=7, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_onThrottle_data_label = Label(self, textvariable = csd_onThrottle_data, anchor=W).grid(row=8, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_offThrottle_data_label = Label(self, textvariable = csd_offThrottle_data, anchor=W).grid(row=9, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_frontCamber_data_label = Label(self, textvariable = csd_frontCamber_data, anchor=W).grid(row=10, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_rearCamber_data_label = Label(self, textvariable = csd_rearCamber_data, anchor=W).grid(row=11, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_frontToe_data_label = Label(self, textvariable = csd_frontToe_data, anchor=W).grid(row=12, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_rearToe_data_label = Label(self, textvariable = csd_rearToe_data, anchor=W).grid(row=13, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_frontSuspension_data_label = Label(self, textvariable = csd_frontSuspension_data, anchor=W).grid(row=14, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_rearSuspension_data_label = Label(self, textvariable = csd_rearSuspension_data, anchor=W).grid(row=15, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_frontAntiRollBar_data_label = Label(self, textvariable = csd_frontAntiRollBar_data, anchor=W).grid(row=16, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_rearAntiRollBar_data_label = Label(self, textvariable = csd_rearAntiRollBar_data, anchor=W).grid(row=17, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_frontSuspensionHeight_data_label = Label(self, textvariable = csd_frontSuspensionHeight_data, anchor=W).grid(row=18, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_rearSuspensionHeight_data_label = Label(self, textvariable = csd_rearSuspensionHeight_data, anchor=W).grid(row=19, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_brakePressure_data_label = Label(self, textvariable = csd_brakePressure_data, anchor=W).grid(row=20, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_brakeBias_data_label = Label(self, textvariable = csd_brakeBias_data, anchor=W).grid(row=21, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_frontTyrePressure_data_label = Label(self, textvariable = csd_frontTyrePressure_data, anchor=W).grid(row=22, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_rearTyrePressure_data_label = Label(self, textvariable = csd_rearTyrePressure_data, anchor=W).grid(row=23, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_ballast_data_label = Label(self, textvariable = csd_ballast_data, anchor=W).grid(row=24, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.csd_fuelLoad_data_label = Label(self, textvariable = csd_fuelLoad_data, anchor=W).grid(row=25, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+[]
+        # Car Telemetry Data
+        self.ctd_speed_data_label = Label(self, textvariable = ctd_speed_data, anchor=W).grid(row=6, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_throttle_data_label  = Label(self, textvariable = ctd_throttle_data, anchor=W).grid(row=7, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_steer_data_label  = Label(self, textvariable = ctd_steer_data, anchor=W).grid(row=8, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_brake_data_label  = Label(self, textvariable = ctd_brake_data, anchor=W).grid(row=9, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_clutch_data_label  = Label(self, textvariable = ctd_clutch_data, anchor=W).grid(row=10, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_gear_data_label  = Label(self, textvariable = ctd_gear_data, anchor=W).grid(row=11, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_engineRPM_data_label  = Label(self, textvariable = ctd_engineRPM_data, anchor=W).grid(row=12, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_drs_data_label  = Label(self, textvariable = ctd_drs_data, anchor=W).grid(row=13, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_revLightsPercent_data_label  = Label(self, textvariable = ctd_revLightsPercent_data, anchor=W).grid(row=14, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_brakesTemperature_rl_data_label  = Label(self, textvariable = ctd_brakesTemperature_rl_data, anchor=W).grid(row=16, column=12, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_brakesTemperature_rr_data_label  = Label(self, textvariable = ctd_brakesTemperature_rr_data, anchor=W).grid(row=16, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_brakesTemperature_fl_data_label  = Label(self, textvariable = ctd_brakesTemperature_fl_data, anchor=W).grid(row=17, column=12, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_brakesTemperature_fr_data_label  = Label(self, textvariable = ctd_brakesTemperature_fr_data, anchor=W).grid(row=17, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresSurfaceTemperature_rl_data_label  = Label(self, textvariable = ctd_tyresSurfaceTemperature_rl_data, anchor=W).grid(row=19, column=12, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresSurfaceTemperature_rr_data_label  = Label(self, textvariable = ctd_tyresSurfaceTemperature_rr_data, anchor=W).grid(row=19, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresSurfaceTemperature_fl_data_label  = Label(self, textvariable = ctd_tyresSurfaceTemperature_fl_data, anchor=W).grid(row=20, column=12, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresSurfaceTemperature_fr_data_label  = Label(self, textvariable = ctd_tyresSurfaceTemperature_fr_data, anchor=W).grid(row=20, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresInnerTemperature_rl_data_label  = Label(self, textvariable = ctd_tyresInnerTemperature_rl_data, anchor=W).grid(row=22, column=12, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresInnerTemperature_rr_data_label  = Label(self, textvariable = ctd_tyresInnerTemperature_rr_data, anchor=W).grid(row=22, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresInnerTemperature_fl_data_label  = Label(self, textvariable = ctd_tyresInnerTemperature_fl_data, anchor=W).grid(row=23, column=12, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresInnerTemperature_fr_data_label  = Label(self, textvariable = ctd_tyresInnerTemperature_fr_data, anchor=W).grid(row=23, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_engineTemperature_data_label  = Label(self, textvariable = ctd_engineTemperature_data, anchor=W).grid(row=24, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresPressure_rl_data_label  = Label(self, textvariable = ctd_tyresPressure_rl_data, anchor=W).grid(row=26, column=12, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresPressure_rr_data_label  = Label(self, textvariable = ctd_tyresPressure_rr_data, anchor=W).grid(row=26, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresPressure_fl_data_label  = Label(self, textvariable = ctd_tyresPressure_fl_data, anchor=W).grid(row=27, column=12, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_tyresPressure_fr_data_label  = Label(self, textvariable = ctd_tyresPressure_fr_data, anchor=W).grid(row=27, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+        self.ctd_buttonStatus_data_label = Label(self, textvariable = ctd_buttonStatus_data, anchor=W).grid(row=28, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
+
         # Add more GUI stuff here
         self.grid()
         # root.update()
@@ -268,14 +390,34 @@ class GuiPart(Frame):
 
                 # Check which packet we grab out of the queue and update GUI accordingly
 
-                if packet[0] == "SessionData":
-                    # print "found sd"
-                    self.new_session_data(packet[1])
-                    root.update()
-                elif packet[0] == "MotionData":
-                    # print "found md"
-                    self.new_motion_data(packet[1])
-                    root.update()
+                # if packet[0] == "SessionData":
+                #     # print "found sd"
+                #     self.new_session_data(packet[1])
+                #     root.update()
+                # if packet[0] == "MotionData":
+                #     # print "found md"
+                #     self.new_motion_data(packet[1])
+                #     root.update()
+                # elif packet[0] == "LapData":
+                #     # print "found sd"
+                #     self.new_lap_data(packet[1])
+                #     root.update()
+                # elif packet[0] == "EventData":
+                #     # print "found ed"
+                #     self.new_event_data(packet[1])
+                #     root.update()
+                # elif packet[0] == "ParticipantData":
+                #     # print "found pd"
+                #     self.new_participant_data(packet[1])
+                #     root.update()
+                # elif packet[0] == "CarSetupData":
+                #     # print "found csd"
+                #     self.new_car_setup_data(packet[1])
+                #     root.update()
+                # elif packet[0] == "CarTelemetryData":
+                #     # print "fount ctd"
+                #     self.new_car_telemetry_data(packet[1])
+                #     root.update
 
 
             except Queue.Empty:
@@ -331,6 +473,8 @@ class GuiPart(Frame):
         global md_angular_accelerationY_data
         global md_angular_accelerationZ_data
         global md_front_wheels_angle_data
+
+
 
         md_world_position_x_data.set(str(packet.m_carMotionData[0].m_worldPositionX))
         md_world_position_y_data.set(str(packet.m_carMotionData[0].m_worldPositionY))
@@ -422,7 +566,166 @@ class GuiPart(Frame):
         sd_safetyCarStatus_data.set(str(packet.m_safetyCarStatus))
         sd_networkGame_data.set(str(packet.m_networkGame))
 
+    def new_lap_data(self, packet):
+        global ld_lapData_data
+        global ld_lastLapTime_data
+        global ld_currentLapTime_data
+        global ld_bestLapTime_data
+        global ld_sector1Time_data
+        global ld_sector2Time_data
+        global ld_lapDistance_data
+        global ld_totalDistance_data
+        global ld_safetyCarDelta_data
+        global ld_carPosition_data
+        global ld_currentLapNum_data
+        global ld_pitStatus_data
+        global ld_sector_data
+        global ld_currentLapInvalid_data
+        global ld_penalties_data
+        global ld_gridPosition_data
+        global ld_driverStatus_data
+        global ld_resultStatus_data
 
+        # ld_lapData_data.set(str())
+        ld_lastLapTime_data.set(str(packet.m_lapData[0].m_lastLapTime))
+        ld_currentLapTime_data.set(str(packet.m_lapData[0].m_currentLapTime))
+        ld_bestLapTime_data.set(str(packet.m_lapData[0].m_bestLapTime))
+        ld_sector1Time_data.set(str(packet.m_lapData[0].m_sector1Time))
+        ld_sector2Time_data.set(str(packet.m_lapData[0].m_sector2Time))
+        ld_lapDistance_data.set(str(packet.m_lapData[0].m_lapDistance))
+        ld_totalDistance_data.set(str(packet.m_lapData[0].m_totalDistance))
+        ld_safetyCarDelta_data.set(str(packet.m_lapData[0].m_safetyCarDelta))
+        ld_carPosition_data.set(str(packet.m_lapData[0].m_carPosition))
+        ld_currentLapNum_data.set(str(packet.m_lapData[0].m_currentLapNum))
+        ld_pitStatus_data.set(str(packet.m_lapData[0].m_pitStatus))
+        ld_sector_data.set(str(packet.m_lapData[0].m_sector))
+        ld_currentLapInvalid_data.set(str(packet.m_lapData[0].m_currentLapInvalid))
+        ld_penalties_data.set(str(packet.m_lapData[0].m_penalties))
+        ld_gridPosition_data.set(str(packet.m_lapData[0].m_gridPosition))
+        ld_driverStatus_data.set(str(packet.m_lapData[0].m_driverStatus))
+        ld_resultStatus_data.set(str(packet.m_lapData[0].m_resultStatus))
+
+    def new_event_data(self, packet):
+        global ed_eventStringCode_data
+
+        ed_eventStringCode_data.set(str(packet.m_eventStringCode))
+
+    def new_participant_data(self, packet):
+        global pd_numCars_data
+        global pd_aiControlled_data
+        global pd_driverId_data
+        global pd_teamId_data
+        global pd_raceNumber_data
+        global pd_nationality_data
+        global pd_name_data
+
+        pd_numCars_data.set(str(packet.m_numCars))
+        pd_aiControlled_data.set(str(packet.m_participants[0].m_aiControlled))
+        pd_driverId_data.set(str(packet.m_participants[0].m_driverId))
+        pd_teamId_data.set(str(packet.m_participants[0].m_teamId))
+        pd_raceNumber_data.set(str(packet.m_participants[0].m_raceNumber))
+        pd_nationality_data.set(str(packet.m_participants[0].m_nationality))
+        pd_name_data.set(str(packet.m_participants[0].m_name))
+
+    def new_car_setup_data(self, packet):
+        global csd_frontWing_data
+        global csd_rearWing_data
+        global csd_onThrottle_data
+        global csd_offThrottle_data
+        global csd_frontCamber_data
+        global csd_rearCamber_data
+        global csd_frontToe_data
+        global csd_rearToe_data
+        global csd_frontSuspension_data
+        global csd_rearSuspension_data
+        global csd_frontAntiRollBar_data
+        global csd_rearAntiRollBar_data
+        global csd_frontSuspensionHeight_data
+        global csd_rearSuspensionHeight_data
+        global csd_brakePressure_data
+        global csd_brakeBias_data
+        global csd_frontTyrePressure_data
+        global csd_rearTyrePressure_data
+        global csd_ballast_data
+        global csd_fuelLoad_data
+
+        csd_frontWing_data.set(str(packet.m_carSetups[0].m_frontWing))
+        csd_rearWing_data.set(str(packet.m_carSetups[0].m_rearWing))
+        csd_onThrottle_data.set(str(packet.m_carSetups[0].m_onThrottle))
+        csd_offThrottle_data.set(str(packet.m_carSetups[0].m_offThrottle))
+        csd_frontCamber_data.set(str(packet.m_carSetups[0].m_frontCamber))
+        csd_rearCamber_data.set(str(packet.m_carSetups[0].m_rearCamber))
+        csd_frontToe_data.set(str(packet.m_carSetups[0].m_frontToe))
+        csd_rearToe_data.set(str(packet.m_carSetups[0].m_rearToe))
+        csd_frontSuspension_data.set(str(packet.m_carSetups[0].m_frontSuspension))
+        csd_rearSuspension_data.set(str(packet.m_carSetups[0].m_rearSuspension))
+        csd_frontAntiRollBar_data.set(str(packet.m_carSetups[0].m_frontAntiRollBar))
+        csd_rearAntiRollBar_data.set(str(packet.m_carSetups[0].m_rearAntiRollBar))
+        csd_frontSuspensionHeight_data.set(str(packet.m_carSetups[0].m_frontSuspensionHeight))
+        csd_rearSuspensionHeight_data.set(str(packet.m_carSetups[0].m_rearSuspensionHeight))
+        csd_brakePressure_data.set(str(packet.m_carSetups[0].m_brakePressure))
+        csd_brakeBias_data.set(str(packet.m_carSetups[0].m_brakeBias))
+        csd_frontTyrePressure_data.set(str(packet.m_carSetups[0].m_frontTyrePressure))
+        csd_rearTyrePressure_data.set(str(packet.m_carSetups[0].m_rearTyrePressure))
+        csd_ballast_data.set(str(packet.m_carSetups[0].m_ballast))
+        csd_fuelLoad_data.set(str(packet.m_carSetups[0].m_fuelLoad))
+
+    def new_car_telemetry_data(self, packet):
+        global ctd_speed_data
+        global ctd_throttle_data
+        global ctd_steer_data
+        global ctd_brake_data
+        global ctd_clutch_data
+        global ctd_gear_data
+        global ctd_engineRPctd_data
+        global ctd_drs_data
+        global ctd_revLightsPercent_data
+        global ctd_brakesTemperature_rl_data
+        global ctd_brakesTemperature_rr_data
+        global ctd_brakesTemperature_fl_data
+        global ctd_brakesTemperature_fr_data
+        global ctd_tyresSurfaceTemperature_rl_data
+        global ctd_tyresSurfaceTemperature_rr_data
+        global ctd_tyresSurfaceTemperature_fl_data
+        global ctd_tyresSurfaceTemperature_fr_data
+        global ctd_tyresInnerTemperature_rl_data
+        global ctd_tyresInnerTemperature_rr_data
+        global ctd_tyresInnerTemperature_fl_data
+        global ctd_tyresInnerTemperature_fr_data
+        global ctd_engineTemperature_data
+        global ctd_tyresPressure_rl_data
+        global ctd_tyresPressure_rr_data
+        global ctd_tyresPressure_fl_data
+        global ctd_tyresPressure_fr_data
+        global ctd_buttonStatus_data
+
+        ctd_speed_data.set(str(packet.m_carTelemetryData[0].m_speed))
+        ctd_throttle_data.set(str(packet.m_carTelemetryData[0].m_throttle))
+        ctd_steer_data.set(str(packet.m_carTelemetryData[0].m_steer))
+        ctd_brake_data.set(str(packet.m_carTelemetryData[0].m_brake))
+        ctd_clutch_data.set(str(packet.m_carTelemetryData[0].m_clutch))
+        ctd_gear_data.set(str(packet.m_carTelemetryData[0].m_gear))
+        ctd_engineRPM_data.set(str(packet.m_carTelemetryData[0].m_engineRPM))
+        ctd_drs_data.set(str(packet.m_carTelemetryData[0].m_drs))
+        ctd_revLightsPercent_data.set(str(packet.m_carTelemetryData[0].m_revLightsPercent))
+        ctd_brakesTemperature_rl_data.set(str(packet.m_carTelemetryData[0].m_brakesTemperature[0]))  #RL, RR, FL, FR
+        ctd_brakesTemperature_rr_data.set(str(packet.m_carTelemetryData[0].m_brakesTemperature[1]))
+        ctd_brakesTemperature_fl_data.set(str(packet.m_carTelemetryData[0].m_brakesTemperature[2]))
+        ctd_brakesTemperature_fr_data.set(str(packet.m_carTelemetryData[0].m_brakesTemperature[3]))
+        ctd_tyresSurfaceTemperature_rl_data.set(str(packet.m_carTelemetryData[0].m_tyresSurfaceTemperature[0])) #RL, RR, FL, FR
+        ctd_tyresSurfaceTemperature_rr_data.set(str(packet.m_carTelemetryData[0].m_tyresSurfaceTemperature[1]))
+        ctd_tyresSurfaceTemperature_fl_data.set(str(packet.m_carTelemetryData[0].m_tyresSurfaceTemperature[2]))
+        ctd_tyresSurfaceTemperature_fr_data.set(str(packet.m_carTelemetryData[0].m_tyresSurfaceTemperature[3]))
+        ctd_tyresInnerTemperature_rl_data.set(str(packet.m_carTelemetryData[0].m_tyresInnerTemperature[0])) #RL, RR, FL, FR
+        ctd_tyresInnerTemperature_rr_data.set(str(packet.m_carTelemetryData[0].m_tyresInnerTemperature[1]))
+        ctd_tyresInnerTemperature_fl_data.set(str(packet.m_carTelemetryData[0].m_tyresInnerTemperature[2]))
+        ctd_tyresInnerTemperature_fr_data.set(str(packet.m_carTelemetryData[0].m_tyresInnerTemperature[3]))
+        ctd_engineTemperature_data.set(str(packet.m_carTelemetryData[0].m_engineTemperature))
+        ctd_tyresPressure_rl_data.set(str(packet.m_carTelemetryData[0].m_tyresPressure[0])) #RL, RR, FL, FR
+        ctd_tyresPressure_rr_data.set(str(packet.m_carTelemetryData[0].m_tyresPressure[1]))
+        ctd_tyresPressure_fl_data.set(str(packet.m_carTelemetryData[0].m_tyresPressure[2]))
+        ctd_tyresPressure_fr_data.set(str(packet.m_carTelemetryData[0].m_tyresPressure[3]))
+        ctd_buttonStatus_data.set(str(packet.m_buttonStatus))
 
 class ThreadedClient:
     """
@@ -463,7 +766,7 @@ class ThreadedClient:
             # This is the brutal stop of the system. You may want to do
             # some cleanup before actually shutting it down.
             root.destroy()
-        self.master.after(100, self.periodicCall)
+        self.master.after(1, self.periodicCall)
 
     def workerThread1(self):
         """
@@ -486,7 +789,7 @@ class ThreadedClient:
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
         # bind the socket to the specified ip address and port
-        sock.bind(('127.0.0.1', 5003))
+        sock.bind(('', 20777))
 
         # packet_count = 0
 
@@ -536,7 +839,7 @@ class ThreadedClient:
                 # return packet_names[packet.m_header.m_packetId], packet
 
 
-
+            # print packet_names[packet.m_header.m_packetId]
             # print "total packets recieved:", packet_count
 
 
@@ -637,6 +940,89 @@ sd_numMarshalZones_data = Tkinter.StringVar(root, value="N/A")
 sd_marshalZones_data = Tkinter.StringVar(root, value="N/A")
 sd_safetyCarStatus_data = Tkinter.StringVar(root, value="N/A")
 sd_networkGame_data = Tkinter.StringVar(root, value="N/A")
+
+# lap data
+ld_lapData_data = Tkinter.StringVar(root, value="N/A")
+ld_lastLapTime_data = Tkinter.StringVar(root, value="N/A")
+ld_currentLapTime_data = Tkinter.StringVar(root, value="N/A")
+ld_bestLapTime_data = Tkinter.StringVar(root, value="N/A")
+ld_sector1Time_data = Tkinter.StringVar(root, value="N/A")
+ld_sector2Time_data = Tkinter.StringVar(root, value="N/A")
+ld_lapDistance_data = Tkinter.StringVar(root, value="N/A")
+ld_totalDistance_data = Tkinter.StringVar(root, value="N/A")
+ld_safetyCarDelta_data = Tkinter.StringVar(root, value="N/A")
+ld_carPosition_data = Tkinter.StringVar(root, value="N/A")
+ld_currentLapNum_data = Tkinter.StringVar(root, value="N/A")
+ld_pitStatus_data = Tkinter.StringVar(root, value="N/A")
+ld_sector_data = Tkinter.StringVar(root, value="N/A")
+ld_currentLapInvalid_data = Tkinter.StringVar(root, value="N/A")
+ld_penalties_data = Tkinter.StringVar(root, value="N/A")
+ld_gridPosition_data = Tkinter.StringVar(root, value="N/A")
+ld_driverStatus_data = Tkinter.StringVar(root, value="N/A")
+ld_resultStatus_data = Tkinter.StringVar(root, value="N/A")
+
+# event data
+ed_eventStringCode_data = Tkinter.StringVar(root, value="N/A")
+
+# participant data
+pd_numCars_data = Tkinter.StringVar(root, value="N/A")
+pd_aiControlled_data = Tkinter.StringVar(root, value="N/A")
+pd_driverId_data = Tkinter.StringVar(root, value="N/A")
+pd_teamId_data = Tkinter.StringVar(root, value="N/A")
+pd_raceNumber_data = Tkinter.StringVar(root, value="N/A")
+pd_nationality_data = Tkinter.StringVar(root, value="N/A")
+pd_name_data = Tkinter.StringVar(root, value="N/A")
+
+# car setup data
+csd_frontWing_data = Tkinter.StringVar(root, value="N/A")
+csd_rearWing_data = Tkinter.StringVar(root, value="N/A")
+csd_onThrottle_data = Tkinter.StringVar(root, value="N/A")
+csd_offThrottle_data = Tkinter.StringVar(root, value="N/A")
+csd_frontCamber_data = Tkinter.StringVar(root, value="N/A")
+csd_rearCamber_data = Tkinter.StringVar(root, value="N/A")
+csd_frontToe_data = Tkinter.StringVar(root, value="N/A")
+csd_rearToe_data = Tkinter.StringVar(root, value="N/A")
+csd_frontSuspension_data = Tkinter.StringVar(root, value="N/A")
+csd_rearSuspension_data = Tkinter.StringVar(root, value="N/A")
+csd_frontAntiRollBar_data = Tkinter.StringVar(root, value="N/A")
+csd_rearAntiRollBar_data = Tkinter.StringVar(root, value="N/A")
+csd_frontSuspensionHeight_data = Tkinter.StringVar(root, value="N/A")
+csd_rearSuspensionHeight_data = Tkinter.StringVar(root, value="N/A")
+csd_brakePressure_data = Tkinter.StringVar(root, value="N/A")
+csd_brakeBias_data = Tkinter.StringVar(root, value="N/A")
+csd_frontTyrePressure_data = Tkinter.StringVar(root, value="N/A")
+csd_rearTyrePressure_data = Tkinter.StringVar(root, value="N/A")
+csd_ballast_data = Tkinter.StringVar(root, value="N/A")
+csd_fuelLoad_data = Tkinter.StringVar(root, value="N/A")
+
+# car telemetry data
+ctd_speed_data = Tkinter.StringVar(root, value="N/A")
+ctd_throttle_data = Tkinter.StringVar(root, value="N/A")
+ctd_steer_data = Tkinter.StringVar(root, value="N/A")
+ctd_brake_data = Tkinter.StringVar(root, value="N/A")
+ctd_clutch_data = Tkinter.StringVar(root, value="N/A")
+ctd_gear_data = Tkinter.StringVar(root, value="N/A")
+ctd_engineRPM_data = Tkinter.StringVar(root, value="N/A")
+ctd_drs_data = Tkinter.StringVar(root, value="N/A")
+ctd_revLightsPercent_data = Tkinter.StringVar(root, value="N/A")
+ctd_brakesTemperature_rl_data = Tkinter.StringVar(root, value="N/A")
+ctd_brakesTemperature_rr_data = Tkinter.StringVar(root, value="N/A")
+ctd_brakesTemperature_fl_data = Tkinter.StringVar(root, value="N/A")
+ctd_brakesTemperature_fr_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresSurfaceTemperature_rl_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresSurfaceTemperature_rr_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresSurfaceTemperature_fl_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresSurfaceTemperature_fr_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresInnerTemperature_rl_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresInnerTemperature_rr_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresInnerTemperature_fl_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresInnerTemperature_fr_data = Tkinter.StringVar(root, value="N/A")
+ctd_engineTemperature_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresPressure_rl_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresPressure_rr_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresPressure_fl_data = Tkinter.StringVar(root, value="N/A")
+ctd_tyresPressure_fr_data = Tkinter.StringVar(root, value="N/A")
+ctd_buttonStatus_data = Tkinter.StringVar(root, value="N/A")
 
 client = ThreadedClient(root)
 root.mainloop()
