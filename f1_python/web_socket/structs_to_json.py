@@ -1220,7 +1220,6 @@ def ParticipantData(packet):
     return participant_data_json
 
 
-
 def CarSetupData(packet):
     setup_data_json = {
     'header': {
@@ -1677,7 +1676,6 @@ def CarSetupData(packet):
     }
 
     return setup_data_json
-
 
 
 def CarTelemetryData(packet):
@@ -2425,7 +2423,6 @@ def CarTelemetryData(packet):
     return telemetry_data_json
 
 
-
 def PacketCarStatusData(packet):
     traction_control_types = ['off', '', 'high']
     anti_lock_brakes_type = ['off', 'on']
@@ -3111,7 +3108,6 @@ def PacketCarStatusData(packet):
     }
 
     return status_data_json
-
 
 
 def structs(packet_name, packet):
