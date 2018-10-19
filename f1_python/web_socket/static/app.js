@@ -86,8 +86,105 @@ var angularAccelerationX = document.getElementById('angularAccelerationX');
 var angularAccelerationY = document.getElementById('angularAccelerationY');
 var angularAccelerationZ = document.getElementById('angularAccelerationZ');
 var frontWheelsAngle = document.getElementById('frontWheelsAngle');
-
-
+// Status data
+var tractionControl = document.getElementById('tractionControl');
+var antiLockBrakes = document.getElementById('antiLockBrakes');
+var fuelMix = document.getElementById('fuelMix');
+var frontBrakeBias = document.getElementById('frontBrakeBias');
+var pitLimiterStatus = document.getElementById('pitLimiterStatus');
+var fuelInTank = document.getElementById('fuelInTank');
+var fuelCapacity = document.getElementById('fuelCapacity');
+var maxRPM = document.getElementById('maxRPM');
+var idleRPM = document.getElementById('idleRPM');
+var maxGears = document.getElementById('maxGears');
+var drsAllowed = document.getElementById('drsAllowed');
+var tyresWear = document.getElementById('tyresWear');
+var tyreCompound = document.getElementById('tyreCompound');
+var tyresDamageRL = document.getElementById('tyresDamageRL');
+var tyresDamageRR = document.getElementById('tyresDamageRR');
+var tyresDamageFL = document.getElementById('tyresDamageFL');
+var tyresDamageFR = document.getElementById('tyresDamageFR');
+var frontLeftWingDamage = document.getElementById('frontLeftWingDamage');
+var frontRightWingDamage = document.getElementById('frontRightWingDamage');
+var rearWingDamage = document.getElementById('rearWingDamage');
+var engineDamage = document.getElementById('engineDamage');
+var gearBoxDamage = document.getElementById('gearBoxDamage');
+var exhaustDamage = document.getElementById('exhaustDamage');
+var vehicleFiaFlags = document.getElementById('vehicleFiaFlags');
+var ersStoreEnergy = document.getElementById('ersStoreEnergy');
+var ersDeployMode = document.getElementById('ersDeployMode');
+var ersHarvestedThisLapMGUK = document.getElementById('ersHarvestedThisLapMGUK');
+var ersHarvestedThisLapMGUH = document.getElementById('ersHarvestedThisLapMGUH');
+var ersDeployedThisLap = document.getElementById('ersDeployedThisLap');
+// Lap data
+var lastLapTime = document.getElementById('lastLapTime');
+var currentLapTime = document.getElementById('currentLapTime');
+var bestLapTime = document.getElementById('bestLapTime');
+var sector1Time = document.getElementById('sector1Time');
+var sector2Time = document.getElementById('sector2Time');
+var lapDistance = document.getElementById('lapDistance');
+var totalDistance = document.getElementById('totalDistance');
+var safetyCarDelta = document.getElementById('safetyCarDelta');
+var carPosition = document.getElementById('carPosition');
+var currentLapNum = document.getElementById('currentLapNum');
+var pitStatus = document.getElementById('pitStatus');
+var sector = document.getElementById('sector');
+var currentLapInvalid = document.getElementById('currentLapInvalid');
+var penalties = document.getElementById('penalties');
+var gridPosition = document.getElementById('gridPosition');
+var driverStatus = document.getElementById('driverStatus');
+var resultStatus = document.getElementById('resultStatus');
+// Session data`
+var weather = document.getElementById('weather');
+var trackTemperature = document.getElementById('trackTemperature');
+var airTemperature = document.getElementById('airTemperature');
+var totalLaps = document.getElementById('totalLaps');
+var trackLength = document.getElementById('trackLength');
+var sessionType = document.getElementById('sessionType');
+var trackId = document.getElementById('trackId');
+var era = document.getElementById('era');
+var sessionTimeLeft = document.getElementById('sessionTimeLeft');
+var sessionDuration = document.getElementById('sessionDuration');
+var pitSpeedLimit = document.getElementById('pitSpeedLimit');
+var gamePaused = document.getElementById('gamePaused');
+var isSpectating = document.getElementById('isSpectating');
+var spectatorCarIndex = document.getElementById('spectatorCarIndex');
+var sliProNativeSupport = document.getElementById('sliProNativeSupport');
+var numMarshalZones = document.getElementById('numMarshalZones');
+var marshalZones = document.getElementById('marshalZones');
+var safetyCarStatus = document.getElementById('safetyCarStatus');
+var networkGame = document.getElementById('networkGame');
+// Car setups data
+var frontWing = document.getElementById('frontWing');
+var rearWing = document.getElementById('rearWing');
+var onThrottle = document.getElementById('onThrottle');
+var offThrottle = document.getElementById('offThrottle');
+var frontCamber = document.getElementById('frontCamber');
+var rearCamber = document.getElementById('rearCamber');
+var frontToe = document.getElementById('frontToe');
+var rearToe = document.getElementById('rearToe');
+var frontSuspension = document.getElementById('frontSuspension');
+var rearSuspension = document.getElementById('rearSuspension');
+var frontAntiRollBar = document.getElementById('frontAntiRollBar');
+var rearAntiRollBar = document.getElementById('rearAntiRollBar');
+var frontSuspensionHeight = document.getElementById('frontSuspensionHeight');
+var rearSuspensionHeight = document.getElementById('rearSuspensionHeight');
+var brakePressure = document.getElementById('brakePressure');
+var brakeBias = document.getElementById('brakeBias');
+var frontTyrePressure = document.getElementById('frontTyrePressure');
+var rearTyrePressure = document.getElementById('rearTyrePressure');
+var ballast = document.getElementById('ballast');
+var fuelLoad = document.getElementById('fuelLoad');
+// Participants data
+numCars
+aiControlled
+driverId
+teamId
+raceNumber
+nationality
+name
+// Event data
+eventStringCode
 // when a new message has been received
 ws.onmessage = function(event){
    var data =  JSON.parse(event.data);
@@ -105,26 +202,25 @@ ws.onmessage = function(event){
 
    var players_car = data.header.packetId
 
-   switch(players_car) {
-     case 0:
-       worldPositionX.innerHTML = JSON.stringify(data.carMotionData[players_car].worldPositionX, null);
-       worldPositionY.innerHTML = JSON.stringify(data.carMotionData[players_car].worldPositionY, null);
-       worldPositionZ.innerHTML = JSON.stringify(data.carMotionData[players_car].worldPositionZ, null);
-       worldVelocityX.innerHTML = JSON.stringify(data.carMotionData[players_car].worldVelocityX, null);
-       worldVelocityY.innerHTML = JSON.stringify(data.carMotionData[players_car].worldVelocityY, null);
-       worldVelocityZ.innerHTML = JSON.stringify(data.carMotionData[players_car].worldVelocityZ, null);
-       worldForwardDirX.innerHTML = JSON.stringify(data.carMotionData[players_car].worldForwardDirX, null);
-       worldForwardDirY.innerHTML = JSON.stringify(data.carMotionData[players_car].worldForwardDirY, null);
-       worldForwardDirZ.innerHTML = JSON.stringify(data.carMotionData[players_car].worldForwardDirZ, null);
-       worldRightDirX.innerHTML = JSON.stringify(data.carMotionData[players_car].worldRightDirX, null);
-       worldRightDirY.innerHTML = JSON.stringify(data.carMotionData[players_car].worldRightDirY, null);
-       worldRightDirZ.innerHTML = JSON.stringify(data.carMotionData[players_car].worldRightDirZ, null);
-       gForceLateral.innerHTML = JSON.stringify(data.carMotionData[players_car].gForceLateral, null);
-       gForceLongitudinal.innerHTML = JSON.stringify(data.carMotionData[players_car].gForceLongitudinal, null);
-       gForceVertical.innerHTML = JSON.stringify(data.carMotionData[players_car].gForceVertical, null);
-       yaw.innerHTML = JSON.stringify(data.carMotionData[players_car].yaw, null);
-       pitch.innerHTML = JSON.stringify(data.carMotionData[players_car].pitch, null);
-       roll.innerHTML = JSON.stringify(data.carMotionData[players_car].roll, null);
+   if (data.header.packetId == 0){
+       worldPositionX.innerHTML = JSON.stringify(data.carMotionData.worldPositionX, null);
+       worldPositionY.innerHTML = JSON.stringify(data.carMotionData.worldPositionY, null);
+       worldPositionZ.innerHTML = JSON.stringify(data.carMotionData.worldPositionZ, null);
+       worldVelocityX.innerHTML = JSON.stringify(data.carMotionData.worldVelocityX, null);
+       worldVelocityY.innerHTML = JSON.stringify(data.carMotionData.worldVelocityY, null);
+       worldVelocityZ.innerHTML = JSON.stringify(data.carMotionData.worldVelocityZ, null);
+       worldForwardDirX.innerHTML = JSON.stringify(data.carMotionData.worldForwardDirX, null);
+       worldForwardDirY.innerHTML = JSON.stringify(data.carMotionData.worldForwardDirY, null);
+       worldForwardDirZ.innerHTML = JSON.stringify(data.carMotionData.worldForwardDirZ, null);
+       worldRightDirX.innerHTML = JSON.stringify(data.carMotionData.worldRightDirX, null);
+       worldRightDirY.innerHTML = JSON.stringify(data.carMotionData.worldRightDirY, null);
+       worldRightDirZ.innerHTML = JSON.stringify(data.carMotionData.worldRightDirZ, null);
+       gForceLateral.innerHTML = JSON.stringify(data.carMotionData.gForceLateral, null);
+       gForceLongitudinal.innerHTML = JSON.stringify(data.carMotionData.gForceLongitudinal, null);
+       gForceVertical.innerHTML = JSON.stringify(data.carMotionData.gForceVertical, null);
+       yaw.innerHTML = JSON.stringify(data.carMotionData.yaw, null);
+       pitch.innerHTML = JSON.stringify(data.carMotionData.pitch, null);
+       roll.innerHTML = JSON.stringify(data.carMotionData.roll, null);
        suspensionPositionRL.innerHTML = JSON.stringify(data.suspensionPosition.RL, null);
        suspensionPositionRR.innerHTML = JSON.stringify(data.suspensionPosition.RR, null);
        suspensionPositionFL.innerHTML = JSON.stringify(data.suspensionPosition.FL, null);
@@ -155,50 +251,139 @@ ws.onmessage = function(event){
        angularAccelerationY.innerHTML = JSON.stringify(data.angularAccelerationY, null);
        angularAccelerationZ.innerHTML = JSON.stringify(data.angularAccelerationZ, null);
        frontWheelsAngle.innerHTML = JSON.stringify(data.frontWheelsAngle, null);
-      // break;
-    // case 1:
-    //   break;
-    // case 2:
-    //   break;
-    // case 3:
-    //   break;
-    // case 4:
-    //   break;
-    // case 5:
-    //   break;
-    case 6:
-      speed.innerHTML = JSON.stringify(data.carTelemetryData[players_car].speed, null);
-      throttle.innerHTML = JSON.stringify(data.carTelemetryData[players_car].throttle, null);
-      steer.innerHTML = JSON.stringify(data.carTelemetryData[players_car].steer, null);
-      brake.innerHTML = JSON.stringify(data.carTelemetryData[players_car].brake, null);
-      clutch.innerHTML = JSON.stringify(data.carTelemetryData[players_car].clutch, null);
-      gear.innerHTML = JSON.stringify(data.carTelemetryData[players_car].gear, null);
-      engineRPM.innerHTML = JSON.stringify(data.carTelemetryData[players_car].engineRPM, null);
-      drs.innerHTML = JSON.stringify(data.carTelemetryData[players_car].drs, null);
-      revLightsPercent.innerHTML = JSON.stringify(data.carTelemetryData[players_car].revLightsPercent, null);
-      engineTemperature.innerHTML = JSON.stringify(data.carTelemetryData[players_car].engineTemperature, null);
-      brakesTemperatureRL.innerHTML = JSON.stringify(data.carTelemetryData[players_car].brakesTemperature.RL, null);
-      brakesTemperatureRR.innerHTML = JSON.stringify(data.carTelemetryData[players_car].brakesTemperature.RR, null);
-      brakesTemperatureFL.innerHTML = JSON.stringify(data.carTelemetryData[players_car].brakesTemperature.FL, null);
-      brakesTemperatureFR.innerHTML = JSON.stringify(data.carTelemetryData[players_car].brakesTemperature.FR, null);
-      tyresSurfaceTemperatureRL.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresSurfaceTemperature.RL, null);
-      tyresSurfaceTemperatureRR.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresSurfaceTemperature.RR, null);
-      tyresSurfaceTemperatureFL.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresSurfaceTemperature.FL, null);
-      tyresSurfaceTemperatureFR.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresSurfaceTemperature.FR, null);
-      tyresInnerTemperatureRL.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresInnerTemperature.RL, null);
-      tyresInnerTemperatureRR.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresInnerTemperature.RR, null);
-      tyresInnerTemperatureFL.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresInnerTemperature.FL, null);
-      tyresInnerTemperatureFR.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresInnerTemperature.FR, null);
-      tyresPressureRL.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresPressure.RL, null);
-      tyresPressureRR.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresPressure.RR, null);
-      tyresPressureFL.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresPressure.FL, null);
-      tyresPressureFR.innerHTML = JSON.stringify(data.carTelemetryData[players_car].tyresPressure.FR, null);
+    }
+    if (data.header.packetId == 1){
+      weather.innerHTML = JSON.stringify(data.weather, null);
+      trackTemperature.innerHTML = JSON.stringify(data.trackTemperature, null);
+      airTemperature.innerHTML = JSON.stringify(data.airTemperature, null);
+      totalLaps.innerHTML = JSON.stringify(data.totalLaps, null);
+      trackLength.innerHTML = JSON.stringify(data.trackLength, null);
+      sessionType.innerHTML = JSON.stringify(data.sessionType, null);
+      trackId.innerHTML = JSON.stringify(data.trackId, null);
+      era.innerHTML = JSON.stringify(data.era, null);
+      sessionTimeLeft.innerHTML = JSON.stringify(data.sessionTimeLeft, null);
+      sessionDuration.innerHTML = JSON.stringify(data.sessionDuration, null);
+      pitSpeedLimit.innerHTML = JSON.stringify(data.pitSpeedLimit, null);
+      gamePaused.innerHTML = JSON.stringify(data.gamePaused, null);
+      isSpectating.innerHTML = JSON.stringify(data.isSpectating, null);
+      spectatorCarIndex.innerHTML = JSON.stringify(data.spectatorCarIndex, null);
+      sliProNativeSupport.innerHTML = JSON.stringify(data.sliProNativeSupport, null);
+      numMarshalZones.innerHTML = JSON.stringify(data.numMarshalZones, null);
+      marshalZones.innerHTML = JSON.stringify(data.marshalZones, null);
+      safetyCarStatus.innerHTML = JSON.stringify(data.safetyCarStatus, null);
+      networkGame.innerHTML = JSON.stringify(data.networkGame, null);
+    }
+    if (data.header.packetId == 2){
+      lastLapTime.innerHTML = JSON.stringify(data.lapData.lastLapTime, null);
+      currentLapTime.innerHTML = JSON.stringify(data.lapData.currentLapTime, null);
+      bestLapTime.innerHTML = JSON.stringify(data.lapData.bestLapTime, null);
+      sector1Time.innerHTML = JSON.stringify(data.lapData.sector1Time, null);
+      sector2Time.innerHTML = JSON.stringify(data.lapData.sector2Time, null);
+      lapDistance.innerHTML = JSON.stringify(data.lapData.lapDistance, null);
+      totalDistance.innerHTML = JSON.stringify(data.lapData.totalDistance, null);
+      safetyCarDelta.innerHTML = JSON.stringify(data.lapData.safetyCarDelta, null);
+      carPosition.innerHTML = JSON.stringify(data.lapData.carPosition, null);
+      currentLapNum.innerHTML = JSON.stringify(data.lapData.currentLapNum, null);
+      pitStatus.innerHTML = JSON.stringify(data.lapData.pitStatus, null);
+      sector.innerHTML = JSON.stringify(data.lapData.sector, null);
+      currentLapInvalid.innerHTML = JSON.stringify(data.lapData.currentLapInvalid, null);
+      penalties.innerHTML = JSON.stringify(data.lapData.penalties, null);
+      gridPosition.innerHTML = JSON.stringify(data.lapData.gridPosition, null);
+      driverStatus.innerHTML = JSON.stringify(data.lapData.driverStatus, null);
+      resultStatus.innerHTML = JSON.stringify(data.lapData.resultStatus, null);
+    }
+    if (data.header.packetId == 3){
+      eventStringCode.innerHTML = JSON.stringify(data.eventStringCode, null);
+    }
+    if (data.header.packetId == 4){
+      numCars.innerHTML = JSON.stringify(data.numCars, null);
+      aiControlled.innerHTML = JSON.stringify(data.participantsaiControlled, null);
+      driverId.innerHTML = JSON.stringify(data.participantsdriverId, null);
+      teamId.innerHTML = JSON.stringify(data.participantsteamId, null);
+      raceNumber.innerHTML = JSON.stringify(data.participantsraceNumber, null);
+      nationality.innerHTML = JSON.stringify(data.participantsnationality, null);
+      name.innerHTML = JSON.stringify(data.participantsname, null);
+    }
+    if (data.header.packetId == 5){
+      frontWing.innerHTML = JSON.stringify(data.carSetups.frontWing, null);
+      rearWing.innerHTML = JSON.stringify(data.carSetups.rearWing, null);
+      onThrottle.innerHTML = JSON.stringify(data.carSetups.onThrottle, null);
+      offThrottle.innerHTML = JSON.stringify(data.carSetups.offThrottle, null);
+      frontCamber.innerHTML = JSON.stringify(data.carSetups.frontCamber, null);
+      rearCamber.innerHTML = JSON.stringify(data.carSetups.rearCamber, null);
+      frontToe.innerHTML = JSON.stringify(data.carSetups.frontToe, null);
+      rearToe.innerHTML = JSON.stringify(data.carSetups.rearToe, null);
+      frontSuspension.innerHTML = JSON.stringify(data.carSetups.frontSuspension, null);
+      rearSuspension.innerHTML = JSON.stringify(data.carSetups.rearSuspension, null);
+      frontAntiRollBar.innerHTML = JSON.stringify(data.carSetups.frontAntiRollBar, null);
+      rearAntiRollBar.innerHTML = JSON.stringify(data.carSetups.rearAntiRollBar, null);
+      frontSuspensionHeight.innerHTML = JSON.stringify(data.carSetups.frontSuspensionHeight, null);
+      rearSuspensionHeight.innerHTML = JSON.stringify(data.carSetups.rearSuspensionHeight, null);
+      brakePressure.innerHTML = JSON.stringify(data.carSetups.brakePressure, null);
+      brakeBias.innerHTML = JSON.stringify(data.carSetups.brakeBias, null);
+      frontTyrePressure.innerHTML = JSON.stringify(data.carSetups.frontTyrePressure, null);
+      rearTyrePressure.innerHTML = JSON.stringify(data.carSetups.rearTyrePressure, null);
+      ballast.innerHTML = JSON.stringify(data.carSetups.ballast, null);
+      fuelLoad.innerHTML = JSON.stringify(data.carSetups.fuelLoad, null);
+    }
+    if (data.header.packetId == 6){
+      speed.innerHTML = JSON.stringify(data.carTelemetryData.speed, null);
+      throttle.innerHTML = JSON.stringify(data.carTelemetryData.throttle, null);
+      steer.innerHTML = JSON.stringify(data.carTelemetryData.steer, null);
+      brake.innerHTML = JSON.stringify(data.carTelemetryData.brake, null);
+      clutch.innerHTML = JSON.stringify(data.carTelemetryData.clutch, null);
+      gear.innerHTML = JSON.stringify(data.carTelemetryData.gear, null);
+      engineRPM.innerHTML = JSON.stringify(data.carTelemetryData.engineRPM, null);
+      drs.innerHTML = JSON.stringify(data.carTelemetryData.drs, null);
+      revLightsPercent.innerHTML = JSON.stringify(data.carTelemetryData.revLightsPercent, null);
+      engineTemperature.innerHTML = JSON.stringify(data.carTelemetryData.engineTemperature, null);
+      brakesTemperatureRL.innerHTML = JSON.stringify(data.carTelemetryData.brakesTemperature.RL, null);
+      brakesTemperatureRR.innerHTML = JSON.stringify(data.carTelemetryData.brakesTemperature.RR, null);
+      brakesTemperatureFL.innerHTML = JSON.stringify(data.carTelemetryData.brakesTemperature.FL, null);
+      brakesTemperatureFR.innerHTML = JSON.stringify(data.carTelemetryData.brakesTemperature.FR, null);
+      tyresSurfaceTemperatureRL.innerHTML = JSON.stringify(data.carTelemetryData.tyresSurfaceTemperature.RL, null);
+      tyresSurfaceTemperatureRR.innerHTML = JSON.stringify(data.carTelemetryData.tyresSurfaceTemperature.RR, null);
+      tyresSurfaceTemperatureFL.innerHTML = JSON.stringify(data.carTelemetryData.tyresSurfaceTemperature.FL, null);
+      tyresSurfaceTemperatureFR.innerHTML = JSON.stringify(data.carTelemetryData.tyresSurfaceTemperature.FR, null);
+      tyresInnerTemperatureRL.innerHTML = JSON.stringify(data.carTelemetryData.tyresInnerTemperature.RL, null);
+      tyresInnerTemperatureRR.innerHTML = JSON.stringify(data.carTelemetryData.tyresInnerTemperature.RR, null);
+      tyresInnerTemperatureFL.innerHTML = JSON.stringify(data.carTelemetryData.tyresInnerTemperature.FL, null);
+      tyresInnerTemperatureFR.innerHTML = JSON.stringify(data.carTelemetryData.tyresInnerTemperature.FR, null);
+      tyresPressureRL.innerHTML = JSON.stringify(data.carTelemetryData.tyresPressure.RL, null);
+      tyresPressureRR.innerHTML = JSON.stringify(data.carTelemetryData.tyresPressure.RR, null);
+      tyresPressureFL.innerHTML = JSON.stringify(data.carTelemetryData.tyresPressure.FL, null);
+      tyresPressureFR.innerHTML = JSON.stringify(data.carTelemetryData.tyresPressure.FR, null);
       buttonStatus.innerHTML = JSON.stringify(data.buttonStatus, null);
-      // break;
-    // case 7:
-      // break;
-    // default:
-    //   break
-
-  }
+    }
+    if (data.header.packetId == 7){
+      tractionControl.innerHTML = JSON.stringify(data.carStatusData.tractionControl, null);
+      antiLockBrakes.innerHTML = JSON.stringify(data.carStatusData.antiLockBrakes, null);
+      fuelMix.innerHTML = JSON.stringify(data.carStatusData.fuelMix, null);
+      frontBrakeBias.innerHTML = JSON.stringify(data.carStatusData.frontBrakeBias, null);
+      pitLimiterStatus.innerHTML = JSON.stringify(data.carStatusData.pitLimiterStatus, null);
+      fuelInTank.innerHTML = JSON.stringify(data.carStatusData.fuelInTank, null);
+      fuelCapacity.innerHTML = JSON.stringify(data.carStatusData.fuelCapacity, null);
+      maxRPM.innerHTML = JSON.stringify(data.carStatusData.maxRPM, null);
+      idleRPM.innerHTML = JSON.stringify(data.carStatusData.idleRPM, null);
+      maxGears.innerHTML = JSON.stringify(data.carStatusData.maxGears, null);
+      drsAllowed.innerHTML = JSON.stringify(data.carStatusData.drsAllowed, null);
+      tyresWear.innerHTML = JSON.stringify(data.carStatusData.tyresWear, null);
+      tyreCompound.innerHTML = JSON.stringify(data.carStatusData.tyreCompound, null);
+      tyresDamageRL.innerHTML = JSON.stringify(data.carStatusData.tyresDamage.RL, null);
+      tyresDamageRR.innerHTML = JSON.stringify(data.carStatusData.tyresDamage.RR, null);
+      tyresDamageFL.innerHTML = JSON.stringify(data.carStatusData.tyresDamage.FL, null);
+      tyresDamageFR.innerHTML = JSON.stringify(data.carStatusData.tyresDamage.FR, null);
+      frontLeftWingDamage.innerHTML = JSON.stringify(data.carStatusData.frontLeftWingDamage, null);
+      frontRightWingDamage.innerHTML = JSON.stringify(data.carStatusData.frontRightWingDamage, null);
+      rearWingDamage.innerHTML = JSON.stringify(data.carStatusData.rearWingDamage, null);
+      engineDamage.innerHTML = JSON.stringify(data.carStatusData.engineDamage, null);
+      gearBoxDamage.innerHTML = JSON.stringify(data.carStatusData.gearBoxDamage, null);
+      exhaustDamage.innerHTML = JSON.stringify(data.carStatusData.exhaustDamage, null);
+      vehicleFiaFlags.innerHTML = JSON.stringify(data.carStatusData.vehicleFiaFlags, null);
+      ersStoreEnergy.innerHTML = JSON.stringify(data.carStatusData.ersStoreEnergy, null);
+      ersDeployMode.innerHTML = JSON.stringify(data.carStatusData.ersDeployMode, null);
+      ersHarvestedThisLapMGUK.innerHTML = JSON.stringify(data.carStatusData.ersHarvestedThisLapMGUK, null);
+      ersHarvestedThisLapMGUH.innerHTML = JSON.stringify(data.carStatusData.ersHarvestedThisLapMGUH, null);
+      ersDeployedThisLap.innerHTML = JSON.stringify(data.carStatusData.ersDeployedThisLap, null);
+    }
 }
