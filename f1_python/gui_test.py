@@ -343,7 +343,7 @@ class GuiPart(Frame):
         self.csd_rearTyrePressure_data_label = Label(self, textvariable = csd_rearTyrePressure_data, anchor=W).grid(row=23, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
         self.csd_ballast_data_label = Label(self, textvariable = csd_ballast_data, anchor=W).grid(row=24, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
         self.csd_fuelLoad_data_label = Label(self, textvariable = csd_fuelLoad_data, anchor=W).grid(row=25, column=11, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
-[]
+
         # Car Telemetry Data
         self.ctd_speed_data_label = Label(self, textvariable = ctd_speed_data, anchor=W).grid(row=6, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
         self.ctd_throttle_data_label  = Label(self, textvariable = ctd_throttle_data, anchor=W).grid(row=7, column=13, sticky = Tkinter.N+Tkinter.S+Tkinter.E+Tkinter.W)
@@ -390,34 +390,34 @@ class GuiPart(Frame):
 
                 # Check which packet we grab out of the queue and update GUI accordingly
 
-                # if packet[0] == "SessionData":
-                #     # print "found sd"
-                #     self.new_session_data(packet[1])
-                #     root.update()
-                # if packet[0] == "MotionData":
-                #     # print "found md"
-                #     self.new_motion_data(packet[1])
-                #     root.update()
-                # elif packet[0] == "LapData":
-                #     # print "found sd"
-                #     self.new_lap_data(packet[1])
-                #     root.update()
-                # elif packet[0] == "EventData":
-                #     # print "found ed"
-                #     self.new_event_data(packet[1])
-                #     root.update()
-                # elif packet[0] == "ParticipantData":
-                #     # print "found pd"
-                #     self.new_participant_data(packet[1])
-                #     root.update()
-                # elif packet[0] == "CarSetupData":
-                #     # print "found csd"
-                #     self.new_car_setup_data(packet[1])
-                #     root.update()
-                # elif packet[0] == "CarTelemetryData":
-                #     # print "fount ctd"
-                #     self.new_car_telemetry_data(packet[1])
-                #     root.update
+                if packet[0] == "SessionData":
+                    # print "found sd"
+                    self.new_session_data(packet[1])
+                    root.update()
+                elif packet[0] == "MotionData":
+                    # print "found md"
+                    self.new_motion_data(packet[1])
+                    root.update()
+                elif packet[0] == "LapData":
+                    # print "found sd"
+                    self.new_lap_data(packet[1])
+                    root.update()
+                elif packet[0] == "EventData":
+                    # print "found ed"
+                    self.new_event_data(packet[1])
+                    root.update()
+                elif packet[0] == "ParticipantData":
+                    # print "found pd"
+                    self.new_participant_data(packet[1])
+                    root.update()
+                elif packet[0] == "CarSetupData":
+                    # print "found csd"
+                    self.new_car_setup_data(packet[1])
+                    root.update()
+                elif packet[0] == "CarTelemetryData":
+                    # print "fount ctd"
+                    self.new_car_telemetry_data(packet[1])
+                    root.update
 
 
             except Queue.Empty:
@@ -766,7 +766,7 @@ class ThreadedClient:
             # This is the brutal stop of the system. You may want to do
             # some cleanup before actually shutting it down.
             root.destroy()
-        self.master.after(1, self.periodicCall)
+        self.master.after(100, self.periodicCall)
 
     def workerThread1(self):
         """
@@ -789,7 +789,7 @@ class ThreadedClient:
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
         # bind the socket to the specified ip address and port
-        sock.bind(('', 20777))
+        sock.bind(('127.0.0.1', 5003))
 
         # packet_count = 0
 
