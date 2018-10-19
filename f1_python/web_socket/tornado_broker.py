@@ -25,7 +25,8 @@ import json
 import structs
 
 # Import out packet to json converter
-import structs_to_json
+# import structs_to_json  # All Cars
+import structs_to_json_users_car # Only users car
 
 class Notifier():
     """ Notifier utility class """
@@ -94,7 +95,7 @@ def handle_udp_messages(sock, fd, events):
             packet_header = structs.PacketHeader.from_buffer_copy(header_data)
             packet_id = packet_header.m_packetId
             packet = packet_structures[packet_id].from_buffer_copy(data)
-            packet = structs_to_json.structs(packet_names[packet_id], packet)
+            packet = structs_to_json_users_car.structs(packet_names[packet_id], packet)
             # notify that we have new data
             notifier.notify(packet)
         except socket.error, e:
