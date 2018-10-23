@@ -228,7 +228,7 @@ class ParticipantData(ctypes.LittleEndianStructure):
         ('m_teamId',                    ctypes.c_uint8),         # Team id - see appendix
         ('m_raceNumber',                ctypes.c_uint8),         # Race number of the car
         ('m_nationality',               ctypes.c_uint8),         # Nationality of the driver
-        ('m_name',                      ctypes.c_char),          # Name of participant in UTF-8 format – null terminated
+        ('m_name',                      ctypes.c_wchar_p),          # Name of participant in UTF-8 format – null terminated
                                                                  # Will be truncated with … (U+2026) if too long
     ]
 
@@ -347,7 +347,7 @@ class CarStatusData(ctypes.LittleEndianStructure):
         ('m_idleRPM',                   ctypes.c_uint16),       # Cars idle RPM
         ('m_maxGears',                  ctypes.c_uint8),        # Maximum number of gears
         ('m_drsAllowed',                ctypes.c_uint8),        # 0 = not allowed, 1 = allowed, -1 = unknown
-        ('m_tyresWear',                 ctypes.c_uint8),        # Tyre wear percentage
+        ('m_tyresWear',                 ctypes.c_uint8 * 4),        # Tyre wear percentage
         ('m_tyreCompound',              ctypes.c_uint8),        # Modern - 0 = hyper soft, 1 = ultra soft
                                                                 # 2 = super soft, 3 = soft, 4 = medium, 5 = hard
                                                                 # 6 = super hard, 7 = inter, 8 = wet
