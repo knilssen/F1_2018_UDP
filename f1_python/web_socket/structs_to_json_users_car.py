@@ -187,7 +187,7 @@ def EventData(packet):
         'frameIdentifier': packet.m_header.m_frameIdentifier,
         'playerCarIndex': packet.m_header.m_playerCarIndex
     },
-    'eventStringCode': str(packet.m_eventStringCode[0]) + str(packet.m_eventStringCode[1]) + str(packet.m_eventStringCode[2]) + str(packet.m_eventStringCode[3])
+    'eventStringCode': ''.join(packet.m_eventStringCode)
     }
 
     return event_data_json
@@ -366,7 +366,13 @@ def PacketCarStatusData(packet):
         'idleRPM': packet.m_carStatusData[players_car].m_idleRPM,
         'maxGears': packet.m_carStatusData[players_car].m_maxGears,
         'drsAllowed': packet.m_carStatusData[players_car].m_drsAllowed, # 0 = not allowed, 1 = allowed, -1 = unknown
-        'tyresWear': packet.m_carStatusData[players_car].m_tyresWear,
+        # 'tyresWear': packet.m_carStatusData[players_car].m_tyresWear,
+        'tyresWear':{
+            'RL': packet.m_carStatusData[players_car].m_tyresWear[0],
+            'RR': packet.m_carStatusData[players_car].m_tyresWear[1],
+            'FL': packet.m_carStatusData[players_car].m_tyresWear[2],
+            'FR': packet.m_carStatusData[players_car].m_tyresWear[3]
+        },
         'tyreCompound': packet.m_carStatusData[players_car].m_tyreCompound, # Modern - 0 = hyper soft, 1 = ultra soft, 2 = super soft, 3 = soft, 4 = medium, 5 = hard, 6 = super hard, 7 = inter, 8 = wet,  Classic - 0-6 = dry, 7-8 = wet
         'tyresDamage':{
             'RL': packet.m_carStatusData[players_car].m_tyresDamage[0],
