@@ -24,4 +24,4 @@ Go to your web browser and enter:
 ![MENU](./screenshots/user_car_packet_view.png)
 
 ### LIVE MAP
-![MENU](./screenshots/live_map_view.png)
+![MENU](./screenshots/live_map_view_screenshot.png)
