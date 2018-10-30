@@ -16,7 +16,9 @@ Go to your web browser and enter:
 
 
 To change the GUI, simply comment out which GUI you would like to run.
+
 This code can be found in lines 80-81 in tornado_broker.py
+
 The following is the current, which at default will display the new live maps:
 
 
