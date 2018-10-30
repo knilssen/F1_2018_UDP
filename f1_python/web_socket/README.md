@@ -30,7 +30,6 @@ The following is the current, which at default will display map_draw_live.html, 
             self.write(loader.load("map_draw_live.html").generate())
 
 
-Examples of current visuals:
 
 ## Screen shots
 ### USERS CAR PACKET DATAS
