@@ -179,15 +179,33 @@ var rearTyrePressure = document.getElementById('rearTyrePressure');
 var ballast = document.getElementById('ballast');
 var fuelLoad = document.getElementById('fuelLoad');
 // Participants data
-numCars
-aiControlled
-driverId
-teamId
-raceNumber
-nationality
-name
+var numCars = document.getElementById('numCars');
+var aiControlled = document.getElementById('aiControlled');
+var driverId = document.getElementById('driverId');
+var teamId = document.getElementById('teamId');
+var raceNumber = document.getElementById('raceNumber');
+var nationality = document.getElementById('nationality');
+var name = document.getElementById('name');
 // Event data
-eventStringCode
+var eventStringCode = document.getElementById('eventStringCode');
+
+
+var max_x = document.getElementById('max_x');
+var max_y = document.getElementById('max_y');
+var max_z = document.getElementById('max_z');
+var min_x = document.getElementById('min_x');
+var min_y = document.getElementById('min_y');
+var min_z = document.getElementById('min_z');
+
+
+var max_x_value = 0
+var max_y_value = 0
+var max_z_value = 0
+var min_x_value = null
+var min_y_value = null
+var min_z_value = null
+
+
 // when a new message has been received
 ws.onmessage = function(event){
    var data =  JSON.parse(event.data);
@@ -206,6 +224,55 @@ ws.onmessage = function(event){
    var players_car = data.header.packetId
 
    if (data.header.packetId == 0){
+
+      if (data.carMotionData.worldPositionX > max_x_value){
+        max_x_value = data.carMotionData.worldPositionX;
+        max_x.innerHTML = JSON.stringify(data.carMotionData.worldPositionX, null);
+      } else {
+        if (min_x_value == null){
+          min_x_value = data.carMotionData.worldPositionX;
+          min_x.innerHTML = JSON.stringify(data.carMotionData.worldPositionX, null);
+        } else {
+          if (data.carMotionData.worldPositionX < min_x_value){
+            min_x_value = data.carMotionData.worldPositionX;
+            min_x.innerHTML = JSON.stringify(data.carMotionData.worldPositionX, null);
+          }
+        }
+      }
+
+      if (data.carMotionData.worldPositionY > max_y_value){
+        max_y_value = data.carMotionData.worldPositionY;
+        max_y.innerHTML = JSON.stringify(data.carMotionData.worldPositionY, null);
+      } else {
+        if (min_y_value == null){
+          min_y_value = data.carMotionData.worldPositionY;
+          min_y.innerHTML = JSON.stringify(data.carMotionData.worldPositionY, null);
+        } else {
+          if (data.carMotionData.worldPositionY < min_y_value){
+            min_y_value = data.carMotionData.worldPositionY;
+            min_y.innerHTML = JSON.stringify(data.carMotionData.worldPositionY, null);
+          }
+        }
+      }
+
+      if (data.carMotionData.worldPositionZ > max_z_value){
+        max_z_value = data.carMotionData.worldPositionZ;
+        max_z.innerHTML = JSON.stringify(data.carMotionData.worldPositionZ, null);
+      } else {
+        if (min_z_value == null){
+          min_z_value = data.carMotionData.worldPositionZ;
+          min_z.innerHTML = JSON.stringify(data.carMotionData.worldPositionZ, null);
+        } else {
+          if (data.carMotionData.worldPositionZ < min_z_value){
+            min_z_value = data.carMotionData.worldPositionZ;
+            min_z.innerHTML = JSON.stringify(data.carMotionData.worldPositionZ, null);
+          }
+        }
+      }
+
+      console.log(max_x_value, max_y_value, max_z_value, min_x_value, min_y_value, min_z_value);
+
+
        worldPositionX.innerHTML = JSON.stringify(data.carMotionData.worldPositionX, null);
        worldPositionY.innerHTML = JSON.stringify(data.carMotionData.worldPositionY, null);
        worldPositionZ.innerHTML = JSON.stringify(data.carMotionData.worldPositionZ, null);
