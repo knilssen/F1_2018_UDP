@@ -6,3 +6,11 @@ html, body{
   width: 100vw;
   height: 100vh;
 } */
+
+.grid-container {
+  display: grid;
+  grid: auto / calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20);
+  /* grid-gap: 10px; */
+  /* background-color: #2196F3; */
+  /* padding: 10px; */
+}
