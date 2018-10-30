@@ -77,7 +77,8 @@ class HTMLHandler(tornado.web.RequestHandler):
     """ HTML handler """
     def get(self):
         loader = tornado.template.Loader(".")
-        self.write(loader.load("user_car_packets_view.html").generate())
+        # self.write(loader.load("user_car_packets_view.html").generate())
+        self.write(loader.load("map_draw_live.html").generate())
 
 @tornado.gen.coroutine
 def handle_udp_messages(sock, fd, events):
