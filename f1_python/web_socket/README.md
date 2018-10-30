@@ -28,3 +28,13 @@ The following is the current, which at default will display map_draw_live.html, 
             loader = tornado.template.Loader(".")
             # self.write(loader.load("user_car_packets_view.html").generate())
             self.write(loader.load("map_draw_live.html").generate())
+
+
+Examples of current visuals:
+
+## Screen shots
+### USERS CAR PACKET DATAS
+![MENU](./screenshots/user_car_packet_view.png)
+
+### LIVE MAP
+![MENU](./screenshots/live_map_view.png)
