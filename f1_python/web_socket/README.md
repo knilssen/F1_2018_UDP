@@ -15,7 +15,9 @@ Go to your web browser and enter:
 
 
 
-To change the GUI, simply comment out which gui you would like to run such as:
+To change the GUI, simply comment out which GUI you would like to run.
+This code can be found in lines 80-81 in tornado_broker.py
+The following is the current, which at default will display the new live maps:
 
 
     class HTMLHandler(tornado.web.RequestHandler):
@@ -24,4 +26,3 @@ To change the GUI, simply comment out which gui you would like to run such as:
             loader = tornado.template.Loader(".")
             # self.write(loader.load("user_car_packets_view.html").generate())
             self.write(loader.load("map_draw_live.html").generate())
-    
