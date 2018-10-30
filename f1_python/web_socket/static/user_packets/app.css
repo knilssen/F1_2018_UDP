@@ -1,0 +1,17 @@
+html, body{
+  font-family: arial;
+}
+
+.grid-container {
+  display: grid;
+  grid: 100vh / calc(100vw / 6) calc(100vw / 6) calc(100vw / 6) calc(100vw / 6) calc(100vw / 6) calc(100vw / 6);
+  grid-gap: 10px;
+  /* background-color: #2196F3; */
+  padding: 10px;
+}
+/* .grid-container>div { */
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  /* text-align: center; */
+  /* padding:20px 0; */
+  /* font-size: 30px; */
+/* } */
