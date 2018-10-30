@@ -19,7 +19,7 @@ To change the GUI, simply comment out which GUI you would like to run.
 
 This code can be found in lines 80-81 in tornado_broker.py
 
-The following is the current, which at default will display the new live maps:
+The following is the current, which at default will display map_draw_live.html, showing live maps:
 
 
     class HTMLHandler(tornado.web.RequestHandler):
