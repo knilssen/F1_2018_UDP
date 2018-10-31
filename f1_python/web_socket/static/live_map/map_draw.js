@@ -92,7 +92,7 @@ var car_20_pos_z = document.getElementById('car_20_pos_z');
 
 var canvas = document.getElementById("packet_canvas");
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.height = window.innerHeight - (canvas.offsetTop);
 
 var ctx = canvas.getContext("2d");
 var canvas_height = canvas.height;
