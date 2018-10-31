@@ -85,16 +85,17 @@ def handle_udp_messages(sock, fd, events):
     """ Handles UDP messages it receives """
     packet_structures = [structs.PacketMotionData, structs.PacketSessionData, structs.PacketLapData, structs.PacketEventData, structs.PacketParticipantsData, structs.PacketCarSetupData, structs.PacketCarTelemetryData, structs.PacketCarStatusData]
     packet_names = ['MotionData', 'SessionData', 'LapData', 'EventData', 'ParticipantData', 'CarSetupData', 'CarTelemetryData', 'PacketCarStatusData']
-    # last_packet = {0:None, 1:None, 2:None, 3:None, 4:None, 5:None, 6:None, 7:None}
     while True:
         try:
             data, addr = sock.recvfrom(1341) # buffer size is 1341 bytes
 
 
-            # print "Received %d bytes: '%s'" % (len(data), data)
+            # Header data is contained in the first 21 bytes. Take this to obtain packets identifying information
             header_data = data[0:21]
             packet_header = structs.PacketHeader.from_buffer_copy(header_data)
             packet_id = packet_header.m_packetId
+            # Since the live map is only dealing with the motion data packet, only proceed to json and the notifier
+            # if and only if the packet received is the motion data packet
             if packet_id == 0:
                 packet = packet_structures[packet_id].from_buffer_copy(data)
                 packet = structs_to_json.structs(packet_names[packet_id], packet)
@@ -111,11 +112,9 @@ application = tornado.web.Application([
 ])
 
 if __name__ == '__main__':
-
-    # Read configuration
-    # Config = ConfigParser.ConfigParser()
-    # Config.read("settings.ini")
+    # Port used for the local host webpage, http://localhost:9090/
     server_port = '9090'
+    # Use the below commented out line in order to make work with matts f1 udp broadcasting on port 20777
     # udp_port    = '20777'
     udp_port    = 5003
 
