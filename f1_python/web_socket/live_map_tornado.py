@@ -101,6 +101,12 @@ def handle_udp_messages(sock, fd, events):
                 packet = structs_to_json.structs(packet_names[packet_id], packet)
                 # notify that we have new data
                 notifier.notify(packet)
+            # Also using the Lap data packet to get the cars position in the car
+            if packet_id == 2:
+                packet = packet_structures[packet_id].from_buffer_copy(data)
+                packet = structs_to_json.structs(packet_names[packet_id], packet)
+                # notify that we have new data
+                notifier.notify(packet)
         except socket.error, e:
             break
 
