@@ -115,6 +115,7 @@ if __name__ == '__main__':
     # Config = ConfigParser.ConfigParser()
     # Config.read("settings.ini")
     server_port = '9090'
+    # Use the below commented out line in order to make work with matts f1 udp broadcasting on port 20777
     # udp_port    = '20777'
     udp_port    = 5003
 

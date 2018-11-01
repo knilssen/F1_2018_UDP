@@ -2,15 +2,85 @@ html, body{
   font-family: arial;
 }
 
-/* .packet_canvas{
-  width: 100vw;
-  height: 100vh;
-} */
-
 .grid-container {
   display: grid;
   grid: auto / calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20);
-  /* grid-gap: 10px; */
-  /* background-color: #2196F3; */
-  /* padding: 10px; */
+  /* grid-gap: 4px; */
+}
+
+.Car1 {
+  border-style: solid;
+  border-color: green;
+}
+.Car2 {
+  border-style: solid;
+  border-color: grey;
+}
+.Car3 {
+  border-style: solid;
+  border-color: yellow;
+}
+.Car4 {
+  border-style: solid;
+  border-color: black;
+}
+.Car5 {
+  border-style: solid;
+  border-color: brown;
+}
+.Car6 {
+  border-style: solid;
+  border-color: red;
+}
+.Car7 {
+  border-style: solid;
+  border-color: blue;
+}
+.Car8 {
+  border-style: solid;
+  border-color: orange;
+}
+.Car9 {
+  border-style: solid;
+  border-color: purple;
+}
+.Car10{
+  border-style: solid;
+  border-color: pink;
+}
+.Car11 {
+  background-color: green;
+}
+.Car12 {
+  background-color: grey;
+  color: white;
+}
+.Car13 {
+  background-color: yellow;
+}
+
+.Car14 {
+  background-color: black;
+  color: white;
+}
+.Car15 {
+  background-color: brown;
+  color: white;
+}
+.Car16 {
+  background-color: red;
+}
+.Car17 {
+  background-color: blue;
+  color: white;
+}
+.Car18 {
+  background-color: orange;
+}
+.Car19 {
+  background-color: purple;
+  color: white;
+}
+.Car20 {
+  background-color: pink;
 }
