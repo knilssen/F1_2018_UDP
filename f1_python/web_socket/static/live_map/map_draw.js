@@ -73,6 +73,29 @@ var car_20_pos_x = document.getElementById('car_20_pos_x');
 var car_20_pos_y = document.getElementById('car_20_pos_y');
 var car_20_pos_z = document.getElementById('car_20_pos_z');
 
+
+// Get car position in race elements
+var car_1_pos = document.getElementById('car_1_pos');
+var car_2_pos = document.getElementById('car_2_pos');
+var car_3_pos = document.getElementById('car_3_pos');
+var car_4_pos = document.getElementById('car_4_pos');
+var car_5_pos = document.getElementById('car_5_pos');
+var car_6_pos = document.getElementById('car_6_pos');
+var car_7_pos = document.getElementById('car_7_pos');
+var car_8_pos = document.getElementById('car_8_pos');
+var car_9_pos = document.getElementById('car_9_pos');
+var car_10_pos = document.getElementById('car_10_pos');
+var car_11_pos = document.getElementById('car_11_pos');
+var car_12_pos = document.getElementById('car_12_pos');
+var car_13_pos = document.getElementById('car_13_pos');
+var car_14_pos = document.getElementById('car_14_pos');
+var car_15_pos = document.getElementById('car_15_pos');
+var car_16_pos = document.getElementById('car_16_pos');
+var car_17_pos = document.getElementById('car_17_pos');
+var car_18_pos = document.getElementById('car_18_pos');
+var car_19_pos = document.getElementById('car_19_pos');
+var car_20_pos = document.getElementById('car_20_pos');
+
 // Get the html5 canvas element and set the width to the screen width
 // and set the height to fill the rest of the screne, eleminating the need to scroll
 var canvas = document.getElementById("packet_canvas");
@@ -285,5 +308,30 @@ ws.onmessage = function(event){
       ctx.clearRect(0-(canvas_width/2), 0-(canvas_height/2), canvas.width, canvas.height);
     }
 
+  }
+
+
+  // If we receive a packet with the packetId of 2, which is the id for the lap_data packet
+  if (data.header.packetId == 2){
+    car_1_pos.innerHTML = JSON.stringify(data.lapData[0].carPosition, null);
+    car_2_pos.innerHTML = JSON.stringify(data.lapData[1].carPosition, null);
+    car_3_pos.innerHTML = JSON.stringify(data.lapData[2].carPosition, null);
+    car_4_pos.innerHTML = JSON.stringify(data.lapData[3].carPosition, null);
+    car_5_pos.innerHTML = JSON.stringify(data.lapData[4].carPosition, null);
+    car_6_pos.innerHTML = JSON.stringify(data.lapData[5].carPosition, null);
+    car_7_pos.innerHTML = JSON.stringify(data.lapData[6].carPosition, null);
+    car_8_pos.innerHTML = JSON.stringify(data.lapData[7].carPosition, null);
+    car_9_pos.innerHTML = JSON.stringify(data.lapData[8].carPosition, null);
+    car_10_pos.innerHTML = JSON.stringify(data.lapData[9].carPosition, null);
+    car_11_pos.innerHTML = JSON.stringify(data.lapData[10].carPosition, null);
+    car_12_pos.innerHTML = JSON.stringify(data.lapData[11].carPosition, null);
+    car_13_pos.innerHTML = JSON.stringify(data.lapData[12].carPosition, null);
+    car_14_pos.innerHTML = JSON.stringify(data.lapData[13].carPosition, null);
+    car_15_pos.innerHTML = JSON.stringify(data.lapData[14].carPosition, null);
+    car_16_pos.innerHTML = JSON.stringify(data.lapData[15].carPosition, null);
+    car_17_pos.innerHTML = JSON.stringify(data.lapData[16].carPosition, null);
+    car_18_pos.innerHTML = JSON.stringify(data.lapData[17].carPosition, null);
+    car_19_pos.innerHTML = JSON.stringify(data.lapData[18].carPosition, null);
+    car_20_pos.innerHTML = JSON.stringify(data.lapData[19].carPosition, null);
   }
 }
