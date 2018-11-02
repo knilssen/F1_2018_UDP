@@ -8,79 +8,79 @@ html, body{
   /* grid-gap: 4px; */
 }
 
-.Car1 {
+#Car1 {
   border-style: solid;
   border-color: green;
 }
-.Car2 {
+#Car2 {
   border-style: solid;
   border-color: grey;
 }
-.Car3 {
+#Car3 {
   border-style: solid;
   border-color: yellow;
 }
-.Car4 {
+#Car4 {
   border-style: solid;
   border-color: black;
 }
-.Car5 {
+#Car5 {
   border-style: solid;
   border-color: brown;
 }
-.Car6 {
+#Car6 {
   border-style: solid;
   border-color: red;
 }
-.Car7 {
+#Car7 {
   border-style: solid;
   border-color: blue;
 }
-.Car8 {
+#Car8 {
   border-style: solid;
   border-color: orange;
 }
-.Car9 {
+#Car9 {
   border-style: solid;
   border-color: purple;
 }
-.Car10{
+#Car10{
   border-style: solid;
   border-color: pink;
 }
-.Car11 {
+#Car11 {
   background-color: green;
 }
-.Car12 {
+#Car12 {
   background-color: grey;
   color: white;
 }
-.Car13 {
+#Car13 {
   background-color: yellow;
 }
 
-.Car14 {
+#Car14 {
   background-color: black;
   color: white;
 }
-.Car15 {
+#Car15 {
   background-color: brown;
   color: white;
 }
-.Car16 {
+#Car16 {
   background-color: red;
 }
-.Car17 {
+#Car17 {
   background-color: blue;
   color: white;
 }
-.Car18 {
+#Car18 {
   background-color: orange;
 }
-.Car19 {
+#Car19 {
   background-color: purple;
   color: white;
 }
-.Car20 {
+#Car20 {
   background-color: pink;
 }

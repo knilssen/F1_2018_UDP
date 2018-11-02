@@ -96,6 +96,9 @@ var car_18_pos = document.getElementById('car_18_pos');
 var car_19_pos = document.getElementById('car_19_pos');
 var car_20_pos = document.getElementById('car_20_pos');
 
+// Get car position in race elements and place them into an arrays
+var car_position_elements = [car_1_pos, car_2_pos, car_3_pos, car_4_pos, car_5_pos, car_6_pos, car_7_pos, car_8_pos, car_9_pos, car_10_pos, car_11_pos, car_12_pos, car_13_pos, car_14_pos, car_15_pos, car_16_pos, car_17_pos, car_18_pos, car_19_pos, car_20_pos];
+
 // Get the html5 canvas element and set the width to the screen width
 // and set the height to fill the rest of the screne, eleminating the need to scroll
 var canvas = document.getElementById("packet_canvas");
@@ -111,6 +114,8 @@ var canvas_width = canvas.width;
 // Set the ctx x and y point for (0,0) from the upper left of the canvas object to the center point to allow
 // our negative world coordinates
 ctx.translate(canvas_width/2, canvas_height/2);
+
+var previous_leaderboard = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
 
 
 // Function is called when live_map_tornado recieves a packet and sends it via the websocket
@@ -313,25 +318,39 @@ ws.onmessage = function(event){
 
   // If we receive a packet with the packetId of 2, which is the id for the lap_data packet
   if (data.header.packetId == 2){
-    car_1_pos.innerHTML = JSON.stringify(data.lapData[0].carPosition, null);
-    car_2_pos.innerHTML = JSON.stringify(data.lapData[1].carPosition, null);
-    car_3_pos.innerHTML = JSON.stringify(data.lapData[2].carPosition, null);
-    car_4_pos.innerHTML = JSON.stringify(data.lapData[3].carPosition, null);
-    car_5_pos.innerHTML = JSON.stringify(data.lapData[4].carPosition, null);
-    car_6_pos.innerHTML = JSON.stringify(data.lapData[5].carPosition, null);
-    car_7_pos.innerHTML = JSON.stringify(data.lapData[6].carPosition, null);
-    car_8_pos.innerHTML = JSON.stringify(data.lapData[7].carPosition, null);
-    car_9_pos.innerHTML = JSON.stringify(data.lapData[8].carPosition, null);
-    car_10_pos.innerHTML = JSON.stringify(data.lapData[9].carPosition, null);
-    car_11_pos.innerHTML = JSON.stringify(data.lapData[10].carPosition, null);
-    car_12_pos.innerHTML = JSON.stringify(data.lapData[11].carPosition, null);
-    car_13_pos.innerHTML = JSON.stringify(data.lapData[12].carPosition, null);
-    car_14_pos.innerHTML = JSON.stringify(data.lapData[13].carPosition, null);
-    car_15_pos.innerHTML = JSON.stringify(data.lapData[14].carPosition, null);
-    car_16_pos.innerHTML = JSON.stringify(data.lapData[15].carPosition, null);
-    car_17_pos.innerHTML = JSON.stringify(data.lapData[16].carPosition, null);
-    car_18_pos.innerHTML = JSON.stringify(data.lapData[17].carPosition, null);
-    car_19_pos.innerHTML = JSON.stringify(data.lapData[18].carPosition, null);
-    car_20_pos.innerHTML = JSON.stringify(data.lapData[19].carPosition, null);
+    // Sets up array to hold current car standings
+    var current_leaderboard = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
+    var similar_leaderboars = true;
+
+    // Loops through car_position_elements and sets the innerHTML of those elements to the position
+    // the corresponding car is in the current race
+    for (i = 0, len = (data.lapData).length; i < len; i++) {
+      var cars_lap_data = data.lapData[i].carPosition
+      car_position_elements[i].innerHTML = JSON.stringify(cars_lap_data, null);
+      current_leaderboard[cars_lap_data-1] = i
+
+      // If previous leaderboard does not match up with current leaderboard, then make sure we set our boolean so
+      if (current_leaderboard[cars_lap_data-1] != previous_leaderboard[cars_lap_data-1]){
+        similar_leaderboars = false;
+      }
+    }
+
+    // If our boolean for similar leaderboards is false, then update the previous leaderboard, and the standings in the webpage
+    if (similar_leaderboars == false){
+      previous_leaderboard = current_leaderboard;
+
+
+      let car_elements = []
+      let car_position_container = document.querySelector('.grid-container')
+      // Add each row to the array
+      car_position_container.querySelectorAll('.car').forEach(el => car_elements.push(el))
+      // Clear the container
+      car_position_container.innerHTML = ''
+      // Sort the array from highest to lowest
+      car_elements.sort((a, b) => a.querySelector('.position').textContent - b.querySelector('.position').textContent)
+      // Put the elements back into the container
+      car_elements.forEach(e => car_position_container.appendChild(e))
+
+    }
   }
 }
