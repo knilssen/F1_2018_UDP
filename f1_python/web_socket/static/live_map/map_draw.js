@@ -115,6 +115,8 @@ var canvas_width = canvas.width;
 // our negative world coordinates
 ctx.translate(canvas_width/2, canvas_height/2);
 
+// Make an array of null variables for previous_leaderboard, since the first packet will be different, it will
+// Update this array and populate it
 var previous_leaderboard = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
 
 
@@ -337,8 +339,9 @@ ws.onmessage = function(event){
 
     // If our boolean for similar leaderboards is false, then update the previous leaderboard, and the standings in the webpage
     if (similar_leaderboars == false){
-      previous_leaderboard = current_leaderboard;
 
+      // set the previous_leaderboard to the current one since we now have a change
+      previous_leaderboard = current_leaderboard;
 
       let car_elements = []
       let car_position_container = document.querySelector('.grid-container')
@@ -350,7 +353,6 @@ ws.onmessage = function(event){
       car_elements.sort((a, b) => a.querySelector('.position').textContent - b.querySelector('.position').textContent)
       // Put the elements back into the container
       car_elements.forEach(e => car_position_container.appendChild(e))
-
     }
   }
 }
