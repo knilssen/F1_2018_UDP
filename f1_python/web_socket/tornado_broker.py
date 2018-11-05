@@ -115,16 +115,21 @@ if __name__ == '__main__':
     # Config = ConfigParser.ConfigParser()
     # Config.read("settings.ini")
     server_port = '9090'
-    # Use the below commented out line in order to make work with matts f1 udp broadcasting on port 20777
-    # udp_port    = '20777'
-    udp_port    = 5003
+    
+    # For using with the live F1 2018 game
+    # listning_ip_address     = ''
+    # udp_port                = 20777
+
+    # For using the pcap emulator
+    listning_ip_address     = '127.0.0.1'
+    udp_port                = 5003
 
     # application start listening on port 9090
     application.listen(server_port)
 
     # setup socket for UDP listening
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind(('127.0.0.1',udp_port))
+    sock.bind((listning_ip_address,udp_port))
     sock.setblocking(False)
 
     # create handler that deals with our UDP messages
