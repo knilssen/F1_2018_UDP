@@ -56,12 +56,35 @@ Go to your web browser and enter:
 
     http://localhost:9090/
 
+### Live Map with Telemetry View
+
+To run the live map view simply run:
+
+    python map_telemetry_tornado.py
+
+To run with pcap emulator or with the actual f1 game, simply comment out the correct line in live_map_tornado:
+
+    124  # For using with the live F1 2018 game
+    125  # listning_ip_address     = ''
+    126  # udp_port                = 20777
+    127      
+    128  # For using the pcap emulator
+    129  listning_ip_address     = '127.0.0.1'
+    130  udp_port                = 5003
+
+Go to your web browser and enter:
+
+    http://localhost:9090/
+
 
 
 
 ## Screen shots
 ### USERS CAR PACKET DATAS
-![MENU](./screenshots/user_car_packet_view.png)
+![USER_CAR_PACKET_DATAS](./screenshots/user_car_packet_view.png)
 
 ### LIVE MAP
-![MENU](./screenshots/live_map_view.png)
+![LIVE_MAP](./screenshots/live_map_view.png)
+
+### LIVE MAP + TELEMETRY
+![MAP_TELEMETRY](./screenshots/map_telemetry_screenshot.png)
