@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>F1 UDP</title>
+  <link rel="stylesheet" href="static/map_telemetry/test_map_draw.css">
+</head>
+<body>
+  <br />
+
+  <div class="top_telemetry_grid_container" id="top_grid">
+    <div id="header_data_display" class="top_telemetry">
+      packetFormat:       <span id="packetFormat"></span><br />
+      packetVersion:      <span id="packetVersion"></span><br />
+      packetId:           <span id="packetId"></span><br />
+      sessionUID:         <span id="sessionUID"></span><br />
+      sessionTime:        <span id="sessionTime"></span><br />
+      frameIdentifier:    <span id="frameIdentifier"></span><br />
+      playerCarIndex:     <span id="playerCarIndex"></span><br /><br />
+    </div>
+    <div id="lap_data_display" class="top_telemetry">
+      <div class="lap_data_grid">
+        <div id="lap_times">
+          CurentLapTime:  <span id="currentLapTime"></span><br />
+          LastLapTime:    <span id="lastLapTime"></span><br />
+          BestLapTime:    <span id="bestLapTime"></span><br />
+          Sector1Time:    <span id="sector1Time"></span><br />
+          Sector2Time:    <span id="sector2Time"></span><br />
+        </div>
+        <div id="lap_number">
+          CurrentLapNum:<br />
+          <span id="currentLapNum"></span> / <span id="totalLaps"></span>
+        </div>
+      </div>
+    </div>
+    <div id="rev_lights_data_display" class="top_telemetry">
+      <div class="rev_vert_grid">
+        <div id="rev_top" class="three_grid">
+          <div id="rev_top_left"></div>
+          <div id="rev_top_middle">
+            Speed:      <span id="speed"></span>
+          </div>
+          <div id="rev_top_right"></div>
+        </div>
+        <div class="rev_lights_display" id="rev_middle">
+          <canvas id="rev_canvas"></canvas>
+        </div>
+        <div id="rev_bottom" class="three_grid">
+            <div id="rev_bottom_left">
+              EngineRPM:  <span id="engineRPM"></span>
+            </div>
+            <div id="rev_bottom_middle">
+              Brake:      <span id="brake"></span>
+            </div>
+            <div id="rev_bottom_right">
+              Gear:       <span id="gear"></span>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div id="fuel_data_display" class="top_telemetry">
+      <div class="fuel_data_grid three_grid">
+        <div id="fuel_left"></div>
+        <div id="fuel_middle">
+          FuelMix:            <span id="fuelMix"></span><br />
+          FuelInTank:         <span id="fuelInTank"></span><br />
+          FuelCapacity:       <span id="fuelCapacity"></span>
+        </div>
+        <div id="fuel_right"></div>
+      </div>
+    </div>
+    <div id="wheel_data_display" class="top_telemetry">
+      <div class="two_by_two_grid">
+        <div id="front_left_wheel_data" class="wheel two_by_two_grid">
+          <div class="brakesTemperature">
+            BrakeTemperature: <br /><span id="fl_brakesTemperature"></span>
+          </div>
+          <div class="tyresPressure">
+            TyrePressure:     <br /><span id="fl_tyresPressure"></span>
+          </div>
+          <div class="tyresWear">
+            TyresWear:        <br /><span id="fl_tyresWear"></span>
+          </div>
+          <div class="tyresDamage">
+            TyresDamage:     <br /><span id="fl_tyresDamage"></span>
+          </div>
+        </div>
+        <div id="front_right_wheel_data" class="wheel two_by_two_grid">
+          <div class="brakesTemperature">
+            BrakeTemperature: <br /><span id="fr_brakesTemperature"></span>
+          </div>
+          <div class="tyresPressure">
+            TyrePressure:     <br /><span id="fr_tyresPressure"></span>
+          </div>
+          <div class="tyresWear">
+            TyresWear:        <br /><span id="fr_tyresWear"></span>
+          </div>
+          <div class="tyresDamage">
+            TyresDamage:      <br /><span id="fr_tyresDamage"></span>
+          </div>
+        </div>
+        <div id="rear_left_wheel_data" class="wheel two_by_two_grid">
+          <div class="brakesTemperature">
+            BrakeTemperature: <br /><span id="rl_brakesTemperature"></span>
+          </div>
+          <div class="tyresPressure">
+            TyrePressure:     <br /><span id="rl_tyresPressure"></span>
+          </div>
+          <div class="tyresWear">
+            TyresWear:        <br /><span id="rl_tyresWear"></span>
+          </div>
+          <div class="tyresDamage">
+            TyresDamage:      <br /><span id="rl_tyresDamage"></span>
+          </div>
+        </div>
+        <div id="rear_right_wheel_data" class="wheel two_by_two_grid">
+          <div class="brakesTemperature">
+            BrakeTemperature: <br /><span id="rr_brakesTemperature"></span>
+          </div>
+          <div class="tyresPressure">
+            TyrePressure:     <br /><span id="rr_tyresPressure"></span>
+          </div>
+          <div class="tyresWear">
+            TyresWear:        <br /><span id="rr_tyresWear"></span>
+          </div>
+          <div class="tyresDamage">
+            TyresDamage:      <br /><span id="rr_tyresDamage"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-container">
+    <div id="standings_table" class="row-container">
+      <div id="Car1" class="car">
+        <div class="car_data">
+          Car1<br />
+          carPosition: <span class="position" id="car_1_pos"></span><br />
+          x: <span id="car_1_pos_x"></span>
+          y: <span id="car_1_pos_y"></span>
+          z: <span id="car_1_pos_z"></span>
+        </div>
+        <div id="car_1_color" class="car_color"></div>
+      </div>
+      <div id="Car2" class="car">
+        <div class="car_data">
+          Car2<br />
+          carPosition: <span class="position" id="car_2_pos"></span><br />
+          x: <span id="car_2_pos_x"></span>
+          y: <span id="car_2_pos_y"></span>
+          z: <span id="car_2_pos_z"></span>
+        </div>
+        <div id="car_2_color" class="car_color"></div>
+      </div>
+      <div id="Car3" class="car">
+        <div class="car_data">
+          Car3<br />
+          carPosition: <span class="position" id="car_3_pos"></span><br />
+          x: <span id="car_3_pos_x"></span>
+          y: <span id="car_3_pos_y"></span>
+          z: <span id="car_3_pos_z"></span>
+        </div>
+        <div id="car_3_color" class="car_color"></div>
+      </div>
+      <div id="Car4" class="car">
+        <div class="car_data">
+          Car4<br />
+          carPosition: <span class="position" id="car_4_pos"></span><br />
+          x: <span id="car_4_pos_x"></span>
+          y: <span id="car_4_pos_y"></span>
+          z: <span id="car_4_pos_z"></span>
+        </div>
+        <div id="car_4_color" class="car_color"></div>
+      </div>
+      <div id="Car5" class="car">
+        <div class="car_data">
+          Car5<br />
+          carPosition: <span class="position" id="car_5_pos"></span><br />
+          x: <span id="car_5_pos_x"></span>
+          y: <span id="car_5_pos_y"></span>
+          z: <span id="car_5_pos_z"></span>
+        </div>
+        <div id="car_5_color" class="car_color"></div>
+      </div>
+      <div id="Car6" class="car">
+        <div class="car_data">
+          Car6<br />
+          carPosition: <span class="position" id="car_6_pos"></span><br />
+          x: <span id="car_6_pos_x"></span>
+          y: <span id="car_6_pos_y"></span>
+          z: <span id="car_6_pos_z"></span>
+        </div>
+        <div id="car_6_color" class="car_color"></div>
+      </div>
+      <div id="Car7" class="car">
+        <div class="car_data">
+          Car7<br />
+          carPosition: <span class="position" id="car_7_pos"></span><br />
+          x: <span id="car_7_pos_x"></span>
+          y: <span id="car_7_pos_y"></span>
+          z: <span id="car_7_pos_z"></span>
+        </div>
+        <div id="car_7_color" class="car_color"></div>
+      </div>
+      <div id="Car8" class="car">
+        <div class="car_data">
+          Car8<br />
+          carPosition: <span class="position" id="car_8_pos"></span><br />
+          x: <span id="car_8_pos_x"></span>
+          y: <span id="car_8_pos_y"></span>
+          z: <span id="car_8_pos_z"></span>
+        </div>
+        <div id="car_8_color" class="car_color"></div>
+      </div>
+      <div id="Car9" class="car">
+        <div class="car_data">
+          Car9<br />
+          carPosition: <span class="position" id="car_9_pos"></span><br />
+          x: <span id="car_9_pos_x"></span>
+          y: <span id="car_9_pos_y"></span>
+          z: <span id="car_9_pos_z"></span>
+        </div>
+        <div id="car_9_color" class="car_color"></div>
+      </div>
+      <div id="Car10" class="car">
+        <div class="car_data">
+          Car10<br />
+          carPosition: <span class="position" id="car_10_pos"></span><br />
+          x: <span id="car_10_pos_x"></span>
+          y: <span id="car_10_pos_y"></span>
+          z: <span id="car_10_pos_z"></span>
+        </div>
+        <div id="car_10_color" class="car_color"></div>
+      </div>
+      <div id="Car11" class="car">
+        <div class="car_data">
+          Car11<br />
+          carPosition: <span class="position" id="car_11_pos"></span><br />
+          x: <span id="car_11_pos_x"></span>
+          y: <span id="car_11_pos_y"></span>
+          z: <span id="car_11_pos_z"></span>
+        </div>
+        <div id="car_11_color" class="car_color"></div>
+      </div>
+      <div id="Car12" class="car">
+        <div class="car_data">
+          Car12<br />
+          carPosition: <span class="position" id="car_12_pos"></span><br />
+          x: <span id="car_12_pos_x"></span>
+          y: <span id="car_12_pos_y"></span>
+          z: <span id="car_12_pos_z"></span>
+        </div>
+        <div id="car_12_color" class="car_color"></div>
+      </div>
+      <div id="Car13" class="car">
+        <div class="car_data">
+          Car13<br />
+          carPosition: <span class="position" id="car_13_pos"></span><br />
+          x: <span id="car_13_pos_x"></span>
+          y: <span id="car_13_pos_y"></span>
+          z: <span id="car_13_pos_z"></span>
+        </div>
+        <div id="car_13_color" class="car_color"></div>
+      </div>
+      <div id="Car14" class="car">
+        <div class="car_data">
+          Car14<br />
+          carPosition: <span class="position" id="car_14_pos"></span><br />
+          x: <span id="car_14_pos_x"></span>
+          y: <span id="car_14_pos_y"></span>
+          z: <span id="car_14_pos_z"></span>
+        </div>
+        <div id="car_14_color" class="car_color"></div>
+      </div>
+      <div id="Car15" class="car">
+        <div class="car_data">
+          Car15<br />
+          carPosition: <span class="position" id="car_15_pos"></span><br />
+          x: <span id="car_15_pos_x"></span>
+          y: <span id="car_15_pos_y"></span>
+          z: <span id="car_15_pos_z"></span>
+        </div>
+        <div id="car_15_color" class="car_color"></div>
+      </div>
+      <div id="Car16" class="car">
+        <div class="car_data">
+          Car16<br />
+          carPosition: <span class="position" id="car_16_pos"></span><br />
+          x: <span id="car_16_pos_x"></span>
+          y: <span id="car_16_pos_y"></span>
+          z: <span id="car_16_pos_z"></span>
+        </div>
+        <div id="car_16_color" class="car_color"></div>
+      </div>
+      <div id="Car17" class="car">
+        <div class="car_data">
+          Car17<br />
+          carPosition: <span class="position" id="car_17_pos"></span><br />
+          x: <span id="car_17_pos_x"></span>
+          y: <span id="car_17_pos_y"></span>
+          z: <span id="car_17_pos_z"></span>
+        </div>
+        <div id="car_17_color" class="car_color"></div>
+      </div>
+      <div id="Car18" class="car">
+        <div class="car_data">
+          Car18<br />
+          carPosition: <span class="position" id="car_18_pos"></span><br />
+          x: <span id="car_18_pos_x"></span>
+          y: <span id="car_18_pos_y"></span>
+          z: <span id="car_18_pos_z"></span>
+        </div>
+        <div id="car_18_color" class="car_color"></div>
+      </div>
+      <div id="Car19" class="car">
+        <div class="car_data">
+          Car19<br />
+          carPosition: <span class="position" id="car_19_pos"></span><br />
+          x: <span id="car_19_pos_x"></span>
+          y: <span id="car_19_pos_y"></span>
+          z: <span id="car_19_pos_z"></span>
+        </div>
+        <div id="car_19_color" class="car_color"></div>
+      </div>
+      <div id="Car20" class="car">
+        <div class="car_data">
+          Car20<br />
+          carPosition: <span class="position" id="car_20_pos"></span><br />
+          x: <span id="car_20_pos_x"></span>
+          y: <span id="car_20_pos_y"></span>
+          z: <span id="car_20_pos_z"></span>
+        </div>
+        <div id="car_20_color" class="car_color"></div>
+      </div>
+    </div>
+
+    <div class="canvas_container">
+      <canvas id="packet_canvas" width="100%" height="100%"></canvas>
+    </div>
+  </div>
+
+
+
+
+</body>
+<script src="static/map_telemetry/test_map_draw.js"></script>
+</html>
