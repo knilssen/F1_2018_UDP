@@ -1,0 +1,78 @@
+html, body{
+  font-family: arial;
+}
+
+.grid-container {
+  display: grid;
+  grid: auto / calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20) calc(100vw / 20);
+  /* grid-gap: 4px; */
+}
+
+
+#Car1 {
+  background-color: green;
+}
+#Car2 {
+  background-color: olive;
+  color: white;
+}
+#Car3 {
+  background-color: yellow;
+}
+#Car4 {
+  background-color: black;
+  color: white;
+}
+#Car5 {
+  background-color: brown;
+  color: white;
+}
+#Car6 {
+  background-color: red;
+}
+#Car7 {
+  background-color: blue;
+  color: white;
+}
+#Car8 {
+  background-color: orange;
+}
+#Car9 {
+  background-color: purple;
+  color: white;
+}
+#Car10{
+  background-color: pink;
+}
+#Car11 {
+  background-color: lightgreen;
+}
+#Car12 {
+  background-color: lightgrey;
+}
+#Car13 {
+  background-color: lightyellow;
+}
+#Car14 {
+  background-color: darkgrey;
+  color: white;
+}
+#Car15 {
+  background-color: cyan;
+}
+#Car16 {
+  background-color: darkred;
+  color: white;
+}
+#Car17 {
+  background-color: lightblue;
+}
+#Car18 {
+  background-color: darkkhaki;
+}
+#Car19 {
+  background-color: plum;
+}
+#Car20 {
+  background-color: lightpink;
+}

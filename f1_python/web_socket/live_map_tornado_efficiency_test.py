@@ -26,7 +26,7 @@ import structs
 
 # Import out packet to json converter
 import structs_to_json  # All Cars
-import structs_to_json_users_car # Only users car
+# import structs_to_json_users_car # Only users car
 
 class Notifier():
     """ Notifier utility class """
@@ -78,7 +78,7 @@ class HTMLHandler(tornado.web.RequestHandler):
     def get(self):
         loader = tornado.template.Loader(".")
         # self.write(loader.load("user_car_packets_view.html").generate())
-        self.write(loader.load("map_telemetry.html").generate())
+        self.write(loader.load("map_draw_live_efficiency_test.html").generate())
 
 @tornado.gen.coroutine
 def handle_udp_messages(sock, fd, events):
@@ -96,21 +96,17 @@ def handle_udp_messages(sock, fd, events):
             packet_id = packet_header.m_packetId
             # Since the live map is only dealing with the motion data packet, only proceed to json and the notifier
             # if and only if the packet received is the motion data packet
-            # Also using the Lap data packet to get the cars position in the car
-            if packet_id == 0 or packet_id == 2:
+            if packet_id == 0:
                 packet = packet_structures[packet_id].from_buffer_copy(data)
                 packet = structs_to_json.structs(packet_names[packet_id], packet)
                 # notify that we have new data
                 notifier.notify(packet)
-
-            # Now for the GUI telemetry data that will only be for the users car. We can use structs_to_json_users_car so
-            # we send a smaller JSON object through our websocket
-            else:
+            # Also using the Lap data packet to get the cars position in the car
+            if packet_id == 2:
                 packet = packet_structures[packet_id].from_buffer_copy(data)
-                packet = structs_to_json_users_car.structs(packet_names[packet_id], packet)
+                packet = structs_to_json.structs(packet_names[packet_id], packet)
                 # notify that we have new data
                 notifier.notify(packet)
-
         except socket.error, e:
             break
 
