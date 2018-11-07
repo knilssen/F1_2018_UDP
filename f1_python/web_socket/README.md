@@ -76,6 +76,26 @@ Go to your web browser and enter:
 
     http://localhost:9090/
 
+### Live Map View Efficiency Test
+
+To run the live map view efficiency test simply run:
+
+    python live_map_tornado_efficiency_test.py
+
+To run with pcap emulator or with the actual f1 game, simply comment out the correct line in live_map_tornado:
+
+    124  # For using with the live F1 2018 game
+    125  # listning_ip_address     = ''
+    126  # udp_port                = 20777
+    127      
+    128  # For using the pcap emulator
+    129  listning_ip_address     = '127.0.0.1'
+    130  udp_port                = 5003
+
+Go to your web browser and enter:
+
+    http://localhost:9090/
+
 
 
 
@@ -88,3 +108,6 @@ Go to your web browser and enter:
 
 ### LIVE MAP + TELEMETRY
 ![MAP_TELEMETRY](./screenshots/map_telemetry_screenshot.png)
+
+### LIVE MAP EFFICIENCY TEST
+![LIVE_MAP_EFFICIENCY_TEST](./screenshots/live_map_view_efficiency_test.png)
