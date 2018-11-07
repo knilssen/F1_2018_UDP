@@ -1,9 +1,9 @@
 ### Websockets with python tornado
 
 
-[article](https://www.simplicity.be/article/transferring-sensor-readings-over-websockets/)
+Article: [https://www.simplicity.be/article/transferring-sensor-readings-over-websockets/](https://www.simplicity.be/article/transferring-sensor-readings-over-websockets/)
 
-[github code](https://github.com/simplicitylab/electronics-experiments/tree/master/Transfer%20sensor%20readings%20over%20WebSockets/python)
+Github Code: [https://github.com/simplicitylab/electronics-experiments/tree/master/Transfer%20sensor%20readings%20over%20WebSockets/python](https://github.com/simplicitylab/electronics-experiments/tree/master/Transfer%20sensor%20readings%20over%20WebSockets/python)
 
 The WebSocket broker is the most difficult part of this project. What the broker does is function as a WebSocket server, listening for certain UDP packets to arrive and translate them into WebSocket messages. For demo purposes, it also contains a handler for serving HTML.
 
