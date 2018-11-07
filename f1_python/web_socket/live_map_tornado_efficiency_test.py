@@ -26,7 +26,6 @@ import structs
 
 # Import out packet to json converter
 import structs_to_json  # All Cars
-# import structs_to_json_users_car # Only users car
 
 class Notifier():
     """ Notifier utility class """
@@ -92,17 +91,11 @@ def handle_udp_messages(sock, fd, events):
 
             # Header data is contained in the first 21 bytes. Take this to obtain packets identifying information
             header_data = data[0:21]
-            packet_header = structs.PacketHeader.from_buffer_copy(header_data)
-            packet_id = packet_header.m_packetId
+            packet_id = structs.PacketHeader.from_buffer_copy(header_data).m_packetId
             # Since the live map is only dealing with the motion data packet, only proceed to json and the notifier
-            # if and only if the packet received is the motion data packet
-            if packet_id == 0:
-                packet = packet_structures[packet_id].from_buffer_copy(data)
-                packet = structs_to_json.structs(packet_names[packet_id], packet)
-                # notify that we have new data
-                notifier.notify(packet)
+            # if the packet received is the motion data packet
             # Also using the Lap data packet to get the cars position in the car
-            if packet_id == 2:
+            if packet_id == 0 or packet_id == 2:
                 packet = packet_structures[packet_id].from_buffer_copy(data)
                 packet = structs_to_json.structs(packet_names[packet_id], packet)
                 # notify that we have new data

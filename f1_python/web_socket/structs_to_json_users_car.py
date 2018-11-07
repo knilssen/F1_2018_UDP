@@ -3,12 +3,7 @@
 # Takes the structs required for the udp data and turns them into json objects to
 # pass through our websocket to the webpage for viewing
 #
-# To increase efficiancy, we can only grab the data from our car like line 25 ->
-#           'worldPositionX': packet.m_carMotionData[0].m_worldPositionX,
-#          Would look like:
-#           'worldPositionX': packet.m_carMotionData[packet.m_header.m_playerCarIndex].m_worldPositionX,
-#
-#
+# Author: Kristian Nilssen
 
 import json
 
