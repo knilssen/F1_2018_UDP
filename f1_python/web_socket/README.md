@@ -131,3 +131,6 @@ Go to your web browser and enter:
 
 ### LIVE MAP EFFICIENCY TEST
 ![LIVE_MAP_EFFICIENCY_TEST](./screenshots/live_map_view_efficiency_test.png)
+
+### Live Telemetry Dashboard
+![LIVE_TELEMETRY_DASHBOARD](./screenshots/telemetry_dashboard.png)
