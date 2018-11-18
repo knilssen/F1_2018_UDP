@@ -14,3 +14,9 @@ make
 ```
 ./udp_client 5003
 ```
+
+
+
+
+
+Note for Kristian: Plz clean up the structs.h code so it looks pretty!
