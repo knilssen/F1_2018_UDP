@@ -1,7 +1,5 @@
 CC=gcc
 CFLAGS = -g
-# uncomment this for SunOS
-# LIBS = -lsocket -lnsl
 
 all: udp_client
 
