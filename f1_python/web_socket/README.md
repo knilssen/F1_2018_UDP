@@ -96,6 +96,26 @@ Go to your web browser and enter:
 
     http://localhost:9090/
 
+### Live Telemetry Dashboard
+
+To run the Telemetry Dashboard simply run:
+
+    python telemetry_dashboard_tornado.py
+
+To run with pcap emulator or with the actual f1 game, simply comment out the correct line in live_map_tornado:
+
+    124  # For using with the live F1 2018 game
+    125  # listning_ip_address     = ''
+    126  # udp_port                = 20777
+    127      
+    128  # For using the pcap emulator
+    129  listning_ip_address     = '127.0.0.1'
+    130  udp_port                = 5003
+
+Go to your web browser and enter:
+
+    http://localhost:9090/
+
 
 
 
@@ -111,3 +131,6 @@ Go to your web browser and enter:
 
 ### LIVE MAP EFFICIENCY TEST
 ![LIVE_MAP_EFFICIENCY_TEST](./screenshots/live_map_view_efficiency_test.png)
+
+### Live Telemetry Dashboard
+![LIVE_TELEMETRY_DASHBOARD](./screenshots/telemetry_dashboard.png)

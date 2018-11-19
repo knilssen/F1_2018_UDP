@@ -26,6 +26,7 @@ import structs
 
 # Import out packet to json converter
 import structs_to_json  # All Cars
+import structs_to_json_users_car
 
 class Notifier():
     """ Notifier utility class """
@@ -72,12 +73,26 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         # remove callback so it doesn't get called in the future
         self._notifier.remove_callback(self.process_notification)
 
-class HTMLHandler(tornado.web.RequestHandler):
+class HTMLLiveHandler(tornado.web.RequestHandler):
     """ HTML handler """
     def get(self):
         loader = tornado.template.Loader(".")
         # self.write(loader.load("user_car_packets_view.html").generate())
-        self.write(loader.load("map_draw_live_efficiency_test.html").generate())
+        self.write(loader.load("telemetry_dashboard.html").generate())
+
+class HTMLHistoryHandler(tornado.web.RequestHandler):
+    """ HTML handler """
+    def get(self):
+        loader = tornado.template.Loader(".")
+        # self.write(loader.load("user_car_packets_view.html").generate())
+        self.write(loader.load("map_draw_live.html").generate())
+
+class HTMLTimeHandler(tornado.web.RequestHandler):
+    """ HTML handler """
+    def get(self):
+        loader = tornado.template.Loader(".")
+        # self.write(loader.load("user_car_packets_view.html").generate())
+        self.write(loader.load("map_draw_live.html").generate())
 
 @tornado.gen.coroutine
 def handle_udp_messages(sock, fd, events):
@@ -95,9 +110,9 @@ def handle_udp_messages(sock, fd, events):
             # Since the live map is only dealing with the motion data packet, only proceed to json and the notifier
             # if the packet received is the motion data packet
             # Also using the Lap data packet to get the cars position in the car
-            if packet_id == 0 or packet_id == 2:
+            if packet_id == 1 or packet_id == 2 or packet_id == 6 or packet_id == 7:
                 packet = packet_structures[packet_id].from_buffer_copy(data)
-                packet = structs_to_json.structs(packet_names[packet_id], packet)
+                packet = structs_to_json_users_car.structs(packet_names[packet_id], packet)
                 # notify that we have new data
                 notifier.notify(packet)
         except socket.error, e:
@@ -106,7 +121,9 @@ def handle_udp_messages(sock, fd, events):
 # setup application routes
 application = tornado.web.Application([
   (r'/ws', WSHandler, dict(notifier=notifier)),
-  (r'/', HTMLHandler),
+  (r'/', HTMLLiveHandler),
+  (r'/history', HTMLHistoryHandler),
+  (r'/time', HTMLTimeHandler),
   (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': 'static'}),
 ])
 
@@ -119,7 +136,8 @@ if __name__ == '__main__':
     # udp_port                = 20777
 
     # For using the pcap emulator
-    listning_ip_address     = '127.0.0.1'
+    listning_ip_address     = ''
+    # listning_ip_address     = '127.0.0.1'
     udp_port                = 5003
 
     # application start listening on port 9090
