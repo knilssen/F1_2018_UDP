@@ -58,10 +58,38 @@ int main(int argc, char *argv[]) {
   for (;;) {
     recvStringLen = recvfrom(sock, recvString, MAXRECVSTRING, 0, NULL, 0);
     if (recvStringLen > 0) {
-			recvString[recvStringLen] = '\0';
+      recvString[recvStringLen] = '\0';
       strncpy (recvString_header, recvString, 21);
       struct PacketHeader *packet = (struct PacketHeader *)&recvString_header;
-			printf("Received packet with id: %hhu\n", packet->m_packetId);
+			// printf("Received packet with id: %hhu\n", packet->m_packetId);
+
+      // Switch statement to handle which packet we received
+      switch(packet->m_packetId) {
+        case 0 :
+          printf("Received Motion data packet");
+          break;
+        case 1 :
+          printf("Received Session data packet");
+          break;
+        case 2 :
+          printf("Received Lap data packet");
+          break;
+        case 3 :
+          printf("Received Event packet");
+          break;
+        case 4 :
+          printf("Received Participants packet");
+          break;
+        case 5 :
+          printf("Received Car Setups packet");
+          break;
+        case 6 :
+          printf("Received Car Telemetry packet");
+          break;
+        case 7 :
+          printf("Received Car Status packet");
+          break;
+      }
 		}
   }
 
