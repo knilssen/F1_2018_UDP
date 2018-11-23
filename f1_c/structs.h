@@ -15,7 +15,7 @@ struct PacketHeader {
     float       m_sessionTime;          // Session timestamp
     uint        m_frameIdentifier;      // Identifier for the frame the data was retrieved on
     uint8_t     m_playerCarIndex;       // Index of player's car in the array
-}__attribute__((packed));
+};
 
 // MOTION PACKET:
 // The motion packet gives physics data for all the cars being driven.
@@ -41,7 +41,7 @@ struct CarMotionData {
     float         m_yaw;                      // Yaw angle in radians
     float         m_pitch;                    // Pitch angle in radians
     float         m_roll;                     // Roll angle in radians
-}__attribute__((packed));
+};
 struct PacketMotionData {
     struct PacketHeader    m_header;               // Header
 
@@ -63,7 +63,7 @@ struct PacketMotionData {
     float         m_angularAccelerationY;        // Angular velocity y-component
     float         m_angularAccelerationZ;        // Angular velocity z-component
     float         m_frontWheelsAngle;            // Current front wheels angle in radians
-}__attribute__((packed));
+};
 
 // SESSION PACKET:
 // The session packet includes details about the current session in progress.
@@ -72,7 +72,7 @@ struct PacketMotionData {
 struct MarshalZone {
     float  m_zoneStart;   // Fraction (0..1) of way through the lap the marshal zone starts
     int8_t   m_zoneFlag;    // -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-}__attribute__((packed));
+};
 struct PacketSessionData {
     struct PacketHeader    m_header;               	// Header
 
@@ -99,7 +99,7 @@ struct PacketSessionData {
     uint8_t           m_safetyCarStatus;          // 0 = no safety car, 1 = full safety car
                                                 // 2 = virtual safety car
     uint8_t          m_networkGame;              // 0 = offline, 1 = online
-}__attribute__((packed));
+};
 
 // LAP DATA PACKET:
 // The lap data packet gives details of all the cars in the session.
@@ -128,12 +128,12 @@ struct LapData {
     uint8_t       m_resultStatus;          // Result status - 0 = invalid, 1 = inactive, 2 = active
                                          // 3 = finished, 4 = disqualified, 5 = not classified
                                          // 6 = retired
-}__attribute__((packed));
+};
 struct PacketLapData {
     struct PacketHeader    m_header;              // Header
 
     struct LapData         m_lapData[20];         // Lap data for all cars on track
-}__attribute__((packed));
+};
 
 // EVENT PACKET:
 // This packet gives details of events that happen during the course of the race.
@@ -143,7 +143,7 @@ struct PacketEventData {
     struct PacketHeader    m_header;               // Header
 
     uint8_t           m_eventStringCode[4];   // Event string code, see above
-}__attribute__((packed));
+};
 
 // PARTICIPANTS PACKET:
 // This is a list of participants in the race. If the vehicle is controlled by AI, then the name will be the driver name.
@@ -159,13 +159,13 @@ struct ParticipantData {
     uint8_t      m_nationality;            // Nationality of the driver
     char       m_name[48];               // Name of participant in UTF-8 format – null terminated
                                          // Will be truncated with … (U+2026) if too long
-}__attribute__((packed));
+};
 struct PacketParticipantsData {
     struct PacketHeader    m_header;            // Header
 
     uint8_t           m_numCars;           // Number of cars in the data
     struct ParticipantData m_participants[20];
-}__attribute__((packed));
+};
 
 // CAR SETUPS PACKET:
 // This packet details the car setups for each vehicle in the session.
@@ -193,12 +193,12 @@ struct CarSetupData {
     float     m_rearTyrePressure;         // Rear tyre pressure (PSI)
     uint8_t     m_ballast;                  // Ballast
     float     m_fuelLoad;                 // Fuel load
-}__attribute__((packed));
+};
 struct PacketCarSetupData {
     struct PacketHeader    m_header;            // Header
 
     struct CarSetupData    m_carSetups[20];
-}__attribute__((packed));
+};
 
 // CAR TELEMETRY PACKET:
 // This packet details telemetry for all the cars in the race.
@@ -220,7 +220,7 @@ struct CarTelemetryData {
     uint16_t    m_tyresInnerTemperature[4];   // Tyres inner temperature (celsius)
     uint16_t    m_engineTemperature;          // Engine temperature (celsius)
     float     m_tyresPressure[4];           // Tyres pressure (PSI)
-}__attribute__((packed));
+};
 struct PacketCarTelemetryData {
     struct PacketHeader        m_header;                // Header
 
@@ -228,7 +228,7 @@ struct PacketCarTelemetryData {
 
     uint32_t              m_buttonStatus;         // Bit flags specifying which buttons are being
                                                 // pressed currently - see appendices
-}__attribute__((packed));
+};
 
 // CAR STATUS PACKET:
 // This packet details car statuses for all the cars in the race. It includes values such as the damage readings on the car.
@@ -266,9 +266,9 @@ struct CarStatusData {
     float       m_ersHarvestedThisLapMGUK;  // ERS energy harvested this lap by MGU-K
     float       m_ersHarvestedThisLapMGUH;  // ERS energy harvested this lap by MGU-H
     float       m_ersDeployedThisLap;       // ERS energy deployed this lap
-}__attribute__((packed));
+};
 struct PacketCarStatusData {
     struct PacketHeader        m_header;            // Header
 
     struct CarStatusData       m_carStatusData[20];
-}__attribute__((packed));
+};
