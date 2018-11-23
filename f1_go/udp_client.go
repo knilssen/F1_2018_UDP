@@ -10,7 +10,7 @@ import (
   "fmt"
 
   // Imports our struct package which has all of our udp structs
-  "github.com/knilssen/F1_2018_Go/structs"
+  "github.com/knilssen/f1_go/structs"
 )
 
 
