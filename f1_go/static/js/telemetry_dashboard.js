@@ -235,7 +235,6 @@ function intTime_to_timeTime(time_str) {
 // Function is called when live_map_tornado recieves a packet and sends it via the websocket
 ws.onmessage = function(event){
   var data =  JSON.parse(event.data);
-  console.log(data);
 
   // If the data inbound is the session data packet, grab the amount of total laps
   if (data.M_header.M_packetId == 1){
