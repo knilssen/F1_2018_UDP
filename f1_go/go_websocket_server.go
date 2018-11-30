@@ -22,13 +22,17 @@ var addr = flag.String("addr", "localhost:8080", "http service address")
 var upgrader = websocket.Upgrader{} // use default options
 
 func main() {
+	// Sets the location in which to serve our static files from for our webpage
   var dir string;
   flag.StringVar(&dir, "dir", "./static", "the directory to serve files from. Defaults to the current dir")
   flag.Parse()
 
+	// Creates a new mux
   router := mux.NewRouter()
+	// WHen our html page calls its static files from /static/file, this sets the location to grab them from
   router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir(dir))))
 
+	// Our handler functions for each page
 	router.HandleFunc("/", rootHandler).Methods("GET")
 	router.HandleFunc("/ws", wsHandler)
 
@@ -36,24 +40,27 @@ func main() {
 }
 
 
-
+// Roothandler is called when our browser goes to the page localhost:8080, this serves up our html file along
+// with its corresponding javascript and css files
 func rootHandler(w http.ResponseWriter, r *http.Request) {
   http.ServeFile(w, r, "./static/telemetry_dashboard.html")
 }
 
 
-
+// Websocket handler, when our javascriot file, which is served along with our html file from our
+// root handler, runs it makes a websocket connection to ws://localhost:8080/ws which triggers our hsHandler with the trailing /ws.
+// We then start our UDP client that listens for and formats the incoming UDP data from F1 2018 then writes the packets to our websocket
 func wsHandler(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
 	}
-	go echo(conn)
+	go udp_client(conn)
 }
 
 
 
-func echo(conn *websocket.Conn) {
+func udp_client(conn *websocket.Conn) {
   // Loop, checking for udp packets and dealing with them accordingly
   addr, _ := net.ResolveUDPAddr("udp", ":5003")
   sock, _ := net.ListenUDP("udp", addr)
@@ -99,10 +106,12 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &motion_packet); err != nil {
     		    fmt.Println("binary.Read motion_packet failed:", err)
       	}
+				// Convert out struct into JSON format
         json_motion_packet, err := json.Marshal(motion_packet)
         if err != nil {
           fmt.Println(err)
         }
+				// Write our JSON formatted F1 UDP packet struct to our websocket
         if err := conn.WriteMessage(websocket.TextMessage, json_motion_packet); err != nil {
     			log.Printf("Websocket error writing motion_packet: %s", err)
     		}
@@ -111,10 +120,12 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &session_packet); err != nil {
     		    fmt.Println("binary.Read session_packet failed:", err)
       	}
+				// Convert out struct into JSON format
         json_session_packet, err := json.Marshal(session_packet)
         if err != nil {
           fmt.Println(err)
         }
+				// Write our JSON formatted F1 UDP packet struct to our websocket
         if err := conn.WriteMessage(websocket.TextMessage, json_session_packet); err != nil {
     			log.Printf("Websocket error writing session_packet: %s", err)
     		}
@@ -123,10 +134,12 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &lap_packet); err != nil {
     		    fmt.Println("binary.Read lap_packet failed:", err)
       	}
+				// Convert out struct into JSON format
         json_lap_packet, err := json.Marshal(lap_packet)
         if err != nil {
           fmt.Println(err)
         }
+				// Write our JSON formatted F1 UDP packet struct to our websocket
         if err := conn.WriteMessage(websocket.TextMessage, json_lap_packet); err != nil {
     			log.Printf("Websocket error writing lap_packet: %s", err)
     		}
@@ -135,10 +148,12 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &event_packet); err != nil {
     		    fmt.Println("binary.Read event_packet failed:", err)
       	}
+				// Convert out struct into JSON format
         json_event_packet, err := json.Marshal(event_packet)
         if err != nil {
           fmt.Println(err)
         }
+				// Write our JSON formatted F1 UDP packet struct to our websocket
         if err := conn.WriteMessage(websocket.TextMessage, json_event_packet); err != nil {
     			log.Printf("Websocket error writing event_packet: %s", err)
     		}
@@ -147,11 +162,12 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &participant_packet); err != nil {
     		    fmt.Println("binary.Read participant_packet failed:", err)
       	}
+				// Convert out struct into JSON format
         json_participant_packet, err := json.Marshal(participant_packet)
         if err != nil {
           fmt.Println(err)
         }
-
+				// Write our JSON formatted F1 UDP packet struct to our websocket
         if err = conn.WriteMessage(websocket.TextMessage, json_participant_packet); err != nil {
     			log.Printf("Websocket error writing participant_packet: %s", err)
     		}
@@ -160,10 +176,12 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &car_setup_packet); err != nil {
     		    fmt.Println("binary.Read car_setup_packet failed:", err)
       	}
+				// Convert out struct into JSON format
         json_car_setup_packet, err := json.Marshal(car_setup_packet)
         if err != nil {
           fmt.Println(err)
         }
+				// Write our JSON formatted F1 UDP packet struct to our websocket
         if err := conn.WriteMessage(websocket.TextMessage, json_car_setup_packet); err != nil {
     			log.Printf("Websocket error writing car_setup_packet: %s", err)
     		}
@@ -176,6 +194,7 @@ func echo(conn *websocket.Conn) {
         if err != nil {
           fmt.Println(err)
         }
+				// Write our JSON formatted F1 UDP packet struct to our websocket
         if err := conn.WriteMessage(websocket.TextMessage, json_telemetry_packet); err != nil {
     			log.Printf("Websocket error writing telemetry_packet: %s", err)
     		}
@@ -184,10 +203,12 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &car_status_packet); err != nil {
     		    fmt.Println("binary.Read car_status_packet failed:", err)
       	}
+				// Convert out struct into JSON format
         json_car_status_packet, err := json.Marshal(car_status_packet)
         if err != nil {
           fmt.Println(err)
         }
+				// Write our JSON formatted F1 UDP packet struct to our websocket
         if err := conn.WriteMessage(websocket.TextMessage, json_car_status_packet); err != nil {
     			log.Printf("Websocket error writing car_status_packet: %s", err)
     		}
