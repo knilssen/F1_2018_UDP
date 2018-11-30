@@ -33,47 +33,13 @@ func main() {
 	router.HandleFunc("/ws", wsHandler)
 
 	log.Fatal(http.ListenAndServe(":8080", router))
-
-
-  // addr, _ := net.ResolveUDPAddr("udp", ":5003")
-  // sock, _ := net.ListenUDP("udp", addr)
-
-
-  // // Set up our structs including the header struct so we are able to determine which
-  // // udp packet is incoming and we can deal with it accordingly
-  // var header structs.PacketHeader
-  // var motion_packet structs.PacketMotionData
-  // var session_packet structs.PacketSessionData
-  // var lap_packet structs.PacketLapData
-  // var event_packet structs.PacketEventData
-  // var participant_packet structs.PacketParticipantsData
-  // var car_setup_packet structs.PacketCarSetupData
-  // var telemetry_packet structs.PacketCarTelemetryData
-  // var car_status_packet structs.PacketCarStatusData
 }
 
 
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-  // fmt.Println(r.Header)
-  // if r.Header.Get("Origin") != "http://"+r.Host {
-	// 	http.Error(w, "Origin not allowed", 403)
-	// 	return
-	// }
   http.ServeFile(w, r, "./static/telemetry_dashboard.html")
-  // conn, err := upgrader.Upgrade(w, r, nil)
-	// if err != nil {
-	// 	http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
-	// }
 }
-//
-// func rootHandler(w http.ResponseWriter, r *http.Request) {
-// 	// fmt.Fprintf(w, "home")
-//   r.ServeFile(w, r, "telemetry_dashboard.html")
-// }
-
-
-
 
 
 
@@ -133,7 +99,6 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &motion_packet); err != nil {
     		    fmt.Println("binary.Read motion_packet failed:", err)
       	}
-        // fmt.Println(motion_packet)
         json_motion_packet, err := json.Marshal(motion_packet)
         if err != nil {
           fmt.Println(err)
@@ -146,7 +111,6 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &session_packet); err != nil {
     		    fmt.Println("binary.Read session_packet failed:", err)
       	}
-        // fmt.Println(session_packet)
         json_session_packet, err := json.Marshal(session_packet)
         if err != nil {
           fmt.Println(err)
@@ -159,7 +123,6 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &lap_packet); err != nil {
     		    fmt.Println("binary.Read lap_packet failed:", err)
       	}
-        // fmt.Println(lap_packet)
         json_lap_packet, err := json.Marshal(lap_packet)
         if err != nil {
           fmt.Println(err)
@@ -172,7 +135,6 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &event_packet); err != nil {
     		    fmt.Println("binary.Read event_packet failed:", err)
       	}
-        // fmt.Println(event_packet)
         json_event_packet, err := json.Marshal(event_packet)
         if err != nil {
           fmt.Println(err)
@@ -198,7 +160,6 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &car_setup_packet); err != nil {
     		    fmt.Println("binary.Read car_setup_packet failed:", err)
       	}
-        // fmt.Println(car_setup_packet)
         json_car_setup_packet, err := json.Marshal(car_setup_packet)
         if err != nil {
           fmt.Println(err)
@@ -211,7 +172,6 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &telemetry_packet); err != nil {
     		    fmt.Println("binary.Read telemetry_packet failed:", err)
       	}
-        // fmt.Println(telemetry_packet)
         json_telemetry_packet, err := json.Marshal(telemetry_packet)
         if err != nil {
           fmt.Println(err)
@@ -224,7 +184,6 @@ func echo(conn *websocket.Conn) {
         if err := binary.Read(packet_bytes_reader, binary.LittleEndian, &car_status_packet); err != nil {
     		    fmt.Println("binary.Read car_status_packet failed:", err)
       	}
-        // fmt.Println(car_status_packet)
         json_car_status_packet, err := json.Marshal(car_status_packet)
         if err != nil {
           fmt.Println(err)
