@@ -1,4 +1,4 @@
-##PACKET TYPES
+## PACKET TYPES
 
 The main change for 2018 is the introduction of multiple packet types: each packet can now carry different types of data rather than having one packet which contains everything. A header has been added to each packet as well so that versioning can be tracked and it will be easier for applications to check they are interpreting the incoming data in the correct way.
 
@@ -18,7 +18,7 @@ struct PacketHeader
 ```
 
 
-###MOTION PACKET
+### MOTION PACKET
 
 The motion packet gives physics data for all the cars being driven. There is additional data for the car being driven with the goal of being able to drive a motion platform setup.
 
@@ -77,7 +77,7 @@ struct PacketMotionData
 };
 ```
 
-###SESSION PACKET
+### SESSION PACKET
 
 The session packet includes details about the current session in progress.
 
@@ -123,7 +123,7 @@ struct PacketSessionData
 };
 ```
 
-###LAP DATA PACKET
+### LAP DATA PACKET
 
 The lap data packet gives details of all the cars in the session.
 
@@ -167,7 +167,7 @@ struct PacketLapData
 };
 ```
 
-###EVENT PACKET
+### EVENT PACKET
 
 This packet gives details of events that happen during the course of the race.
 
@@ -185,7 +185,7 @@ struct PacketEventData
 ```
 
 
-###PARTICIPANTS PACKET
+### PARTICIPANTS PACKET
 
 This is a list of participants in the race. If the vehicle is controlled by AI, then the name will be the driver name. If this is a multiplayer game, the names will be the Steam Id on PC, or the LAN name if appropriate. On Xbox One, the names will always be the driver name, on PS4 the name will be the LAN name if playing a LAN game, otherwise it will be the driver name.
 
@@ -215,7 +215,7 @@ struct PacketParticipantsData
 };
 ```
 
-###CAR SETUPS PACKET
+### CAR SETUPS PACKET
 
 This packet details the car setups for each vehicle in the session. Note that in multiplayer games, other player cars will appear as blank, you will only be able to see your car setup and AI cars.
 
@@ -257,7 +257,7 @@ struct PacketCarSetupData
 };
 ```
 
-###CAR TELEMETRY PACKET
+### CAR TELEMETRY PACKET
 
 This packet details telemetry for all the cars in the race. It details various values that would be recorded on the car such as speed, throttle application, DRS etc.
 
@@ -296,7 +296,7 @@ struct PacketCarTelemetryData
 };
 ```
 
-###CAR STATUS PACKET
+### CAR STATUS PACKET
 
 This packet details car statuses for all the cars in the race. It includes values such as the damage readings on the car.
 
