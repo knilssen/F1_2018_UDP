@@ -1,5 +1,7 @@
 ## PACKET TYPES
 
+Taken from codemasters forum [https://forums.codemasters.com/discussion/136948/f1-2018-udp-specification](https://forums.codemasters.com/discussion/136948/f1-2018-udp-specification)
+
 The main change for 2018 is the introduction of multiple packet types: each packet can now carry different types of data rather than having one packet which contains everything. A header has been added to each packet as well so that versioning can be tracked and it will be easier for applications to check they are interpreting the incoming data in the correct way.
 
 Each packet has the following header:
