@@ -1,0 +1,277 @@
+html, body{
+  font-family: arial;
+  background-color: #112D32;
+  color: #DDDDDD;
+}
+
+body{
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.header {
+  height: 4em;
+  width: 100vw;
+}
+
+#gui_name {
+  height: 2em;
+  width: -webkit-fill-available;
+  /* background-color: #FC4445; */
+  background-color: #8D8741;
+  color: white;
+  line-height: 2em;
+  padding-left: 2em;
+}
+
+#header_nav {
+  height: 2em;
+  width: -webkit-fill-available;
+  background-color: #254E58;
+  line-height: 2em;
+  padding-left: 2em;
+}
+
+.nav_item {
+  height: 100%;
+  display: inline-block;
+  margin-right: 2em;
+  position: relative;
+}
+
+.nav_item .centered {
+  /* vertical-align: middle; */
+  vertical-align: middle;
+  /* display: inline-block; */
+}
+
+.header_svg_container{
+  height: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.header_svg {
+  height: 100%;
+  fill: #DDDDDD;
+  vertical-align: top;
+}
+
+.header_span_container {
+  height: 100%;
+  display: inline-block;
+  /* line-height: 2em; */
+}
+
+#page_title {
+  margin-top: 1em;
+  height: 2em;
+  line-height: 2em;
+}
+
+
+.element_container {
+  margin-right: 2em;
+  margin-left: 2em;
+}
+
+.live_page_element {
+  margin-top: 0.5%;
+  width: 100%;
+  height: 60px;
+  /* background-color: #254E58; */
+}
+
+#live_telemetry_grid {
+  margin-top: 0.5em;
+  display: grid;
+  grid: 120px 120px / calc(100% / 4) calc(100% / 4) calc(100% / 4) calc(100% / 4);
+}
+
+.telemetry_grid_element{
+  border-radius: 6px;
+  background-color: #254E58;
+}
+
+#first_row_first_position {
+  margin-right: 0.5em;
+  margin-bottom: 0.25em;
+}
+#first_row_second_position {
+  margin-right: 0.5em;
+  margin-bottom: 0.25em;
+}
+#first_row_third_position {
+  margin-right: 0.5em;
+  margin-bottom: 0.25em;
+}
+#first_row_fourth_position {
+  margin-bottom: 0.25em;
+}
+
+#second_row_first_position {
+  margin-right: 0.5em;
+  margin-top: 0.25em;
+}
+#second_row_second_position {
+  margin-right: 0.5em;
+  margin-top: 0.25em;
+}
+#second_row_third_position {
+  margin-right: 0.5em;
+  margin-top: 0.25em;
+}
+#second_row_fourth_position {
+  margin-top: 0.25em;
+}
+
+.telemetry_grid_element_data_container {
+  position: relative;
+  float: left;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.telemetry_data_title {
+  text-align: center;
+}
+
+.telemetry_data_data {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 2em;
+}
+
+.graph_title {
+  /* width: 100%; */
+  height: 1em;
+  margin-top: 1em;
+  /* margin-bottom: 1vw; */
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+#speed_graph {
+  margin-top: 0.5em;
+  height: 19em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+}
+
+#speed_graph_container {
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  height: 15em;
+  width: -webkit-fill-available;
+  /* background-color: transparent; */
+}
+
+
+
+#speed_chart {
+  height: 100%;
+}
+
+/* #speed_chart > svg > g > path {
+  stroke: transparent;
+} */
+
+/* #speed_chart > svg > g {
+  fill: #DDDDDD;
+}
+
+#speed_chart > svg > g > g > line {
+  stroke: #DDDDDD;
+} */
+
+/* #speed_graph_container > div > div:nth-child(1) > div > svg > rect {
+  fill-opacity: 0.0;
+} */
+
+
+#engine_rpm_graph {
+  margin-top: 0.5em;
+  height: 19em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+}
+
+#rpm_graph_container {
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  height: 15em;
+  width: -webkit-fill-available;
+  /* background-color: transparent; */
+}
+
+#rpm_chart {
+  height: 100%;
+}
+
+/* #rpm_chart > svg > g > path {
+  stroke: transparent;
+} */
+
+/* #rpm_chart > svg > g {
+  fill: #DDDDDD;
+}
+
+#rpm_chart > svg > g > g > line {
+  stroke: #DDDDDD;
+} */
+
+#gear_graph {
+  margin-top: 0.5em;
+  height: 19em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+}
+
+#gear_graph_container {
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  height: 15em;
+  width: -webkit-fill-available;
+  /* background-color: transparent; */
+}
+
+#gear_chart {
+  height: 100%;
+}
+
+
+
+#throttle_brake_graph {
+  margin-top: 0.5em;
+  height: 19em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+}
+
+#throttle_brake_graph_container {
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  height: 15em;
+  width: -webkit-fill-available;
+  /* background-color: transparent; */
+}
+
+
+
+#throttle_brake_chart {
+  height: 100%;
+}
