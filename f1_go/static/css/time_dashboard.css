@@ -1,0 +1,198 @@
+html, body{
+  font-family: arial;
+  background-color: #112D32;
+  color: #DDDDDD;
+}
+
+body{
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.header {
+  height: 4em;
+  width: 100vw;
+}
+
+#gui_name {
+  height: 2em;
+  width: -webkit-fill-available;
+  /* background-color: #FC4445; */
+  background-color: #8D8741;
+  color: white;
+  line-height: 2em;
+  padding-left: 2em;
+}
+
+#header_nav {
+  height: 2em;
+  width: -webkit-fill-available;
+  background-color: #254E58;
+  line-height: 2em;
+  padding-left: 2em;
+}
+
+.nav_item {
+  height: 100%;
+  display: inline-block;
+  margin-right: 2em;
+  position: relative;
+}
+
+.nav_item .centered {
+  /* vertical-align: middle; */
+  vertical-align: middle;
+  /* display: inline-block; */
+}
+
+.header_svg_container{
+  height: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.header_svg {
+  height: 100%;
+  fill: #DDDDDD;
+  vertical-align: top;
+}
+
+.header_span_container {
+  height: 100%;
+  display: inline-block;
+  /* line-height: 2em; */
+}
+
+#page_title {
+  margin-top: 1em;
+  height: 2em;
+  line-height: 2em;
+}
+
+.element_container {
+  margin-right: 2em;
+  margin-left: 2em;
+}
+
+#time_chart {
+  margin-top: 0.5%;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background-color: #254E58;
+}
+
+
+
+
+
+
+
+#time_chart {
+  background-color: #254E58;
+  width: -webkit-fill-available;
+}
+
+.chart_legend {
+  height: 1.5em;
+  line-height: 1.5em;
+  padding-top: 2em;
+  padding-left: 2em;
+}
+
+.chart_legend_item {
+  height: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+.chart_legend_item_colored {
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.chart_legend_item .centered {
+  /* vertical-align: middle; */
+  vertical-align: middle;
+  /* display: inline-block; */
+}
+
+#chart_legend_fastest_lap {
+  border-radius: 6px;
+  background-color: rgb(0,116,2175,0.5);
+}
+
+#chart_legend_slowest_lap {
+  border-radius: 6px;
+  background-color: rgb(255,0,0,0.5);
+}
+
+#chart_legend_car_pitted {
+  border-radius: 6px;
+  color: white;
+  background-color: rgb(255,255,0,0.5);
+}
+
+
+.fastest_lap {
+  background-color: rgb(0,116,2175,0.1);
+}
+
+.slowest_lap {
+  background-color: rgb(255,0,0,0.1);
+}
+
+.car_pitted {
+  background-color: rgb(255,255,0,0.1);
+}
+
+.fastest_lap.car_pitted {
+  background: repeating-linear-gradient(
+  135deg,
+  rgb(0,116,2175,0.1),
+  rgb(0,116,2175,0.1) 10px,
+  rgb(255,255,0,0.1) 10px,
+  rgb(255,255,0,0.1) 20px
+  );
+}
+
+.slowest_lap.car_pitted {
+  background: repeating-linear-gradient(
+  135deg,
+  rgb(255,0,0,0.1),
+  rgb(255,0,0,0.1) 10px,
+  rgb(255,255,0,0.1) 10px,
+  rgb(255,255,0,0.1) 20px
+  );
+}
+
+
+
+
+
+#time_chart_grid {
+  padding-top: 2em;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-bottom: 2em;
+}
+
+#time_grid_titles {
+  border-bottom: 2.5px solid #DDDDDD;
+}
+
+.new_lap_entry {
+  border-top: 1px solid #DDDDDD;
+}
+
+.time_grid_entry{
+  height: 3em;
+}
+
+.time_grid_data {
+  padding-left: 1em;
+  display: grid;
+  grid: 3em / calc(100% / 5) calc(100% / 5) calc(100% / 5) calc(100% / 5) calc(100% / 5);
+  line-height: 3em;
+}
