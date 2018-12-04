@@ -10,6 +10,8 @@ go run udp_client.go
 
 ### To run the UDP client + websocket
 
+To see images of webpage, see static folder!
+
 Create a new project in your go path and copy the following items like such inside your gopath projects area:
 
 ```
