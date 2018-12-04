@@ -87,8 +87,6 @@ var ws = new WebSocket('ws:localhost:8080/time/ws');
 ws.onmessage = function(event){
   var data =  JSON.parse(event.data);
 
-  console.log('Current_lap:', current_lap);
-
   switch (data.M_header.M_packetId) {
     // If the data inbound is the lap data packet, grab the amount of total laps
     case 2:
@@ -100,11 +98,9 @@ ws.onmessage = function(event){
         // starting this on a race that is currently in progress. Without this we would set fastest lap time to 0 and would never
         // actually find the fastest lap
         if (current_lap != 0) {
-          console.log('1');
           // If we have already had a full lap and our fastest lap time and fastest lap is still 0 meaning we havent had a fastest lap
           // yet becuase this would be our first real compleated lap. Set this first lap to our fastest lap.
           if (fastest_lap_time == 0){
-            console.log('2');
             fastest_lap_time = current_lap_time;
             fastest_lap_number = current_lap;
             // toggle the color for the row of the fastest lap
@@ -120,10 +116,8 @@ ws.onmessage = function(event){
           // Also, since we have now compleated two laps, we can now set the slowest of the two as our slowest lap. Eliminated the need for
           // more confusing logic statements, just check and do stuff here for it.
           else {
-            console.log('3');
             // If current lap is faster than our recorded fastest lap time, we have found a new fastest lap!
             if (current_lap_time < fastest_lap_time) {
-              console.log('4');
               // Toggle the color off the previous fastest lap
               document.getElementById('lap_' + fastest_lap_number).classList.toggle('fastest_lap');
               fastest_lap_time = current_lap_time;
@@ -134,7 +128,6 @@ ws.onmessage = function(event){
 
             // Check if our past full lap is now the slowest
             if (current_lap_time > slowest_lap_time) {
-              console.log('5');
               slowest_lap_time = current_lap_time;
               slowest_lap_number = current_lap;
               document.getElementById('lap_' + slowest_lap_number).classList.toggle('slowest_lap');
@@ -143,7 +136,6 @@ ws.onmessage = function(event){
             // we arent going to toggle both the fastest and the slowest on the same lap after only one lap. Fastest takes preseident because it
             // truly is the fastest yet. So now toggle the color on the first lap.
             else {
-              console.log('6');
               if (!document.getElementById('lap_' + slowest_lap_number).classList.contains('slowest_lap')){
                 document.getElementById('lap_' + slowest_lap_number).classList.toggle('slowest_lap');
               }
