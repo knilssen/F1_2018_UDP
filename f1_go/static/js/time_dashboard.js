@@ -83,7 +83,7 @@ function intTime_to_timeTime(time_str) {
 // connect to websocket
 var ws = new WebSocket('ws:localhost:8080/time/ws');
 
-// Function is called when live_map_tornado recieves a packet and sends it via the websocket
+// Function is called when go_websocket_server recieves a packet and sends it via the websocket
 ws.onmessage = function(event){
   var data =  JSON.parse(event.data);
 
