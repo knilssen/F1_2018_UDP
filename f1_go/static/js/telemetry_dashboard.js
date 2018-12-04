@@ -232,7 +232,7 @@ function intTime_to_timeTime(time_str) {
   return time_min + ":" + time_sec + ":" + time_mil
 }
 
-// Function is called when live_map_tornado recieves a packet and sends it via the websocket
+// Function is called when our websocket receives data
 ws.onmessage = function(event){
   var data =  JSON.parse(event.data);
 
