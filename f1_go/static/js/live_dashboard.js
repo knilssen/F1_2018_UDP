@@ -1,6 +1,3 @@
-// connect to websocket
-var ws = new WebSocket('ws://localhost:8080/ws');
-
 // set up the html elements
 // Lap
 var laps_element = document.getElementById('lap_number');
@@ -130,6 +127,10 @@ var gear_multiplier = gear_canvas_height / 8;
 var throttle_brake_multiplier = throttle_brake_canvas_height / 100;
 
 
+// connect to websocket
+var ws = new WebSocket('ws://localhost:8080/ws');
+
+
 // Function that shifts the chart
 function chart_shift(chart_data) {
   // If our chart is full with data, delete the furthest left
@@ -232,54 +233,54 @@ function intTime_to_timeTime(time_str) {
   return time_min + ":" + time_sec + ":" + time_mil
 }
 
-// Function is called when our websocket receives data
+// Function is called when go_websocket_server recieves a packet and sends it via the websocket
 ws.onmessage = function(event){
   var data =  JSON.parse(event.data);
 
-  // If the data inbound is the session data packet, grab the amount of total laps
-  if (data.M_header.M_packetId == 1){
-    if (amount_of_laps == 0) {
-      amount_of_laps = data.M_totalLaps;
-    }
+
+  switch (data.M_header.M_packetId) {
+    // If the data inbound is the session data packet, grab the amount of total laps
+    case 1:
+      if (amount_of_laps == 0) {
+        amount_of_laps = data.M_totalLaps;
+      }
+      break;
+
+    // If the data inbound is the lap data packet
+    case 2:
+      // set current lap number data
+      if (amount_of_laps != 0) {
+        laps_element.innerHTML = JSON.stringify(data.M_lapData[data.M_header.M_playerCarIndex].M_currentLapNum, null) + " of " + JSON.stringify(amount_of_laps, null);
+      }
+      // Set the data for the rest lap packet informations
+      race_position_element.innerHTML = data.M_lapData[data.M_header.M_playerCarIndex].M_carPosition;
+      last_lap_time_element.innerHTML = intTime_to_timeTime(data.M_lapData[data.M_header.M_playerCarIndex].M_lastLapTime);                        // convert to time format?
+      pit_status_element.innerHTML = pit_info[data.M_lapData[data.M_header.M_playerCarIndex].M_pitStatus];                                        // 0 = none, 1 = pitting, 2 = in pit area
+      current_sector_element.innerHTML = data.M_lapData[data.M_header.M_playerCarIndex].M_sector;                     // 0 = sector1, 1 = sector2, 2 = sector3
+      break;
+
+    // If the data inbound is the car telemetry packet
+    case 6:
+      // Set the data for the telemetry packet information
+      drs_status_element.innerHTML = drs_info[data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_drs];                                     // 0 = off, 1 = on
+      current_gear_element.innerHTML = gear_info[data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_gear];
+      speed_chart_data.push([speed_canvas_width, data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_speed * speed_multiplier]);
+      rpm_chart_data.push([rpm_canvas_width, data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_engineRPM * rpm_multiplier]);
+      gear_chart_data.push([gear_canvas_width, data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_gear * gear_multiplier]);
+
+      throttle_brake_chart_throttle_data.push([throttle_brake_canvas_width, data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_throttle * throttle_brake_multiplier]);
+      throttle_brake_chart_brake_data.push([throttle_brake_canvas_width, data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_brake * throttle_brake_multiplier]);
+
+      draw_chart(speed_chart_data, speed_ctx, speed_canvas);
+      draw_chart(rpm_chart_data, rpm_ctx, rpm_canvas);
+      draw_chart(gear_chart_data, gear_ctx, gear_canvas);
+      draw_throttle_brake_chart(throttle_brake_chart_throttle_data, throttle_brake_chart_brake_data, throttle_brake_ctx, throttle_brake_canvas);
+      break;
+
+    // If the data inbound is the car status packet
+    case 7:
+      // Set the data for the status packet information
+      current_fia_flags_element.innerHTML = fia_info[data.M_carStatusData[data.M_header.M_playerCarIndex].M_vehicleFiaFlags];                     // -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+      break;
   }
-
-  // If the data inbound is the lap data packet
-  if (data.M_header.M_packetId == 2){
-    // set current lap number data
-    if (amount_of_laps != 0) {
-      laps_element.innerHTML = JSON.stringify(data.M_lapData[data.M_header.M_playerCarIndex].M_currentLapNum, null) + " of " + JSON.stringify(amount_of_laps, null);
-    }
-    // Set the data for the rest lap packet informations
-    race_position_element.innerHTML = JSON.stringify(data.M_lapData[data.M_header.M_playerCarIndex].M_carPosition, null);
-    last_lap_time_element.innerHTML = intTime_to_timeTime(data.M_lapData[data.M_header.M_playerCarIndex].M_lastLapTime);                        // convert to time format?
-    pit_status_element.innerHTML = pit_info[data.M_lapData[data.M_header.M_playerCarIndex].M_pitStatus];                                        // 0 = none, 1 = pitting, 2 = in pit area
-    current_sector_element.innerHTML = JSON.stringify((data.M_lapData[data.M_header.M_playerCarIndex].M_sector + 1), null);                     // 0 = sector1, 1 = sector2, 2 = sector3
-  }
-
-  // If the data inbound is the car telemetry packet
-  if (data.M_header.M_packetId == 6){
-    // Set the data for the telemetry packet information
-    drs_status_element.innerHTML = drs_info[data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_drs];                                     // 0 = off, 1 = on
-    current_gear_element.innerHTML = gear_info[data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_gear];
-    speed_chart_data.push([speed_canvas_width, data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_speed * speed_multiplier]);
-    rpm_chart_data.push([rpm_canvas_width, data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_engineRPM * rpm_multiplier]);
-    gear_chart_data.push([gear_canvas_width, data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_gear * gear_multiplier]);
-
-    throttle_brake_chart_throttle_data.push([throttle_brake_canvas_width, data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_throttle * throttle_brake_multiplier]);
-    throttle_brake_chart_brake_data.push([throttle_brake_canvas_width, data.M_carTelemetryData[data.M_header.M_playerCarIndex].M_brake * throttle_brake_multiplier]);
-
-    draw_chart(speed_chart_data, speed_ctx, speed_canvas);
-    draw_chart(rpm_chart_data, rpm_ctx, rpm_canvas);
-    draw_chart(gear_chart_data, gear_ctx, gear_canvas);
-    draw_throttle_brake_chart(throttle_brake_chart_throttle_data, throttle_brake_chart_brake_data, throttle_brake_ctx, throttle_brake_canvas);
-  }
-
-
-
-  // If the data inbound is the car status packet
-  if (data.M_header.M_packetId == 7){
-    // Set the data for the status packet information
-    current_fia_flags_element.innerHTML = fia_info[data.M_carStatusData[data.M_header.M_playerCarIndex].M_vehicleFiaFlags];                     // -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-  }
-
 }
