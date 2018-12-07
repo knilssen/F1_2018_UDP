@@ -7,7 +7,7 @@ from scapy.all import *
 
 # Use the ip and the port set is the games udp settings
 UDP_IP = "127.0.0.1"
-UDP_PORT = 5001
+UDP_PORT = 5003
 
 
 print "UDP target IP:", UDP_IP

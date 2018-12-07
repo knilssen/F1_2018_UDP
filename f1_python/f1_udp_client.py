@@ -6,7 +6,7 @@ import structs
 from pprint import pprint
 
 packet_structures = [structs.PacketMotionData, structs.PacketSessionData, structs.PacketLapData, structs.PacketEventData, structs.PacketParticipantsData, structs.PacketCarSetupData, structs.PacketCarTelemetryData, structs.PacketCarStatusData]
-packet_names = ['MotionData', 'SessionData', 'LapData', 'ParticipantData', 'CarSetupData', 'CarTelemetryData', 'PacketCarStatusData']
+packet_names = ['MotionData', 'SessionData', 'LapData', 'EventData', 'ParticipantData', 'CarSetupData', 'CarTelemetryData', 'PacketCarStatusData']
 
 def get_packet(address, port):
     """
@@ -46,14 +46,14 @@ def get_telemetry(address, port):
     :param port: Port on which to receive packets
     :yeild: a UDPPacket for each udp packet received
     """
-    last_packet = None
+
+    last_packet = {0:None, 1:None, 2:None, 3:None, 4:None, 5:None, 6:None, 7:None}
 
     while True:
         packet = get_packet(address, port)
-        if last_packet is None or packet.m_header.m_sessionTime > last_packet.m_header.m_sessionTime:
+        if last_packet[packet.m_header.m_packetId] is None or packet.m_header.m_sessionTime > last_packet[packet.m_header.m_packetId].m_header.m_sessionTime:
             yield packet
-            last_packet = packet
-
+            last_packet[packet.m_header.m_packetId] = packet
 
 def main(address, port):
     # Enter the ip and port you are using
@@ -63,7 +63,7 @@ def main(address, port):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        # Kristians Usuage:     python python_udp_test.py  127.0.0.1 5003
+        # Kristians Usuage:     python f1_udp_client.py 127.0.0.1 5003
         print 'Correct Usage is:            python f1_udp_client.py     [ ip address ]      [ port ]'
     else:
-        main(sys.argv[1],sys.argv[2])
+        main(sys.argv[1],int(sys.argv[2]))
