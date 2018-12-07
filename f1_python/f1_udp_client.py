@@ -20,7 +20,7 @@ def get_packet(address, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     # bind the socket to the specified ip address and port
-    sock.bind((address, port))
+    sock.bind(('', 20777))
 
     # recieve data
     data, addr = sock.recvfrom(1341)
@@ -60,7 +60,7 @@ def main(address, port):
     for packet in get_telemetry(address, port):
         pprint(dir(packet))
 
-        
+
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         # Kristians Usuage:     python python_udp_test.py  127.0.0.1 5003
