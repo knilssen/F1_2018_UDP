@@ -2,6 +2,7 @@ import socket
 import ctypes
 import binascii
 import time
+from scapy.all import *
 
 
 # Use the ip and the port set is the games udp settings

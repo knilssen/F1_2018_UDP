@@ -20,7 +20,7 @@ def get_packet(address, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     # bind the socket to the specified ip address and port
-    sock.bind((address, port))
+    sock.bind(('', 20777))
 
     # recieve data
     data, addr = sock.recvfrom(1341)
